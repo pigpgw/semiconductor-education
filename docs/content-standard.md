@@ -59,7 +59,20 @@ learningGoals:
   - "학습 목표"
 prerequisites:
   - "선수 지식"
+quickSummary:
+  conclusion: "90초 요약의 한 줄 결론"
+  keyTerms:
+    - "먼저 알아야 할 용어"
+  fieldKeywords:
+    - "현업 키워드"
+  outcome: "읽고 나면 설명할 수 있어야 하는 결과"
+readingGuide:
+  basic: "기초 학습자가 먼저 볼 지점"
+  applied: "중급 학습자가 먼저 볼 지점"
+  field: "심화 학습자가 먼저 볼 지점"
 sources:
   - title: "공식 출처 제목"
     url: "https://example.com"
+    checkedAt: "2026-05-07"
+    usedFor: "이 출처를 어떤 설명의 근거로 사용했는지"
 ```

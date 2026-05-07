@@ -50,7 +50,11 @@ export default function GlossaryPage() {
               </div>
               <div className="mt-4 grid gap-4 md:grid-cols-2">
                 {terms.map((item) => (
-                  <article key={item.term} className="border border-line bg-paper p-5">
+                  <article
+                    key={item.term}
+                    id={item.term}
+                    className="scroll-mt-24 border border-line bg-paper p-5"
+                  >
                     <div className="flex flex-wrap items-center gap-2">
                       <DifficultyBadge level={item.level} />
                       <span className="rounded-full border border-line px-3 py-1 text-xs font-bold text-muted">
