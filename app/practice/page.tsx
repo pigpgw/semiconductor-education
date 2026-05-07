@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, PenLine } from "lucide-react";
 import { PracticeDrill } from "@/components/practice-drill";
-import { practiceSets } from "@/lib/practice";
+import { practiceSets, practiceTopics } from "@/lib/practice";
 
 export const metadata: Metadata = {
   title: "복습 훈련",
@@ -35,8 +35,8 @@ export default function PracticePage() {
           키웁니다.
         </p>
         <p className="mt-4 text-sm font-bold text-teal">
-          현재 {totalQuestions}개 질문과 {totalScenarios}개 실무 시나리오를
-          제공합니다.
+          현재 {totalQuestions}개 질문, {totalScenarios}개 실무 시나리오,
+          {practiceTopics.length}개 주제를 제공합니다.
         </p>
       </section>
 
@@ -67,20 +67,8 @@ export default function PracticePage() {
         </div>
       </section>
 
-      <nav className="mt-8 flex flex-wrap gap-2" aria-label="레벨별 복습 이동">
-        {practiceSets.map((set) => (
-          <a
-            key={set.levelId}
-            href={`#${set.levelId}`}
-            className="focus-ring inline-flex min-h-10 items-center rounded-md border border-line bg-paper px-3 text-sm font-bold hover:border-teal hover:text-teal"
-          >
-            {set.levelLabel} · {set.questions.length}문항
-          </a>
-        ))}
-      </nav>
-
       <div className="mt-10">
-        <PracticeDrill sets={practiceSets} />
+        <PracticeDrill sets={practiceSets} topics={practiceTopics} />
       </div>
 
       <section className="mt-10 rounded-2xl border border-line bg-bg0 p-6 text-white">
