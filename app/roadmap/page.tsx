@@ -141,7 +141,7 @@ export default function RoadmapPage() {
         </article>
       </section>
 
-      <section className="mt-10 border border-line bg-ink p-6 text-white">
+      <section className="mt-10 rounded-2xl border border-line bg-bg0 p-6 text-white">
         <h2 className="text-2xl font-black">MVP에서는 어디까지 완성하나요?</h2>
         <p className="mt-3 max-w-3xl leading-8 text-white/80">
           전체 지도를 먼저 보여주고, DRAM/HBM/EUV 3편만 깊게 완성합니다.
@@ -150,7 +150,7 @@ export default function RoadmapPage() {
         </p>
         <Link
           href="/learn"
-          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-4 text-sm font-bold text-ink transition hover:bg-teal hover:text-white"
+          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-blue px-4 text-sm font-bold text-bg0 transition hover:bg-teal"
         >
           핵심 3편 읽기 <ArrowRight size={17} aria-hidden />
         </Link>

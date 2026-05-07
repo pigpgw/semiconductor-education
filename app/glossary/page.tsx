@@ -83,7 +83,7 @@ export default function GlossaryPage() {
         })}
       </div>
 
-      <section className="mt-10 border border-line bg-ink p-6 text-white">
+      <section className="mt-10 rounded-2xl border border-line bg-bg0 p-6 text-white">
         <h2 className="text-2xl font-black">용어를 읽고 바로 글로 돌아가세요.</h2>
         <p className="mt-3 max-w-3xl leading-8 text-white/80">
           용어 사전은 별도 암기장이 아니라 교재를 읽는 보조 장치입니다.
@@ -92,7 +92,7 @@ export default function GlossaryPage() {
         </p>
         <Link
           href="/learn"
-          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-4 text-sm font-bold text-ink transition hover:bg-teal hover:text-white"
+          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-blue px-4 text-sm font-bold text-bg0 transition hover:bg-teal"
         >
           교재로 돌아가기 <ArrowRight size={17} aria-hidden />
         </Link>

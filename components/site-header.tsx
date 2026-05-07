@@ -2,17 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Github } from "lucide-react";
-import { LevelPreference } from "@/components/level-preference";
+import { Github } from "lucide-react";
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/level", label: "Level" },
-  { href: "/roadmap", label: "Roadmap" },
-  { href: "/learn", label: "Learn" },
-  { href: "/study", label: "Study" },
-  { href: "/practice", label: "Practice" },
-  { href: "/glossary", label: "Glossary" }
+  { href: "/", label: "홈" },
+  { href: "/level", label: "레벨" },
+  { href: "/roadmap", label: "로드맵" },
+  { href: "/learn", label: "교재" },
+  { href: "/practice", label: "복습" },
+  { href: "/glossary", label: "용어사전" }
 ];
 
 function isActive(pathname: string, href: string) {
@@ -27,51 +25,60 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-3 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+    <header className="sticky top-0 z-40 border-b border-line bg-bg0/90 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-3 sm:px-6 lg:px-8 xl:flex-row xl:items-center xl:justify-between">
         <Link
           href="/"
-          className="focus-ring inline-flex min-h-11 items-center gap-2 self-start rounded-md text-sm font-black"
+          className="focus-ring inline-flex min-h-11 items-center gap-3 self-start rounded-md text-sm font-black"
         >
-          <BookOpen className="text-teal" size={20} aria-hidden />
-          Semiconductor Education
+          <span className="grid h-8 w-8 grid-cols-3 gap-0.5 rounded-lg border border-white/20 bg-bg3 p-1.5">
+            {Array.from({ length: 9 }).map((_, index) => (
+              <span
+                key={index}
+                className={`rounded-[2px] ${
+                  index === 1 || index === 4 ? "bg-teal" : "bg-blue/70"
+                }`}
+                aria-hidden
+              />
+            ))}
+          </span>
+          <span className="tracking-normal">
+            Semiconductor <span className="text-blue">Education</span>
+          </span>
         </Link>
 
-        <div className="flex flex-col gap-3 md:items-end">
-          <nav
-            className="flex flex-wrap items-center gap-1 text-sm font-bold"
-            aria-label="주요 탐색"
-          >
-            {navItems.map((item) => {
-              const active = isActive(pathname, item.href);
+        <nav
+          className="flex flex-wrap items-center gap-1 text-sm font-bold"
+          aria-label="주요 탐색"
+        >
+          {navItems.map((item) => {
+            const active = isActive(pathname, item.href);
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`focus-ring inline-flex min-h-10 items-center rounded-md px-3 transition ${
-                    active
-                      ? "bg-ink text-white"
-                      : "text-muted hover:bg-surface hover:text-ink"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <a
-              href="https://github.com/pigpgw/semiconductor-education"
-              target="_blank"
-              rel="noreferrer"
-              className="focus-ring inline-flex min-h-10 items-center gap-2 rounded-md px-3 text-muted transition hover:bg-surface hover:text-ink"
-            >
-              <Github size={17} aria-hidden />
-              GitHub
-            </a>
-          </nav>
-          <LevelPreference />
-        </div>
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`focus-ring inline-flex min-h-10 items-center rounded-md px-3 transition ${
+                  active
+                    ? "bg-bg3 text-ink"
+                    : "text-muted hover:bg-bg3 hover:text-ink"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+          <a
+            href="https://github.com/pigpgw/semiconductor-education"
+            target="_blank"
+            rel="noreferrer"
+            className="focus-ring inline-flex min-h-10 items-center gap-2 rounded-full border border-line bg-bg3 px-4 text-xs font-bold text-muted transition hover:border-white/20 hover:text-ink"
+          >
+            <Github size={17} aria-hidden />
+            GitHub ↗
+          </a>
+        </nav>
       </div>
     </header>
   );

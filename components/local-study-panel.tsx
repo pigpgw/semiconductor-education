@@ -151,7 +151,7 @@ export function LocalStudyPanel() {
         <button
           type="button"
           onClick={copyNote}
-          className="focus-ring mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-ink px-4 text-sm font-bold text-white hover:bg-teal"
+          className="focus-ring mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-blue px-4 text-sm font-bold text-bg0 hover:bg-teal"
         >
           <CheckCircle2 size={17} aria-hidden />
           {copyState}

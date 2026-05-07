@@ -191,7 +191,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </p>
             <Link
               href="/practice"
-              className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-ink px-4 text-sm font-bold text-white hover:bg-teal"
+              className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-blue px-4 text-sm font-bold text-bg0 hover:bg-teal"
             >
               복습 문제 풀기 <ArrowRight size={17} aria-hidden />
             </Link>

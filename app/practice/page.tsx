@@ -70,7 +70,7 @@ export default function PracticePage() {
         <PracticeDrill sets={practiceSets} />
       </div>
 
-      <section className="mt-10 border border-line bg-ink p-6 text-white">
+      <section className="mt-10 rounded-2xl border border-line bg-bg0 p-6 text-white">
         <h2 className="text-2xl font-black">복습 후에는 글로 돌아가세요.</h2>
         <p className="mt-3 max-w-3xl leading-8 text-white/80">
           질문에 답하지 못한 부분은 실력이 부족하다는 뜻이 아니라, 다시 읽을
@@ -79,7 +79,7 @@ export default function PracticePage() {
         </p>
         <Link
           href="/learn"
-          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-4 text-sm font-bold text-ink transition hover:bg-teal hover:text-white"
+          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-blue px-4 text-sm font-bold text-bg0 transition hover:bg-teal"
         >
           교재로 돌아가기 <ArrowRight size={17} aria-hidden />
         </Link>

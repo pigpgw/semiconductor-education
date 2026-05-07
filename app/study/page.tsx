@@ -41,7 +41,7 @@ export default function StudyPage() {
         <LocalStudyPanel />
       </div>
 
-      <section className="mt-10 border border-line bg-ink p-6 text-white">
+      <section className="mt-10 rounded-2xl border border-line bg-bg0 p-6 text-white">
         <h2 className="text-2xl font-black">다른 기기에서 이어 보려면</h2>
         <p className="mt-3 max-w-3xl leading-8 text-white/80">
           노트 복사 버튼으로 학습 노트를 복사해 개인 메모 앱에 저장하세요.
@@ -49,7 +49,7 @@ export default function StudyPage() {
         </p>
         <Link
           href="/practice"
-          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-4 text-sm font-bold text-ink transition hover:bg-teal hover:text-white"
+          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-blue px-4 text-sm font-bold text-bg0 transition hover:bg-teal"
         >
           복습으로 이동 <ArrowRight size={17} aria-hidden />
         </Link>
