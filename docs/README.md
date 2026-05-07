@@ -12,6 +12,8 @@
    - 현재 구현된 화면, 콘텐츠 수량, 검증 기준, 포트폴리오 어필 포인트를 한 번에 정리합니다.
 4. [보완 기획](planning-improvements.md)
    - MVP 이후 무엇을 먼저 보완할지 우선순위와 기준을 정리합니다.
+5. [기술 블로그와 뉴스 소스 전략](tech-news-source-strategy.md)
+   - 반도체 기업 기술블로그 링크 허브, 공식 뉴스 수집, 학습자용 해설 레이어를 설계합니다.
 
 ## 기획 문서
 
@@ -20,6 +22,7 @@
 | [제품 기획 보완](product-planning.md) | 문제 정의, 타깃 사용자, 포지셔닝, 운영 원칙 |
 | [오픈소스 문서 전략](open-source-document-strategy.md) | 문서 중심 제품 철학, 기여 단위, 품질 게이트 |
 | [시장 조사](market-research.md) | 반도체 교육 접근성, 공식 자료 활용 방향 |
+| [기술 블로그와 뉴스 소스 전략](tech-news-source-strategy.md) | 공식 출처 링크 허브, RSS/API 수집, 크롤링 정책 |
 | [학습 설계 보완](learning-design.md) | 기초, 중급, 심화 학습 경험과 깊이 매트릭스 |
 | [레벨 시스템](level-system.md) | 레벨 진단, 추천 기준, 사용자별 경로 |
 | [학습 로드맵](roadmap.md) | 반도체를 실무 문맥으로 이해하는 순서 |
