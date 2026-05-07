@@ -81,6 +81,7 @@
 ## 현재 MVP 상태
 
 - 핵심 글 3편: DRAM, HBM, EUV
+- 핵심 글 3편 1차 리라이트: 스펙 읽기, trade-off, 실무 판단 기준 보강
 - 용어 사전 30개
 - 복습 질문 20개와 실무 시나리오 3개
 - 학습 체크리스트 7개
@@ -162,7 +163,7 @@ npm run check:viewport
 
 ## 향후 로드맵
 
-- Phase 1.1: DRAM/HBM/EUV 글 리라이트, 출처 해석 고도화, 요약 카드 고도화
+- Phase 1.1: DRAM/HBM/EUV 1차 리라이트, 출처 해석 고도화, 요약 카드 고도화
 - Phase 1.2: 레벨별 읽기 안내 고도화, 학습 노트 내보내기, 공식 RSS/API 후보 조사
 - Phase 2: NAND, SSD, DDR/LPDDR/GDDR/HBM 비교
 - Phase 3: 패키징, TSV, MR-MUF, 공정 흐름, 직무별 반도체 이해 지도
