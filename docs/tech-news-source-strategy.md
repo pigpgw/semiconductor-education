@@ -25,16 +25,16 @@ Semiconductor Education은 반도체 기술 뉴스를 “긁어 모아 보여주
 | 분류 | 회사/기관 | 링크 | 주로 볼 내용 |
 | --- | --- | --- | --- |
 | 메모리 | Samsung Semiconductor | https://semiconductor.samsung.com/news-events/tech-blog/ | DRAM, HBM, CXL, SSD, Foundry, EUV 관련 기술 글 |
-| 메모리 | SK hynix Newsroom | https://news.skhynix.com/ | HBM, DRAM, NAND, AI memory, 기술 리더 인터뷰 |
-| 메모리 | Micron Newsroom | https://www.micron.com/about/newsroom | DRAM, NAND, data center, AI memory, 제품 발표 |
+| 메모리 | SK hynix Newsroom | https://news.skhynix.co.kr/ | HBM, DRAM, NAND, AI memory, 기술 리더 인터뷰 |
+| 메모리 | Micron Newsroom | https://www.micron.com/about/press/news | DRAM, NAND, data center, AI memory, 제품 발표 |
 | 파운드리 | TSMC Technology | https://www.tsmc.com/english/dedicatedFoundry/technology | 공정 노드, advanced packaging, OIP, R&D 방향 |
 | 파운드리 | TSMC Press Center | https://pr.tsmc.com/english/news | 기술 심포지엄, 공정/패키징 발표 |
 | 파운드리/로직 | Intel Newsroom | https://newsroom.intel.com/ | Intel Foundry, process roadmap, packaging, AI PC |
 | 장비 | ASML Stories | https://www.asml.com/en/news/stories | EUV, High-NA, lithography, metrology |
 | 장비 | Lam Research Newsroom | https://www.lamresearch.com/newsroom/ | etch, deposition, wafer fabrication, AI-era process |
 | 장비 | Applied Materials Newsroom | https://www.appliedmaterials.com/us/en/newsroom.html | materials engineering, wiring, DRAM scaling, advanced patterning |
-| 계측/수율 | KLA News | https://www.kla.com/ | inspection, metrology, yield management |
-| 연구 | imec News | https://www.imec-int.com/en/news | sub-2nm, EUV, silicon photonics, advanced research |
+| 계측/수율 | KLA Newsroom | https://www.kla.com/newsroom | inspection, metrology, yield management |
+| 연구 | imec Reading Room | https://www.imec-int.com/en/reading-room | sub-2nm, EUV, silicon photonics, advanced research |
 
 ## 사이트 기능 설계
 
