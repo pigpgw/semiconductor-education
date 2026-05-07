@@ -12,6 +12,15 @@ const industryText = readFileSync(industryFile, "utf8");
 const minimumCandidateCount = 3;
 const allowedStatuses = new Set(["review-needed", "approved", "dismissed"]);
 const allowedPriorities = new Set(["high", "medium", "low"]);
+const allowedPromotionLevels = new Set(["기초", "중급", "심화"]);
+const allowedPromotionStatuses = new Set(["curated", "lesson-linked", "watching"]);
+const allowedPromotionSourceTypes = new Set([
+  "보도자료",
+  "기술 페이지",
+  "제품 페이지",
+  "기술 플랫폼",
+  "공식 사이트"
+]);
 
 function getField(block, field) {
   return block.match(new RegExp(`${field}:\\s*"([^"]+)"`))?.[1];
@@ -25,6 +34,10 @@ function getArrayField(block, field) {
   }
 
   return Array.from(match[1].matchAll(/"([^"]+)"/g)).map(([, value]) => value);
+}
+
+function getObjectBlock(block, field) {
+  return block.match(new RegExp(`${field}: \\{([\\s\\S]*?)\\n    \\}`))?.[1];
 }
 
 function extractArray(text, exportName) {
@@ -42,21 +55,35 @@ function extractArray(text, exportName) {
 }
 
 function extractFeedReviewQueue(text) {
-  return extractArray(text, "feedReviewQueue").map((block) => ({
-    id: getField(block, "id"),
-    sourceId: getField(block, "sourceId"),
-    sourceName: getField(block, "sourceName"),
-    title: getField(block, "title"),
-    url: getField(block, "url"),
-    publishedAt: getField(block, "publishedAt"),
-    fetchedAt: getField(block, "fetchedAt"),
-    status: getField(block, "status"),
-    priority: getField(block, "priority"),
-    topics: getArrayField(block, "topics"),
-    reason: getField(block, "reason"),
-    reviewQuestions: getArrayField(block, "reviewQuestions"),
-    suggestedRelatedLessons: getArrayField(block, "suggestedRelatedLessons")
-  }));
+  return extractArray(text, "feedReviewQueue").map((block) => {
+    const promotionBlock = getObjectBlock(block, "promotion");
+
+    return {
+      id: getField(block, "id"),
+      sourceId: getField(block, "sourceId"),
+      sourceName: getField(block, "sourceName"),
+      title: getField(block, "title"),
+      url: getField(block, "url"),
+      publishedAt: getField(block, "publishedAt"),
+      fetchedAt: getField(block, "fetchedAt"),
+      status: getField(block, "status"),
+      priority: getField(block, "priority"),
+      topics: getArrayField(block, "topics"),
+      reason: getField(block, "reason"),
+      reviewQuestions: getArrayField(block, "reviewQuestions"),
+      suggestedRelatedLessons: getArrayField(block, "suggestedRelatedLessons"),
+      promotion: promotionBlock
+        ? {
+            sourceType: getField(promotionBlock, "sourceType"),
+            level: getField(promotionBlock, "level"),
+            category: getField(promotionBlock, "category"),
+            status: getField(promotionBlock, "status"),
+            tags: getArrayField(promotionBlock, "tags"),
+            summary: getField(promotionBlock, "summary")
+          }
+        : undefined
+    };
+  });
 }
 
 function extractOfficialSourceIds(text) {
@@ -112,7 +139,13 @@ const missingFields = candidates.filter(
     !candidate.topics.length ||
     !candidate.reason ||
     !candidate.reviewQuestions.length ||
-    !candidate.suggestedRelatedLessons.length
+    !candidate.suggestedRelatedLessons.length ||
+    !candidate.promotion?.sourceType ||
+    !candidate.promotion?.level ||
+    !candidate.promotion?.category ||
+    !candidate.promotion?.status ||
+    !candidate.promotion?.tags.length ||
+    !candidate.promotion?.summary
 );
 const invalidUrls = candidates.filter((candidate) => {
   try {
@@ -133,6 +166,15 @@ const invalidStatuses = candidates.filter(
 const invalidPriorities = candidates.filter(
   (candidate) => !allowedPriorities.has(candidate.priority)
 );
+const invalidPromotionLevels = candidates.filter(
+  (candidate) => !allowedPromotionLevels.has(candidate.promotion?.level)
+);
+const invalidPromotionStatuses = candidates.filter(
+  (candidate) => !allowedPromotionStatuses.has(candidate.promotion?.status)
+);
+const invalidPromotionSourceTypes = candidates.filter(
+  (candidate) => !allowedPromotionSourceTypes.has(candidate.promotion?.sourceType)
+);
 const unknownSources = candidates.filter(
   (candidate) => !sourceIds.has(candidate.sourceId)
 );
@@ -144,6 +186,9 @@ const invalidRelatedLessons = candidates.filter((candidate) =>
 );
 const weakReviewQuestions = candidates.filter(
   (candidate) => candidate.reviewQuestions.length < 2
+);
+const weakPromotionSummaries = candidates.filter(
+  (candidate) => (candidate.promotion?.summary?.length ?? 0) < 45
 );
 const tooFewCandidates = candidates.length < minimumCandidateCount;
 
@@ -157,10 +202,14 @@ const report = {
     invalidDates.length === 0 &&
     invalidStatuses.length === 0 &&
     invalidPriorities.length === 0 &&
+    invalidPromotionLevels.length === 0 &&
+    invalidPromotionStatuses.length === 0 &&
+    invalidPromotionSourceTypes.length === 0 &&
     unknownSources.length === 0 &&
     alreadyCurated.length === 0 &&
     invalidRelatedLessons.length === 0 &&
-    weakReviewQuestions.length === 0,
+    weakReviewQuestions.length === 0 &&
+    weakPromotionSummaries.length === 0,
   count: candidates.length,
   minimumCandidateCount,
   byStatus: candidates.reduce((counts, candidate) => {
@@ -178,10 +227,14 @@ const report = {
   invalidDates,
   invalidStatuses,
   invalidPriorities,
+  invalidPromotionLevels,
+  invalidPromotionStatuses,
+  invalidPromotionSourceTypes,
   unknownSources,
   alreadyCurated,
   invalidRelatedLessons,
-  weakReviewQuestions
+  weakReviewQuestions,
+  weakPromotionSummaries
 };
 
 if (!report.ok) {

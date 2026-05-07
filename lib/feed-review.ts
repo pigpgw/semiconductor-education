@@ -1,5 +1,13 @@
 export type FeedReviewStatus = "review-needed" | "approved" | "dismissed";
 export type FeedReviewPriority = "high" | "medium" | "low";
+export type FeedReviewPromotion = {
+  sourceType: "보도자료" | "기술 페이지" | "제품 페이지" | "기술 플랫폼" | "공식 사이트";
+  level: "기초" | "중급" | "심화";
+  category: string;
+  status: "curated" | "lesson-linked" | "watching";
+  tags: string[];
+  summary: string;
+};
 
 export type FeedReviewCandidate = {
   id: string;
@@ -15,6 +23,7 @@ export type FeedReviewCandidate = {
   reason: string;
   reviewQuestions: string[];
   suggestedRelatedLessons: string[];
+  promotion: FeedReviewPromotion;
 };
 
 export const feedReviewStatusLabels: Record<FeedReviewStatus, string> = {
@@ -49,7 +58,16 @@ export const feedReviewQueue: FeedReviewCandidate[] = [
       "HBM, GPU, AI workload 사이의 연결을 초보자에게 어떻게 풀 수 있는가",
       "이미 있는 HBM 양산 업데이트와 내용이 중복되는가"
     ],
-    suggestedRelatedLessons: ["hbm-ai-memory"]
+    suggestedRelatedLessons: ["hbm-ai-memory"],
+    promotion: {
+      sourceType: "보도자료",
+      level: "심화",
+      category: "HBM/AI 메모리",
+      status: "watching",
+      tags: ["HBM", "AI Computing", "IEEE", "Memory Wall", "Industry Signal"],
+      summary:
+        "IEEE 수상 발표를 통해 HBM을 단순 고속 메모리가 아니라 AI 연산 확장을 가능하게 한 병목 완화 기술로 읽습니다."
+    }
   },
   {
     id: "micron-245tb-6600-ion-ssd",
@@ -69,7 +87,16 @@ export const feedReviewQueue: FeedReviewCandidate[] = [
       "AI 데이터센터에서 SSD가 HBM/DRAM과 다른 병목을 푸는 지점은 무엇인가",
       "중국어/번체 발표 대신 영어 원문이나 제품 페이지가 있는지 확인했는가"
     ],
-    suggestedRelatedLessons: ["dram-basics"]
+    suggestedRelatedLessons: ["dram-basics"],
+    promotion: {
+      sourceType: "보도자료",
+      level: "중급",
+      category: "NAND/스토리지",
+      status: "watching",
+      tags: ["SSD", "NAND", "QLC", "Data Center", "AI Storage"],
+      summary:
+        "245TB 데이터센터 SSD 발표를 DRAM/HBM과 다른 저장 계층 병목, rack density, 전력 효율 관점으로 읽는 초안입니다."
+    }
   },
   {
     id: "applied-nexx-advanced-packaging",
@@ -89,7 +116,16 @@ export const feedReviewQueue: FeedReviewCandidate[] = [
       "HBM 패키징 병목과 직접 연결할 수 있는 근거가 충분한가",
       "패키징 글로 승격할지, 산업 업데이트로만 둘지 판단했는가"
     ],
-    suggestedRelatedLessons: ["hbm-ai-memory"]
+    suggestedRelatedLessons: ["hbm-ai-memory"],
+    promotion: {
+      sourceType: "보도자료",
+      level: "심화",
+      category: "패키징/시스템",
+      status: "watching",
+      tags: ["Advanced Packaging", "Deposition", "HBM", "Chiplet", "Equipment"],
+      summary:
+        "Applied Materials의 NEXX 인수 발표를 HBM, chiplet, advanced packaging에서 장비 포트폴리오가 왜 중요해지는지 읽는 자료로 봅니다."
+    }
   },
   {
     id: "lam-quarter-results-process-signal",
@@ -109,7 +145,16 @@ export const feedReviewQueue: FeedReviewCandidate[] = [
       "etch/deposition 수요를 공정 난이도와 연결할 수 있는 문구가 있는가",
       "기존 Lam conductor etch 큐레이션과 중복되는가"
     ],
-    suggestedRelatedLessons: ["euv-dram-scaling"]
+    suggestedRelatedLessons: ["euv-dram-scaling"],
+    promotion: {
+      sourceType: "보도자료",
+      level: "심화",
+      category: "공정/장비 사이클",
+      status: "watching",
+      tags: ["Etch", "Deposition", "Wafer Fabrication", "Equipment Cycle"],
+      summary:
+        "Lam Research의 실적 발표를 그대로 산업 업데이트로 쓰기보다 식각, 증착, 장비 수요가 공정 난이도와 연결되는지 점검하는 후보로 둡니다."
+    }
   }
 ];
 
