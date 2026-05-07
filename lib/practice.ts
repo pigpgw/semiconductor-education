@@ -57,6 +57,66 @@ export const practiceSets: PracticeSet[] = [
           title: "학습 로드맵",
           href: "/roadmap"
         }
+      },
+      {
+        question: "반도체가 도체와 부도체의 중간이라는 말은 무슨 뜻일까요?",
+        hint: "항상 전기가 잘 통하거나 항상 막히는 물질이 아니라는 점을 생각하세요.",
+        answer:
+          "반도체는 조건에 따라 전기가 흐르기도 하고 막히기도 하는 물질입니다. 불순물, 전압, 빛, 온도 같은 조건으로 전기적 성질을 조절할 수 있습니다.",
+        fieldPoint:
+          "공정과 소자 설계는 이 조절 가능성을 이용해 스위치, 저장 셀, 센서 같은 기능을 만듭니다.",
+        relatedLesson: {
+          title: "학습 로드맵",
+          href: "/roadmap"
+        }
+      },
+      {
+        question: "DRAM이 빠른데도 컴퓨터가 SSD만으로 동작하지 않는 이유는 무엇일까요?",
+        hint: "오래 보관하는 능력과 빠르게 꺼내 쓰는 능력을 구분해 보세요.",
+        answer:
+          "SSD는 전원이 꺼져도 데이터를 보관하지만 CPU가 매 순간 필요한 데이터를 처리하기에는 DRAM보다 느립니다. 그래서 실행 중인 데이터는 DRAM에 올려 빠르게 접근합니다.",
+        fieldPoint:
+          "시스템 설계에서는 저장장치 용량, DRAM 용량, 캐시, 인터페이스 속도가 함께 성능 병목을 만듭니다.",
+        relatedLesson: {
+          title: "DRAM은 왜 빠른 작업 메모리인가",
+          href: "/learn/dram-basics"
+        }
+      },
+      {
+        question: "HBM을 데이터가 지나가는 넓은 도로라고 비유할 수 있는 이유는 무엇일까요?",
+        hint: "한 번에 지나갈 수 있는 데이터 양을 떠올려 보세요.",
+        answer:
+          "HBM은 GPU 가까이에서 매우 넓은 데이터 통로를 제공합니다. 같은 시간에 더 많은 데이터를 옮길 수 있어 AI 연산기가 기다리는 시간을 줄입니다.",
+        fieldPoint:
+          "AI 서버에서는 연산 성능만큼 데이터 공급 능력이 중요하므로 대역폭, 전력, 패키징을 함께 봐야 합니다.",
+        relatedLesson: {
+          title: "HBM은 왜 AI 시대의 핵심 메모리인가",
+          href: "/learn/hbm-ai-memory"
+        }
+      },
+      {
+        question: "EUV에서 빛의 파장이 짧다는 말은 왜 중요할까요?",
+        hint: "두꺼운 펜과 얇은 펜으로 작은 글씨를 쓰는 차이를 떠올려 보세요.",
+        answer:
+          "파장이 짧을수록 더 작은 패턴을 그릴 수 있는 여지가 커집니다. 그래서 EUV는 더 미세한 회로 패턴을 만드는 데 중요합니다.",
+        fieldPoint:
+          "하지만 짧은 파장은 시작점일 뿐이고 실제 양산에서는 장비, 마스크, 결함, 수율을 함께 제어해야 합니다.",
+        relatedLesson: {
+          title: "EUV는 왜 DRAM 미세화에 중요한가",
+          href: "/learn/euv-dram-scaling"
+        }
+      },
+      {
+        question: "수율이 낮으면 기술이 좋아 보여도 왜 문제가 될까요?",
+        hint: "100개를 만들었을 때 정상 제품이 몇 개인지 생각해 보세요.",
+        answer:
+          "수율이 낮으면 정상 제품이 적게 나와 원가가 올라가고 공급량도 줄어듭니다. 기술 시연이 성공해도 안정적으로 많이 만들지 못하면 제품 경쟁력이 약해집니다.",
+        fieldPoint:
+          "현업에서는 성능 발표와 함께 양산성, 결함 관리, 고객 납기, 원가 구조를 함께 판단합니다.",
+        relatedLesson: {
+          title: "용어 사전",
+          href: "/glossary"
+        }
       }
     ],
     scenarios: [
@@ -102,6 +162,66 @@ export const practiceSets: PracticeSet[] = [
           title: "DRAM은 왜 빠른 작업 메모리인가",
           href: "/learn/dram-basics"
         }
+      },
+      {
+        question: "DDR, LPDDR, GDDR, HBM은 모두 DRAM 계열인데 왜 용도가 다를까요?",
+        hint: "속도 하나만 보지 말고 전력, 거리, 패키징, 시스템 종류를 같이 보세요.",
+        answer:
+          "각 제품군은 같은 DRAM 계열이라도 목표 시스템이 다릅니다. DDR은 범용 컴퓨팅, LPDDR은 저전력 모바일, GDDR은 그래픽, HBM은 AI/HPC의 높은 대역폭에 초점을 둡니다.",
+        fieldPoint:
+          "제품 선택은 최고 성능 하나로 끝나지 않고 전력 예산, 보드 면적, 패키징 비용, 공급 안정성까지 포함합니다.",
+        relatedLesson: {
+          title: "DRAM은 왜 빠른 작업 메모리인가",
+          href: "/learn/dram-basics"
+        }
+      },
+      {
+        question: "3D NAND가 셀을 위로 쌓는 방식으로 용량을 늘리는 이유는 무엇인가요?",
+        hint: "땅이 부족할 때 건물을 높게 짓는 상황을 떠올려 보세요.",
+        answer:
+          "평면에서 셀을 계속 줄이면 간섭과 신뢰성 문제가 커집니다. 3D NAND는 셀을 위로 쌓아 같은 면적에서 더 큰 저장 용량을 확보합니다.",
+        fieldPoint:
+          "층 수가 늘면 채널 홀 식각, 균일도, 결함 관리, 수율 같은 제조 난이도도 함께 올라갑니다.",
+        relatedLesson: {
+          title: "용어 사전",
+          href: "/glossary"
+        }
+      },
+      {
+        question: "TSV는 HBM에서 어떤 문제를 풀고, 어떤 문제를 새로 만들까요?",
+        hint: "칩을 쌓았을 때 위아래를 어떻게 연결할지 생각하세요.",
+        answer:
+          "TSV는 쌓인 DRAM 다이를 수직으로 연결해 짧고 넓은 데이터 경로를 만듭니다. 대신 구멍 형성, 정렬, 접합, 열, 수율 관리가 어려워집니다.",
+        fieldPoint:
+          "HBM 경쟁력은 셀 설계뿐 아니라 패키징 공정, 검사, 열 관리, 고객 검증 역량까지 포함합니다.",
+        relatedLesson: {
+          title: "HBM은 왜 AI 시대의 핵심 메모리인가",
+          href: "/learn/hbm-ai-memory"
+        }
+      },
+      {
+        question: "DUV에서 멀티 패터닝을 쓰면 왜 비용과 오차 부담이 커질까요?",
+        hint: "한 번에 그릴 그림을 여러 번 나누어 맞추는 상황을 생각하세요.",
+        answer:
+          "멀티 패터닝은 작은 패턴을 여러 번 나누어 그리는 방식입니다. 공정 횟수가 늘고 각 패턴을 정확히 맞춰야 하므로 시간, 비용, overlay 오차, 결함 가능성이 커집니다.",
+        fieldPoint:
+          "EUV 도입 이유는 더 작은 패턴뿐 아니라 일부 구간에서 공정 복잡도를 낮출 수 있다는 점과 연결됩니다.",
+        relatedLesson: {
+          title: "EUV는 왜 DRAM 미세화에 중요한가",
+          href: "/learn/euv-dram-scaling"
+        }
+      },
+      {
+        question: "메모리 성능을 볼 때 대역폭과 지연 시간을 구분해야 하는 이유는 무엇인가요?",
+        hint: "도로의 차선 수와 목적지까지 걸리는 시간을 나눠 생각하세요.",
+        answer:
+          "대역폭은 한 번에 옮길 수 있는 데이터 양이고, 지연 시간은 요청한 데이터가 도착하기까지 걸리는 시간입니다. 둘은 모두 중요하지만 같은 문제가 아닙니다.",
+        fieldPoint:
+          "AI 학습, 게임, 모바일, 서버 워크로드는 대역폭과 지연 시간에 민감한 정도가 달라 제품 요구사항도 달라집니다.",
+        relatedLesson: {
+          title: "HBM은 왜 AI 시대의 핵심 메모리인가",
+          href: "/learn/hbm-ai-memory"
+        }
       }
     ],
     scenarios: [
@@ -146,6 +266,54 @@ export const practiceSets: PracticeSet[] = [
         relatedLesson: {
           title: "HBM은 왜 AI 시대의 핵심 메모리인가",
           href: "/learn/hbm-ai-memory"
+        }
+      },
+      {
+        question: "DRAM 미세화에서 커패시터가 작아질수록 어떤 실무 문제가 커질까요?",
+        hint: "작은 컵에 물을 담으면 조금만 새어도 티가 많이 난다는 비유를 떠올리세요.",
+        answer:
+          "셀 면적이 줄면 충분한 전하를 저장하기 어려워지고 누설 전류와 refresh 부담이 커질 수 있습니다. 재료, 구조, 공정 균일도 제어가 더 중요해집니다.",
+        fieldPoint:
+          "DRAM scaling은 선폭 축소만의 문제가 아니라 capacitor 형상, 유전막, 식각, 증착, 수율이 묶인 제조 문제입니다.",
+        relatedLesson: {
+          title: "DRAM은 왜 빠른 작업 메모리인가",
+          href: "/learn/dram-basics"
+        }
+      },
+      {
+        question: "HBM 패키징에서 열 문제가 성능 문제로 바뀌는 과정은 무엇인가요?",
+        hint: "칩을 쌓으면 열이 빠져나가는 길이 어떻게 달라지는지 생각하세요.",
+        answer:
+          "다이를 쌓으면 전력 밀도와 열 이동 경로가 어려워집니다. 열이 충분히 빠지지 않으면 동작 속도 제한, 신뢰성 저하, 패키지 설계 제약으로 이어질 수 있습니다.",
+        fieldPoint:
+          "현업에서는 대역폭 수치와 함께 전력 효율, 냉각 조건, 패키지 두께, 고객 시스템 검증을 같이 봅니다.",
+        relatedLesson: {
+          title: "HBM은 왜 AI 시대의 핵심 메모리인가",
+          href: "/learn/hbm-ai-memory"
+        }
+      },
+      {
+        question: "CXL 같은 메모리 확장 기술이 HBM을 바로 대체한다고 보기 어려운 이유는 무엇인가요?",
+        hint: "가까운 초고속 작업 공간과 멀리 있는 확장 공간을 나눠 보세요.",
+        answer:
+          "HBM은 GPU 가까이에서 매우 높은 대역폭을 제공하고, CXL은 시스템 차원에서 메모리를 유연하게 확장하는 연결 표준입니다. 해결하는 병목과 위치가 다릅니다.",
+        fieldPoint:
+          "AI 인프라에서는 HBM, DDR, CXL 메모리, 저장장치를 계층으로 보고 성능, 비용, 전력, 용량을 조합합니다.",
+        relatedLesson: {
+          title: "용어 사전",
+          href: "/glossary"
+        }
+      },
+      {
+        question: "새 공정이나 새 패키징 기술이 발표되면 어떤 질문으로 실무성을 확인해야 할까요?",
+        hint: "좋다는 말 뒤에 양산과 고객 적용을 확인하는 질문을 붙여 보세요.",
+        answer:
+          "어떤 병목을 줄였는지, 기존 방식 대비 비용과 공정 수는 어떤지, 수율은 확보됐는지, 고객 제품에 적용 가능한지, 공급 규모를 늘릴 수 있는지 확인해야 합니다.",
+        fieldPoint:
+          "기술 발표를 면접이나 포트폴리오에서 다룰 때는 주장보다 적용 조건, trade-off, 검증 상태를 분리해 말하는 것이 중요합니다.",
+        relatedLesson: {
+          title: "산업 업데이트",
+          href: "/industry"
         }
       }
     ],
