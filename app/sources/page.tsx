@@ -14,6 +14,7 @@ import {
   crawlPolicyLabels,
   getSourceHost,
   officialSources,
+  rssSourceCount,
   sourceCompanyTypes,
   sourceTopics,
   type SourceCompanyType
@@ -96,7 +97,7 @@ export default async function SourcesPage({ searchParams }: SourcesPageProps) {
           { label: "공식 출처", value: officialSources.length, unit: "개" },
           { label: "분야", value: sourceCompanyTypes.length, unit: "개" },
           { label: "주제 태그", value: sourceTopics.length, unit: "개" },
-          { label: "자동 본문 저장", value: 0, unit: "건" }
+          { label: "RSS/API 후보", value: rssSourceCount, unit: "개" }
         ].map((item) => (
           <div key={item.label} className="bg-bg0 px-5 py-6 text-center">
             <div className="text-3xl font-black">
@@ -222,15 +223,28 @@ export default async function SourcesPage({ searchParams }: SourcesPageProps) {
                   ))}
                 </div>
                 <div className="mt-auto flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between">
-                  <a
-                    href={source.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-blue px-4 text-sm font-black text-bg0 hover:bg-teal"
-                  >
-                    공식 사이트로 이동
-                    <ExternalLink size={16} aria-hidden />
-                  </a>
+                  <div className="flex flex-wrap gap-2">
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-blue px-4 text-sm font-black text-bg0 hover:bg-teal"
+                    >
+                      공식 사이트로 이동
+                      <ExternalLink size={16} aria-hidden />
+                    </a>
+                    {source.feedUrl ? (
+                      <a
+                        href={source.feedUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-line px-4 text-sm font-black text-muted hover:border-teal hover:text-teal"
+                      >
+                        RSS 피드
+                        <Rss size={16} aria-hidden />
+                      </a>
+                    ) : null}
+                  </div>
                   <p className="text-xs font-bold text-muted/70">
                     확인일 {source.verifiedAt}
                   </p>
