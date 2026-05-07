@@ -17,10 +17,22 @@ Checks:
 - branch name convention
 - commit message convention
 - `npm ci`
-- `npm run lint`
-- `npm run typecheck`
-- `npm run build`
+- `npm run validate`
+  - `npm run lint`
+  - `npm run typecheck`
+  - `npm run check:lessons`
+  - `npm run check:glossary`
+  - `npm run check:practice`
+  - `npm run build`
 - viewport smoke test against the built app
+
+External official-link checks are kept as an explicit local audit command instead of a required CI gate:
+
+```bash
+npm run check:links
+```
+
+This avoids blocking PRs when an official company site temporarily rejects automated requests.
 
 ## Vercel Deployment
 
