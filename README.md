@@ -20,6 +20,8 @@
 - `/glossary`: 쉬운 설명과 실무 맥락을 함께 제공하는 용어 사전
 - `/learn`: 교재 글 목록과 난이도/주제 필터
 - `/learn/[slug]`: MDX 기반 교재 본문, 출처, 다음 글 링크
+- `/industry`: 공식 기술 발표를 교재와 연결하는 수동 큐레이션 목록
+- `/sources`: 반도체 기업 공식 기술블로그와 뉴스룸 링크 허브
 - `/study`: 로그인 없이 현재 브라우저에만 저장되는 학습 체크리스트와 노트
 - `/practice`: 레벨별 복습 질문과 실무 시나리오
 
@@ -81,6 +83,7 @@
 - 용어 사전 12개
 - 복습 질문 6개와 실무 시나리오 3개
 - 학습 체크리스트 7개
+- 공식 출처 11개와 산업 업데이트 8개
 - 로그인 없는 로컬 학습 노트
 - 다크 문서형 반응형 UI
 
@@ -126,6 +129,8 @@ npm run dev
 npm run lint
 npm run typecheck
 npm run build
+npm run check:sources
+npm run check:industry
 npm run check:viewport
 ```
 
