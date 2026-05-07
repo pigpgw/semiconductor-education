@@ -5,12 +5,22 @@ import path from "node:path";
 import { cache } from "react";
 import matter from "gray-matter";
 import { slugifyHeading } from "@/lib/format";
+import type { LevelId } from "@/lib/levels";
 
 const lessonsDirectory = path.join(process.cwd(), "content", "lessons");
 
 type Source = {
   title: string;
   url: string;
+  checkedAt: string;
+  usedFor: string;
+};
+
+type QuickSummary = {
+  conclusion: string;
+  keyTerms: string[];
+  fieldKeywords: string[];
+  outcome: string;
 };
 
 type LessonFrontmatter = {
@@ -23,6 +33,8 @@ type LessonFrontmatter = {
   updatedAt: string;
   learningGoals: string[];
   prerequisites: string[];
+  quickSummary: QuickSummary;
+  readingGuide: Record<LevelId, string>;
   sources: Source[];
 };
 
@@ -58,16 +70,63 @@ function assertSources(value: unknown): Source[] {
         item !== null &&
         "title" in item &&
         "url" in item &&
+        "checkedAt" in item &&
+        "usedFor" in item &&
         typeof item.title === "string" &&
         item.title.trim().length > 0 &&
         typeof item.url === "string" &&
-        URL.canParse(item.url)
+        URL.canParse(item.url) &&
+        typeof item.checkedAt === "string" &&
+        item.checkedAt.trim().length > 0 &&
+        typeof item.usedFor === "string" &&
+        item.usedFor.trim().length > 0
     )
   ) {
     throw new Error("Invalid frontmatter field: sources");
   }
 
   return value;
+}
+
+function assertQuickSummary(value: unknown): QuickSummary {
+  if (typeof value !== "object" || value === null) {
+    throw new Error("Invalid frontmatter field: quickSummary");
+  }
+
+  if (
+    !("conclusion" in value) ||
+    !("keyTerms" in value) ||
+    !("fieldKeywords" in value) ||
+    !("outcome" in value)
+  ) {
+    throw new Error("Invalid frontmatter field: quickSummary");
+  }
+
+  return {
+    conclusion: assertString(value.conclusion, "quickSummary.conclusion"),
+    keyTerms: assertStringArray(value.keyTerms, "quickSummary.keyTerms"),
+    fieldKeywords: assertStringArray(
+      value.fieldKeywords,
+      "quickSummary.fieldKeywords"
+    ),
+    outcome: assertString(value.outcome, "quickSummary.outcome")
+  };
+}
+
+function assertReadingGuide(value: unknown): Record<LevelId, string> {
+  if (typeof value !== "object" || value === null) {
+    throw new Error("Invalid frontmatter field: readingGuide");
+  }
+
+  if (!("basic" in value) || !("applied" in value) || !("field" in value)) {
+    throw new Error("Invalid frontmatter field: readingGuide");
+  }
+
+  return {
+    basic: assertString(value.basic, "readingGuide.basic"),
+    applied: assertString(value.applied, "readingGuide.applied"),
+    field: assertString(value.field, "readingGuide.field")
+  };
 }
 
 function parseLesson(fileName: string): Lesson {
@@ -87,6 +146,8 @@ function parseLesson(fileName: string): Lesson {
     updatedAt: assertString(data.updatedAt, "updatedAt"),
     learningGoals: assertStringArray(data.learningGoals, "learningGoals"),
     prerequisites: assertStringArray(data.prerequisites, "prerequisites"),
+    quickSummary: assertQuickSummary(data.quickSummary),
+    readingGuide: assertReadingGuide(data.readingGuide),
     sources: assertSources(data.sources),
     content
   };
