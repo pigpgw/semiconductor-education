@@ -7,9 +7,50 @@
 - 브랜치 흐름: `feature/*`, `fix/*`, `refactor/*`, `docs/*`, `style/*`, `chore/*`, `test/*` -> `dev` -> `main`
 - 핵심 화면: `/`, `/level`, `/roadmap`, `/learn`, `/learn/[slug]`, `/glossary`, `/sources`, `/industry`, `/industry/[slug]`, `/practice`, `/study`
 - 핵심 콘텐츠: DRAM, HBM, EUV 글 3편
-- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, 산업 업데이트 8개
+- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, 검토 대기 후보 4개, 산업 업데이트 8개
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
+
+## 2026-05-07: feed 검토 대기열 데이터 구조
+
+### 작업 브랜치
+
+- `feature/feed-review-queue`
+
+### 작업한 것
+
+- `lib/feed-review.ts`에 `review-needed`, `approved`, `dismissed` 상태와 우선순위 타입을 추가했습니다.
+- 공식 feed 수집 결과 중 사람이 볼 후보 4개를 `feedReviewQueue`로 분리했습니다.
+- 각 후보에 검토 이유, 검토 질문, 추천 관련 교재를 넣었습니다.
+- `/industry` 상단 통계에 검토 대기 후보 수를 표시했습니다.
+- `scripts/check-feed-review.mjs`로 sourceId, URL, 날짜, 상태, 우선순위, 관련 교재, 중복 여부를 검증하게 했습니다.
+- `npm run check:content`에 `check:feed-review`를 포함했습니다.
+- README, MVP 요약, 설계 보완, 보완 기획, 뉴스 소스 전략, 총점검 문서를 최신 상태로 맞췄습니다.
+
+### 부족한 점
+
+- source별 include/exclude 키워드 필터는 아직 없습니다.
+- 검토 대기 후보를 `/industry` 해설 노트 초안으로 승격하는 스크립트는 아직 없습니다.
+- 검토 후보를 직접 탐색하는 별도 UI는 아직 없습니다. 현재는 `/industry` 통계만 표시합니다.
+- 학습 노트 내보내기는 아직 없습니다.
+
+### 다음 작업 후보
+
+1. source별 포함/제외 키워드 필터를 추가합니다.
+2. 선별된 feed 항목을 `/industry` 해설 노트 초안으로 승격하는 스크립트를 추가합니다.
+3. 검토 대기 후보를 탐색하는 내부용 페이지나 문서 뷰를 추가합니다.
+4. 학습 노트 내보내기를 추가합니다.
+5. NAND/SSD 첫 글을 추가합니다.
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run check:feed-review`: 통과, 검토 대기 후보 4개 확인
+- `npm run validate`: 통과
+- `npm run check:links`: 통과, 공식 출처 12개와 공식 feed 6개, 산업 업데이트 8개 확인
+- `npm run collect:feeds -- --limit=2`: 통과, 공식 feed 6개에서 `review-needed` 후보 11개 출력
+- `npm audit --audit-level=moderate`: 통과, 취약점 0건
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
 
 ## 2026-05-07: 공식 feed 메타데이터 수집기
 
