@@ -11,6 +11,7 @@ import {
   ShieldCheck
 } from "lucide-react";
 import { getAllLessons } from "@/lib/content";
+import { feedReviewQueue } from "@/lib/feed-review";
 import {
   formatIndustryDate,
   getIndustrySource,
@@ -100,6 +101,9 @@ export default async function IndustryPage({ searchParams }: IndustryPageProps) 
   const linkedCount = industryUpdates.filter(
     (update) => update.status === "lesson-linked"
   ).length;
+  const reviewNeededCount = feedReviewQueue.filter(
+    (candidate) => candidate.status === "review-needed"
+  ).length;
   const sourceCount = new Set(industryUpdates.map((update) => update.sourceId)).size;
 
   return (
@@ -118,11 +122,12 @@ export default async function IndustryPage({ searchParams }: IndustryPageProps) 
         </p>
       </section>
 
-      <section className="mt-8 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-4">
+      <section className="mt-8 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
         {[
           { label: "큐레이션", value: industryUpdates.length, unit: "개" },
           { label: "공식 출처", value: sourceCount, unit: "개" },
           { label: "교재 연결", value: linkedCount, unit: "개" },
+          { label: "검토 대기", value: reviewNeededCount, unit: "개" },
           { label: "본문 저장", value: 0, unit: "건" }
         ].map((item) => (
           <div key={item.label} className="bg-bg0 px-5 py-6 text-center">
