@@ -60,6 +60,7 @@
 | 문서 | 역할 |
 | --- | --- |
 | [교재 글 템플릿](templates/lesson-template.mdx) | 새 MDX 교재 글 작성 뼈대 |
+| [용어 사전 추가 템플릿](templates/glossary-term-template.md) | `/glossary`에 쉬운 설명과 실무 맥락을 갖춘 용어를 추가할 때 필요한 필드와 체크리스트 |
 | [공식 출처 추가 템플릿](templates/source-addition-template.md) | `/sources`에 공식 출처를 추가할 때 필요한 필드와 체크리스트 |
 | [산업 업데이트 템플릿](templates/industry-update-template.md) | `/industry` 수동 큐레이션 항목을 추가할 때 필요한 필드와 체크리스트 |
 
