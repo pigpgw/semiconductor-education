@@ -54,6 +54,10 @@ function getArrayField(block, field) {
   return Array.from(match[1].matchAll(/"([^"]+)"/g)).map(([, value]) => value);
 }
 
+function getObjectBlock(block, field) {
+  return block.match(new RegExp(`${field}: \\{([\\s\\S]*?)\\n    \\}`))?.[1];
+}
+
 function extractArray(text, exportName) {
   const arrayMatch = text.match(
     new RegExp(`export const ${exportName}[^=]*= \\[([\\s\\S]*?)\\];`)
@@ -69,21 +73,35 @@ function extractArray(text, exportName) {
 }
 
 function extractFeedReviewQueue(text) {
-  return extractArray(text, "feedReviewQueue").map((block) => ({
-    id: getField(block, "id"),
-    sourceId: getField(block, "sourceId"),
-    sourceName: getField(block, "sourceName"),
-    title: getField(block, "title"),
-    url: getField(block, "url"),
-    publishedAt: getField(block, "publishedAt"),
-    fetchedAt: getField(block, "fetchedAt"),
-    status: getField(block, "status"),
-    priority: getField(block, "priority"),
-    topics: getArrayField(block, "topics"),
-    reason: getField(block, "reason"),
-    reviewQuestions: getArrayField(block, "reviewQuestions"),
-    suggestedRelatedLessons: getArrayField(block, "suggestedRelatedLessons")
-  }));
+  return extractArray(text, "feedReviewQueue").map((block) => {
+    const promotionBlock = getObjectBlock(block, "promotion");
+
+    return {
+      id: getField(block, "id"),
+      sourceId: getField(block, "sourceId"),
+      sourceName: getField(block, "sourceName"),
+      title: getField(block, "title"),
+      url: getField(block, "url"),
+      publishedAt: getField(block, "publishedAt"),
+      fetchedAt: getField(block, "fetchedAt"),
+      status: getField(block, "status"),
+      priority: getField(block, "priority"),
+      topics: getArrayField(block, "topics"),
+      reason: getField(block, "reason"),
+      reviewQuestions: getArrayField(block, "reviewQuestions"),
+      suggestedRelatedLessons: getArrayField(block, "suggestedRelatedLessons"),
+      promotion: promotionBlock
+        ? {
+            sourceType: getField(promotionBlock, "sourceType"),
+            level: getField(promotionBlock, "level"),
+            category: getField(promotionBlock, "category"),
+            status: getField(promotionBlock, "status"),
+            tags: getArrayField(promotionBlock, "tags"),
+            summary: getField(promotionBlock, "summary")
+          }
+        : undefined
+    };
+  });
 }
 
 function extractOfficialSources(text) {
@@ -181,20 +199,24 @@ function inferSourceType(candidate, source) {
 }
 
 function toIndustryDraft(candidate, source) {
+  const promotion = candidate.promotion;
+
   return {
     id: candidate.id,
     title: candidate.title,
     sourceId: candidate.sourceId,
     sourceName: candidate.sourceName,
     url: candidate.url,
-    sourceType: inferSourceType(candidate, source),
+    sourceType: promotion?.sourceType ?? inferSourceType(candidate, source),
     publishedAt: candidate.publishedAt,
     curatedAt: getTodayInSeoul(),
-    level: inferLevel(candidate),
-    category: inferCategory(candidate),
-    status: "watching",
-    tags: candidate.topics,
-    summary: `${candidate.topics.join(", ")} 관점에서 원문을 확인할 산업 업데이트 초안입니다.`,
+    level: promotion?.level ?? inferLevel(candidate),
+    category: promotion?.category ?? inferCategory(candidate),
+    status: promotion?.status ?? "watching",
+    tags: promotion?.tags?.length ? promotion.tags : candidate.topics,
+    summary:
+      promotion?.summary ??
+      `${candidate.topics.join(", ")} 관점에서 원문을 확인할 산업 업데이트 초안입니다.`,
     whyItMatters: candidate.reason,
     readFor: candidate.reviewQuestions,
     relatedLessons: candidate.suggestedRelatedLessons
@@ -245,7 +267,9 @@ if (options.list) {
           title: candidate.title,
           sourceId: candidate.sourceId,
           status: candidate.status,
-          priority: candidate.priority
+          priority: candidate.priority,
+          level: candidate.promotion?.level,
+          category: candidate.promotion?.category
         }))
       },
       null,

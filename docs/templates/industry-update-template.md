@@ -10,7 +10,7 @@ npm run promote:industry-draft -- --list
 npm run promote:industry-draft -- --id=후보-id --format=ts
 ```
 
-출력된 초안은 그대로 게시하지 말고 원문 확인 뒤 요약과 질문을 다듬습니다.
+출력된 초안은 후보의 promotion 메타데이터를 반영하지만, 그대로 게시하지 말고 원문 확인 뒤 요약과 질문을 한 번 더 다듬습니다.
 
 ## 기본 정보
 

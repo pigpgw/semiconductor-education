@@ -7,9 +7,52 @@
 - 브랜치 흐름: `feature/*`, `fix/*`, `refactor/*`, `docs/*`, `style/*`, `chore/*`, `test/*` -> `dev` -> `main`
 - 핵심 화면: `/`, `/level`, `/roadmap`, `/learn`, `/learn/[slug]`, `/glossary`, `/sources`, `/industry`, `/industry/[slug]`, `/practice`, `/study`
 - 핵심 콘텐츠: DRAM, HBM, EUV 글 3편
-- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
+- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, promotion 품질 메타데이터 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
+
+## 2026-05-07: 승격 초안 품질 보정
+
+### 작업 브랜치
+
+- `feature/industry-draft-quality`
+
+### 작업한 것
+
+- `FeedReviewCandidate`에 `promotion` 메타데이터를 추가했습니다.
+- 검토 대기 후보 4개에 sourceType, level, category, status, tags, summary를 직접 넣었습니다.
+- `promote:industry-draft`가 promotion 메타데이터를 우선 사용하고, 없을 때만 기존 추론으로 fallback하게 했습니다.
+- `promote:industry-draft -- --list` 출력에 level/category를 추가했습니다.
+- `check:feed-review`가 promotion 필드, level/status/sourceType 허용값, summary 최소 길이를 검증하게 했습니다.
+- README, MVP 요약, 보완 기획, 설계 보완, 뉴스 소스 전략, 총점검 문서, 산업 업데이트 템플릿을 최신 상태로 맞췄습니다.
+
+### 부족한 점
+
+- 검토 후보를 직접 탐색하는 별도 UI는 아직 없습니다.
+- source별 exclude 키워드는 실제 feed 결과 기준으로 계속 보정이 필요합니다.
+- 스크립트는 `lib/industry.ts`를 자동 수정하지 않습니다.
+- 학습 노트 내보내기는 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 검토 대기 후보를 탐색하는 내부용 페이지나 문서 뷰를 추가합니다.
+2. source별 exclude 키워드를 실제 수집 결과 기준으로 정밀 보정합니다.
+3. 학습 노트 내보내기를 추가합니다.
+4. NAND/SSD 첫 글을 추가합니다.
+5. promotion 메타데이터를 실제 원문 검토 후 계속 다듬습니다.
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run check:feed-review`: 통과, promotion 메타데이터 4개 확인
+- `npm run promote:industry-draft -- --list`: 통과, 후보 4개의 level/category 표시 확인
+- `npm run promote:industry-draft -- --id=sk-hynix-ieee-hbm-award`: 통과, promotion summary/category/level 사용 확인
+- `npm run promote:industry-draft -- --id=micron-245tb-6600-ion-ssd --format=ts`: 통과, NAND/스토리지 중급 초안 확인
+- `npm run validate`: 통과
+- `npm run check:links`: 통과, 공식 출처 12개와 공식 feed 6개, 산업 업데이트 8개 확인
+- `npm run collect:feeds -- --limit=2`: 통과, source별 필터 적용 후 공식 feed 6개에서 `review-needed` 후보 9개 출력
+- `npm audit --audit-level=moderate`: 통과, 취약점 0건
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
 
 ## 2026-05-07: industry 초안 승격 스크립트
 

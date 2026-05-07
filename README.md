@@ -149,7 +149,7 @@ npm run promote:industry-draft -- --list
 npm run promote:industry-draft -- --id=sk-hynix-ieee-hbm-award --format=ts
 ```
 
-이 명령은 `lib/industry.ts`를 자동으로 수정하지 않습니다. 원문 확인 뒤 출력된 초안을 다듬어 `industryUpdates`에 추가합니다.
+이 명령은 `lib/industry.ts`를 자동으로 수정하지 않습니다. 초안의 category, level, tags, summary는 검토 후보의 promotion 메타데이터를 우선 사용하며, 원문 확인 뒤 `industryUpdates`에 추가합니다.
 
 ## 협업/배포 흐름
 
