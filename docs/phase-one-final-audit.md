@@ -72,7 +72,7 @@
 ### P2
 
 - 교재 반영 상태 표시
-- 선별된 feed 후보를 `/industry` 해설 노트 초안으로 승격하는 스크립트
+- 승격 초안의 summary, category, level 품질 보정
 - NAND/SSD 첫 글 추가
 - 패키징, TSV, MR-MUF 심화 글 추가
 - 직무별 읽기 경로 추가
