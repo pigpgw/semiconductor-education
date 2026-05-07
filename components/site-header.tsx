@@ -10,7 +10,8 @@ const navItems = [
   { href: "/roadmap", label: "로드맵" },
   { href: "/learn", label: "교재" },
   { href: "/practice", label: "복습" },
-  { href: "/glossary", label: "용어사전" }
+  { href: "/glossary", label: "용어사전" },
+  { href: "/sources", label: "출처" }
 ];
 
 function isActive(pathname: string, href: string) {
