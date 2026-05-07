@@ -64,7 +64,7 @@
 1차 MVP는 다음을 만족하면 마감 상태로 봅니다.
 
 - 핵심 페이지 11개가 유지된다.
-- 핵심 글 3편이 유지된다.
+- 핵심 글 3편이 유지되고, 스펙 읽기와 실무 판단 기준을 포함한다.
 - 레벨 진단, 용어 사전, 복습 질문, 로컬 학습 노트가 동작한다.
 - README와 docs에서 제품 방향, MVP 범위, 출처 정책, 보완 계획을 확인할 수 있다.
 - `npm run lint`, `npm run typecheck`, `npm run build`, `npm run check:lessons`, `npm run check:glossary`, `npm run check:practice`, `npm run check:sources`, `npm run check:industry`, `npm run check:viewport`가 통과한다.
@@ -73,9 +73,8 @@
 
 ### P0
 
-- DRAM, HBM, EUV 글 리라이트
-- 각 글 출처 해석 메모 고도화
 - 글별 상단 요약 카드 설계
+- DRAM, HBM, EUV 문장 밀도 다듬기와 도식 보강
 
 ### P2
 
