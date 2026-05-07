@@ -66,7 +66,7 @@
 - 핵심 글 3편이 유지된다.
 - 레벨 진단, 용어 사전, 복습 질문, 로컬 학습 노트가 동작한다.
 - README와 docs에서 제품 방향, MVP 범위, 출처 정책, 보완 계획을 확인할 수 있다.
-- `npm run lint`, `npm run typecheck`, `npm run build`, `npm run check:sources`, `npm run check:industry`, `npm run check:viewport`가 통과한다.
+- `npm run lint`, `npm run typecheck`, `npm run build`, `npm run check:glossary`, `npm run check:sources`, `npm run check:industry`, `npm run check:viewport`가 통과한다.
 
 ## 다음 작업
 
@@ -78,7 +78,6 @@
 
 ### P1
 
-- 용어 사전 30개까지 확장
 - 복습 질문 20개까지 확장
 
 ### P2
