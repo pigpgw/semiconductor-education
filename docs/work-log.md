@@ -11,6 +11,45 @@
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
 
+## 2026-05-07: 공식 feed 메타데이터 수집기
+
+### 작업 브랜치
+
+- `feature/feed-metadata-collector`
+
+### 작업한 것
+
+- `scripts/collect-source-feeds.mjs`를 추가했습니다.
+- `npm run collect:feeds -- --limit=5`로 공식 RSS feed에서 제목, URL, 발행일, 수집일, 주제, 짧은 description을 JSON으로 출력합니다.
+- 출력 항목에는 기본 상태 `review-needed`를 넣어 자동 게시가 아니라 사람 검토 대기열로 이어지게 했습니다.
+- 원문 본문 저장, 이미지 저장, 파일 쓰기, 자동 게시를 하지 않도록 범위를 제한했습니다.
+- Samsung Global Newsroom feed를 반도체 카테고리 feed로 바꾸고, Lam Research feed를 실제 press release RSS로 바로잡았습니다.
+- `README.md`, `docs/mvp-summary.md`, `docs/tech-news-source-strategy.md`, `docs/design-supplement.md`, `docs/planning-improvements.md`, `docs/phase-one-final-audit.md`를 최신 기준으로 정리했습니다.
+
+### 부족한 점
+
+- 수집 결과를 저장하는 `review-needed` 대기열 파일이나 UI는 아직 없습니다.
+- 수집 항목 중 반도체 학습과 무관한 회사 공지/투자자 발표를 걸러내는 키워드 필터는 아직 없습니다.
+- 선별된 feed 항목을 `/industry` 해설 노트로 승격하는 도구는 아직 없습니다.
+- 학습 노트 내보내기는 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 수집 결과를 저장하는 `review-needed` 대기열 데이터 구조를 추가합니다.
+2. source별 포함/제외 키워드 필터를 추가합니다.
+3. 선별된 feed 항목을 `/industry` 해설 노트 초안으로 승격하는 스크립트를 추가합니다.
+4. 학습 노트 내보내기를 추가합니다.
+5. NAND/SSD 첫 글을 추가합니다.
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run validate`: 통과
+- `npm run check:links`: 통과, 공식 출처 12개와 공식 feed 6개, 산업 업데이트 8개 확인
+- `npm run collect:feeds -- --limit=2`: 통과, 공식 feed 6개에서 `review-needed` 후보 11개 출력
+- `npm audit --audit-level=moderate`: 통과, 취약점 0건
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
+
 ## 2026-05-07: 공식 출처 feedUrl 메타데이터
 
 ### 작업 브랜치
