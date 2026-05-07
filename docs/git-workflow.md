@@ -83,4 +83,14 @@ Required checks:
 - `Commit convention`
 - `Validate app`
 
+Local validation before pushing:
+
+```bash
+npm run validate
+npm run check:links
+npm run check:viewport
+```
+
+`check:links` is kept separate from required CI because official company sites can temporarily reject automated requests.
+
 For `main`, use `dev` as the only merge source unless an emergency fix is explicitly approved.

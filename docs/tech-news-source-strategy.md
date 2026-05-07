@@ -180,7 +180,7 @@ MVP 다음 단계에서는 자동 크롤링보다 수동 큐레이션을 먼저 
 
 기술적으로는 user-agent, 요청 간격, 캐시, 실패 재시도 제한, source별 allowlist를 둡니다.
 
-현재 MVP에는 원문 수집기가 아니라 공식 링크 상태를 점검하는 `npm run check:sources`만 둡니다. 이 명령은 `/sources`에 노출되는 공식 URL이 살아 있는지 확인하고, 자동 요청을 제한하는 TSMC 링크처럼 브라우저 이동은 가능하지만 Node 요청은 `403`이 나는 출처를 명시적 allowlist로 관리합니다.
+현재 MVP에는 원문 수집기가 아니라 공식 링크 상태를 점검하는 `npm run check:links`만 둡니다. 이 명령은 `/sources`와 `/industry`에 노출되는 공식 URL이 살아 있는지 확인하고, 자동 요청을 제한하는 TSMC 링크처럼 브라우저 이동은 가능하지만 Node 요청은 `403`이 나는 출처를 명시적 allowlist로 관리합니다.
 
 ## 데이터 모델 초안
 
@@ -223,7 +223,7 @@ type IndustryUpdate = {
 | 우선순위 | 작업 | 완료 기준 |
 | --- | --- | --- |
 | P1 | `/sources` 공식 링크 허브 | 완료: 10개 이상 공식 출처 카드, 외부 이동 버튼 |
-| P1 | 공식 출처 URL 헬스체크 | 완료: `npm run check:sources`, TSMC 403 allowlist |
+| P1 | 공식 출처 URL 헬스체크 | 완료: `npm run check:links`, TSMC 403 allowlist |
 | P1 | 수동 industry notes | 1차 구현: HBM/EUV/Packaging/공정/수율 관련 공식 글 8개 큐레이션 |
 | P2 | `/industry` 업데이트 목록 | 완료: 출처, 날짜, 태그, 관련 교재 글 표시 |
 | P2 | `/industry/[slug]` 상세 해설 | 완료: 원문별 질문, 출처 정책, 관련 교재 표시 |
