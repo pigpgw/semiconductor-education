@@ -1,9 +1,10 @@
 # Semiconductor Education
 
-기초부터 심화까지 읽을 수 있는 반도체 온라인 교재 MVP입니다. 목표는 누구나 반도체를 쉽게 시작할 수 있게 돕되, 글의 깊이와 출처 관리에서는 현업 기술 문서처럼 신뢰를 주는 것입니다.
+기초부터 심화까지 읽을 수 있는 반도체 오픈소스 문서 MVP입니다. 목표는 Toss Frontend Fundamentals처럼 하나의 기준 있는 공개 문서를 꾸준히 만들면서, 누구나 반도체를 쉽게 시작하고 실무 관점까지 올라갈 수 있게 돕는 것입니다.
 
 ## 프로젝트 목표
 
+- 기능이 많은 교육 플랫폼보다 글이 중심인 오픈소스 문서로 운영
 - 초보자도 이해할 수 있는 반도체 기초 설명
 - 삼성전자와 SK하이닉스가 공개한 공식 기술 자료를 바탕으로 한 메모리 중심 학습 콘텐츠
 - DRAM, HBM, EUV처럼 채용과 산업 맥락에서 중요한 키워드를 구조적으로 설명
@@ -32,6 +33,7 @@
 - 포트폴리오에서는 코드 구현보다 먼저 기술 지식 구조화, 출처 관리, 학습 UX 설계 능력이 보이게 합니다.
 
 문서 전체 목차는 [docs/README.md](docs/README.md)에서 볼 수 있습니다.
+오픈소스 문서 운영 방향은 [docs/open-source-document-strategy.md](docs/open-source-document-strategy.md)에 정리했습니다.
 상세 기획은 [docs/product-planning.md](docs/product-planning.md), 1차 MVP 최종 설계 기준은 [docs/final-design.md](docs/final-design.md), 현재 MVP 정리는 [docs/mvp-summary.md](docs/mvp-summary.md), 다음 보완 기획은 [docs/planning-improvements.md](docs/planning-improvements.md)에 정리했습니다.
 
 첫 글 3편:
