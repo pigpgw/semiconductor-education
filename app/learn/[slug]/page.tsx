@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpenCheck,
+  ExternalLink,
+  FileSearch,
+  Target
+} from "lucide-react";
 import { DifficultyBadge } from "@/components/difficulty-badge";
 import { mdxComponents } from "@/components/mdx-components";
 import { LessonTechnicalVisual } from "@/components/technical-visual";
@@ -104,6 +112,76 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </dl>
           </header>
 
+          <section className="mt-8 overflow-hidden rounded-xl border border-line bg-paper">
+            <div className="border-b border-line bg-bg0 p-5 sm:p-6">
+              <p className="text-sm font-black text-teal">90초 요약</p>
+              <h2 className="mt-2 max-w-3xl text-2xl font-black leading-snug sm:text-3xl">
+                {lesson.quickSummary.conclusion}
+              </h2>
+            </div>
+            <div className="grid gap-px bg-line md:grid-cols-2">
+              <SummaryBlock
+                icon={<BookOpenCheck size={18} aria-hidden />}
+                label="먼저 알아야 할 말"
+              >
+                <div className="flex flex-wrap gap-2">
+                  {lesson.quickSummary.keyTerms.map((term) => (
+                    <Link
+                      key={term}
+                      href={`/glossary#${encodeURIComponent(term)}`}
+                      className="focus-ring rounded-md border border-line bg-bg3 px-2.5 py-1 text-xs font-bold text-ink hover:border-teal hover:text-teal"
+                    >
+                      {term}
+                    </Link>
+                  ))}
+                </div>
+              </SummaryBlock>
+              <SummaryBlock
+                icon={<FileSearch size={18} aria-hidden />}
+                label="현업 키워드"
+              >
+                <div className="flex flex-wrap gap-2">
+                  {lesson.quickSummary.fieldKeywords.map((keyword) => (
+                    <span
+                      key={keyword}
+                      className="rounded-md border border-line bg-bg3 px-2.5 py-1 text-xs font-bold text-muted"
+                    >
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+              </SummaryBlock>
+              <SummaryBlock
+                icon={<Target size={18} aria-hidden />}
+                label="읽고 나면"
+              >
+                <p className="text-sm leading-7 text-muted">
+                  {lesson.quickSummary.outcome}
+                </p>
+              </SummaryBlock>
+              <SummaryBlock
+                icon={<ExternalLink size={18} aria-hidden />}
+                label="공식 출처"
+              >
+                <ul className="grid gap-2">
+                  {lesson.sources.slice(0, 2).map((source) => (
+                    <li key={source.url}>
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="focus-ring inline-flex items-center gap-1 text-sm font-bold text-muted hover:text-teal"
+                      >
+                        {source.title}
+                        <ExternalLink size={14} aria-hidden />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </SummaryBlock>
+            </div>
+          </section>
+
           <LessonTechnicalVisual slug={lesson.slug} />
 
           <section className="mt-8 border border-line bg-paper p-5">
@@ -127,7 +205,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
                   <p className="text-xs font-black text-saffron">{level.badge}</p>
                   <h3 className="mt-2 text-base font-black">{level.label}</h3>
                   <p className="mt-2 text-sm leading-6 text-muted">
-                    {level.readingMode}
+                    {lesson.readingGuide[level.id]}
                   </p>
                 </article>
               ))}
@@ -150,16 +228,23 @@ export default async function LessonPage({ params }: LessonPageProps) {
             <h2 className="text-2xl font-black">공식 출처</h2>
             <ul className="mt-4 grid gap-3">
               {lesson.sources.map((source) => (
-                <li key={source.url}>
+                <li key={source.url} className="border border-line bg-paper p-4">
                   <a
                     href={source.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-md border border-line bg-paper px-4 text-sm font-bold hover:border-teal hover:text-teal"
+                    className="focus-ring inline-flex min-h-9 items-center gap-2 text-sm font-black hover:text-teal"
                   >
                     {source.title}
                     <ExternalLink size={16} aria-hidden />
                   </a>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    {source.usedFor}
+                  </p>
+                  <p className="mt-2 text-xs font-bold text-muted/70">
+                    확인일{" "}
+                    <time dateTime={source.checkedAt}>{source.checkedAt}</time>
+                  </p>
                 </li>
               ))}
             </ul>
@@ -219,5 +304,25 @@ export default async function LessonPage({ params }: LessonPageProps) {
         </aside>
       </div>
     </main>
+  );
+}
+
+function SummaryBlock({
+  icon,
+  label,
+  children
+}: {
+  icon: ReactNode;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="bg-paper p-5">
+      <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-teal">
+        {icon}
+        {label}
+      </div>
+      <div className="mt-3">{children}</div>
+    </div>
   );
 }
