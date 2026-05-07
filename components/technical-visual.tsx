@@ -8,28 +8,6 @@ function SignalLine({ className = "" }: { className?: string }) {
   );
 }
 
-function WaferPattern() {
-  return (
-    <div
-      className="relative aspect-square overflow-hidden rounded-full border border-line bg-paper"
-      aria-hidden
-    >
-      <div className="absolute inset-4 grid grid-cols-5 gap-1">
-        {Array.from({ length: 25 }).map((_, index) => (
-          <div
-            key={index}
-            className={`border border-line ${
-              index % 4 === 0 ? "bg-teal/10" : "bg-surface"
-            }`}
-          />
-        ))}
-      </div>
-      <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-line" />
-      <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-line" />
-    </div>
-  );
-}
-
 function DramCellVisual() {
   return (
     <div className="grid h-full content-center gap-4" aria-hidden>
@@ -99,41 +77,6 @@ function EuvBeamVisual() {
         </div>
       </div>
     </div>
-  );
-}
-
-export function HomeTechnicalVisual() {
-  return (
-    <figure className="rounded-2xl border border-line bg-bg0 p-5 text-ink shadow-soft">
-      <div className="grid gap-4">
-        <div className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">
-          <div className="border border-white/20 bg-white/10 p-4">
-            <p className="text-xs font-black uppercase text-white/70">Wafer</p>
-            <div className="mt-4">
-              <WaferPattern />
-            </div>
-          </div>
-          <div className="border border-white/20 bg-bg2 p-4 text-ink">
-            <p className="text-xs font-black uppercase text-teal">HBM stack</p>
-            <HbmStackVisual />
-          </div>
-        </div>
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div className="border border-white/20 bg-bg2 p-4 text-ink">
-            <p className="text-xs font-black uppercase text-teal">DRAM cell</p>
-            <DramCellVisual />
-          </div>
-          <div className="border border-white/20 bg-surface p-4 text-ink">
-            <p className="text-xs font-black uppercase text-saffron">EUV pattern</p>
-            <EuvBeamVisual />
-          </div>
-        </div>
-      </div>
-      <figcaption className="mt-4 text-sm font-semibold leading-6 text-muted">
-        메모리 셀, 적층, 노광 패턴을 먼저 시각적으로 잡고 본문에서 구조와
-        실무 제약을 이어서 읽습니다.
-      </figcaption>
-    </figure>
   );
 }
 
