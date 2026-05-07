@@ -68,6 +68,7 @@ MVP는 다음 검증을 통과해야 합니다.
 npm run lint
 npm run typecheck
 npm run build
+npm run check:lessons
 npm run check:glossary
 npm run check:practice
 npm run check:industry

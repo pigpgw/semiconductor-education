@@ -212,6 +212,31 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </div>
           </section>
 
+          <section className="mt-8 border border-line bg-surface p-5">
+            <p className="text-sm font-black text-teal">공식 자료 해석</p>
+            <h2 className="mt-2 text-2xl font-black">
+              원문을 그대로 외우지 않고, 판단 기준으로 바꿉니다.
+            </h2>
+            <div className="mt-5 grid gap-3 md:grid-cols-2">
+              <InterpretationItem
+                label="공식 자료의 주장"
+                text={lesson.sourceInterpretation.officialClaim}
+              />
+              <InterpretationItem
+                label="엔지니어링 의미"
+                text={lesson.sourceInterpretation.engineeringMeaning}
+              />
+              <InterpretationItem
+                label="읽을 때 던질 질문"
+                text={lesson.sourceInterpretation.readerQuestion}
+              />
+              <InterpretationItem
+                label="최신성 메모"
+                text={lesson.sourceInterpretation.freshnessNote}
+              />
+            </div>
+          </section>
+
           <div className="article-prose mt-8">
             <MDXRemote
               source={lesson.content}
@@ -304,6 +329,15 @@ export default async function LessonPage({ params }: LessonPageProps) {
         </aside>
       </div>
     </main>
+  );
+}
+
+function InterpretationItem({ label, text }: { label: string; text: string }) {
+  return (
+    <div className="border border-line bg-paper p-4">
+      <h3 className="text-sm font-black">{label}</h3>
+      <p className="mt-2 text-sm leading-7 text-muted">{text}</p>
+    </div>
   );
 }
 
