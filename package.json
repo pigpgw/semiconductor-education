@@ -2,7 +2,7 @@
   "name": "semiconductor-education",
   "version": "0.1.0",
   "private": true,
-  "description": "기초부터 심화까지 읽을 수 있는 반도체 온라인 교재 MVP",
+  "description": "기초부터 실무 관점까지 읽는 반도체 오픈소스 문서 MVP",
   "packageManager": "npm@11.6.2",
   "engines": {
     "node": ">=20.9.0"
@@ -17,7 +17,6 @@
     "validate": "npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
-    "@mdx-js/react": "^3.1.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.468.0",
     "next": "^16.2.5",
