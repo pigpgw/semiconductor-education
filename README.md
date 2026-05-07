@@ -85,7 +85,7 @@
 - 용어 사전 30개
 - 복습 질문 20개와 실무 시나리오 3개
 - 학습 체크리스트 7개
-- 공식 출처 12개, RSS/API 후보 6개, 검토 대기 후보 4개, 산업 업데이트/해설 노트 8개
+- 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, 산업 업데이트/해설 노트 8개
 - 로그인 없는 로컬 학습 노트
 - 다크 문서형 반응형 UI
 
@@ -139,7 +139,7 @@ npm run check:viewport
 npm run collect:feeds -- --limit=5
 ```
 
-이 명령은 원문 본문을 저장하지 않고 공식 RSS의 제목, URL, 날짜, 짧은 description만 JSON으로 출력합니다.
+이 명령은 원문 본문을 저장하지 않고 공식 RSS의 제목, URL, 날짜, 짧은 description만 JSON으로 출력합니다. source별 포함/제외 키워드로 투자자 공지, 채용, 캠페인성 글은 검토 후보에서 먼저 거릅니다.
 모든 feed 성공을 강제하려면 `--strict`를 붙입니다.
 
 ## 협업/배포 흐름
@@ -167,7 +167,7 @@ npm run collect:feeds -- --limit=5
 ## 향후 로드맵
 
 - Phase 1.1: DRAM/HBM/EUV 1차 리라이트, 출처 해석 고도화, 요약 카드 고도화
-- Phase 1.2: 레벨별 읽기 안내 고도화, 공식 RSS/API 후보 정리와 검토 대기열 완료, 학습 노트 내보내기
+- Phase 1.2: 레벨별 읽기 안내 고도화, 공식 RSS/API 후보 정리, feed 필터, 검토 대기열 완료, 학습 노트 내보내기
 - Phase 2: NAND, SSD, DDR/LPDDR/GDDR/HBM 비교
 - Phase 3: 패키징, TSV, MR-MUF, 공정 흐름, 직무별 반도체 이해 지도
 
