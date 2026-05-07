@@ -2,6 +2,70 @@
 
 이 문서는 다음 작업자가 바로 이어서 개발할 수 있도록 최근 작업, 검증 결과, 부족한 점, 다음 우선순위를 기록합니다.
 
+## 2026-05-07: 산업 업데이트 상세 해설 노트 구현
+
+### 작업 브랜치
+
+- `feature/industry-detail-notes`
+
+### 작업한 것
+
+- `/industry/[slug]` 상세 페이지를 추가해 공식 발표 하나를 읽을 질문, 왜 중요한지, 알아야 할 용어, 관련 교재, 출처 정책으로 분리했습니다.
+- `/industry` 목록의 제목과 `해설 노트 보기` 버튼을 상세 페이지로 연결했습니다.
+- `lib/industry.ts`에 `formatIndustryDate`, `getIndustryUpdateById`, `getNextIndustryUpdate` 헬퍼를 추가해 목록과 상세가 같은 데이터를 사용하게 했습니다.
+- `npm run check:industry`가 상세 페이지에 필요한 필수 필드까지 검증하도록 보강했습니다.
+- viewport 검증 대상에 `/industry/sk-hynix-12-layer-hbm3e`, `/industry/samsung-euv-dram-scaling`를 추가했습니다.
+- README, MVP 정리, 보완 기획, 설계 보완, 기술 뉴스 전략, 1차 점검 문서에 상세 해설 노트 구현 상태를 반영했습니다.
+
+### 일부러 넣지 않은 것
+
+- 원문 본문 저장
+- 자동 크롤링 또는 RSS 수집
+- 로그인 기반 개인화
+- 산업 업데이트별 별도 MDX 파일
+- 댓글, 좋아요, 조회수
+
+### 부족한 점
+
+- 상세 노트는 현재 `lib/industry.ts`의 수동 데이터에서 생성되며, 항목별 긴 해설 본문은 아직 없습니다.
+- 공식 RSS/API 후보 조사는 아직 데이터 필드로 정리하지 않았습니다.
+- DRAM/HBM/EUV 본문 리라이트는 여전히 다음 핵심 작업입니다.
+- 글 상세 90초 요약 카드에 비유, 예상 소요 시간, 난이도별 읽기 목표를 더 촘촘히 붙일 여지가 있습니다.
+
+### 다음 작업 후보
+
+1. DRAM/HBM/EUV 본문을 공식 자료 해석 메모 기준으로 리라이트합니다.
+2. 글 상세 90초 요약 카드를 고도화합니다.
+3. 공식 RSS/API 후보를 출처별로 조사하고 `feedUrl` 필드 추가 여부를 결정합니다.
+4. NAND/SSD 첫 글을 추가합니다.
+5. 패키징/TSV/MR-MUF 심화 글을 추가합니다.
+
+### 검증 기준
+
+- `npm run check:industry`
+- `git diff --check`
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- `npm run check:lessons`
+- `npm run check:glossary`
+- `npm run check:practice`
+- `npm run check:sources`
+- `npm run check:viewport`
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run check:industry`: 통과, 산업 업데이트 8개 확인
+- `npm run lint`: 통과
+- `npm run typecheck`: 통과
+- `npm run build`: 통과, `/industry/[slug]` 8개 정적 생성 확인
+- `npm run check:lessons`: 통과, 핵심 글 3편 확인
+- `npm run check:glossary`: 통과, 용어 30개 확인
+- `npm run check:practice`: 통과, 복습 질문 20개 확인
+- `npm run check:sources`: 통과, 공식 출처 11개 확인
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
+
 ## 2026-05-07: 용어 사전 검색/필터 UX 보강
 
 ### 작업 브랜치
