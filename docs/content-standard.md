@@ -70,6 +70,11 @@ readingGuide:
   basic: "기초 학습자가 먼저 볼 지점"
   applied: "중급 학습자가 먼저 볼 지점"
   field: "심화 학습자가 먼저 볼 지점"
+sourceInterpretation:
+  officialClaim: "공식 자료가 직접 말하는 주장"
+  engineeringMeaning: "그 주장을 엔지니어링 판단 기준으로 바꾼 의미"
+  readerQuestion: "학습자가 원문을 읽을 때 던질 질문"
+  freshnessNote: "확인일과 바뀔 수 있는 정보에 대한 메모"
 sources:
   - title: "공식 출처 제목"
     url: "https://example.com"
