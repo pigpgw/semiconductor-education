@@ -142,6 +142,15 @@ npm run collect:feeds -- --limit=5
 이 명령은 원문 본문을 저장하지 않고 공식 RSS의 제목, URL, 날짜, 짧은 description만 JSON으로 출력합니다. source별 포함/제외 키워드로 투자자 공지, 채용, 캠페인성 글은 검토 후보에서 먼저 거릅니다.
 모든 feed 성공을 강제하려면 `--strict`를 붙입니다.
 
+검토 후보를 `/industry` 해설 노트 초안으로 바꾸기:
+
+```bash
+npm run promote:industry-draft -- --list
+npm run promote:industry-draft -- --id=sk-hynix-ieee-hbm-award --format=ts
+```
+
+이 명령은 `lib/industry.ts`를 자동으로 수정하지 않습니다. 원문 확인 뒤 출력된 초안을 다듬어 `industryUpdates`에 추가합니다.
+
 ## 협업/배포 흐름
 
 - `main`: 안정 배포 브랜치

@@ -7,9 +7,50 @@
 - 브랜치 흐름: `feature/*`, `fix/*`, `refactor/*`, `docs/*`, `style/*`, `chore/*`, `test/*` -> `dev` -> `main`
 - 핵심 화면: `/`, `/level`, `/roadmap`, `/learn`, `/learn/[slug]`, `/glossary`, `/sources`, `/industry`, `/industry/[slug]`, `/practice`, `/study`
 - 핵심 콘텐츠: DRAM, HBM, EUV 글 3편
-- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, 산업 업데이트 8개
+- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
+
+## 2026-05-07: industry 초안 승격 스크립트
+
+### 작업 브랜치
+
+- `feature/industry-draft-promoter`
+
+### 작업한 것
+
+- `scripts/promote-feed-review-to-industry.mjs`를 추가했습니다.
+- `npm run promote:industry-draft -- --list`로 검토 대기 후보 id를 확인할 수 있게 했습니다.
+- `npm run promote:industry-draft -- --id=후보-id`로 `IndustryUpdate` 초안 JSON을 출력하게 했습니다.
+- `--format=ts` 옵션으로 `lib/industry.ts`에 넣기 쉬운 TypeScript 객체 초안을 출력하게 했습니다.
+- 후보 id, 공식 sourceId, dismissed 상태, `/industry` 중복 id/URL, 관련 교재 slug를 검증합니다.
+- `npm run check:industry-draft`를 추가하고 `npm run check:content`에 포함했습니다.
+- README, MVP 요약, 보완 기획, 설계 보완, 뉴스 소스 전략, 산업 업데이트 템플릿을 최신 상태로 맞췄습니다.
+
+### 부족한 점
+
+- 초안의 `summary`, `category`, `level`은 규칙 기반이라 원문 확인 뒤 사람이 반드시 다듬어야 합니다.
+- 스크립트는 `lib/industry.ts`를 자동 수정하지 않습니다.
+- 검토 후보를 직접 탐색하는 별도 UI는 아직 없습니다.
+- 학습 노트 내보내기는 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 승격 초안의 `summary`, `category`, `level` 품질을 보정합니다.
+2. 검토 대기 후보를 탐색하는 내부용 페이지나 문서 뷰를 추가합니다.
+3. source별 exclude 키워드를 실제 수집 결과 기준으로 정밀 보정합니다.
+4. 학습 노트 내보내기를 추가합니다.
+5. NAND/SSD 첫 글을 추가합니다.
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run check:industry-draft`: 통과, `sk-hynix-ieee-hbm-award` 초안 생성 확인
+- `npm run validate`: 통과
+- `npm run check:links`: 통과, 공식 출처 12개와 공식 feed 6개, 산업 업데이트 8개 확인
+- `npm run collect:feeds -- --limit=2`: 통과, source별 필터 적용 후 공식 feed 6개에서 `review-needed` 후보 9개 출력
+- `npm audit --audit-level=moderate`: 통과, 취약점 0건
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
 
 ## 2026-05-07: source별 feed 키워드 필터
 
@@ -30,18 +71,16 @@
 
 ### 부족한 점
 
-- 필터 통과 후보를 `/industry` 해설 노트 초안으로 승격하는 스크립트는 아직 없습니다.
 - 검토 후보를 직접 탐색하는 별도 UI는 아직 없습니다. 현재는 `/sources` 필터 기준과 `/industry` 검토 대기 통계만 표시합니다.
 - Intel처럼 broad AI 키워드만으로 걸리는 후보는 다음 단계에서 source별 exclude 키워드를 더 정밀하게 조정해야 합니다.
 - 학습 노트 내보내기는 아직 없습니다.
 
 ### 다음 작업 후보
 
-1. 선별된 feed 항목을 `/industry` 해설 노트 초안으로 승격하는 스크립트를 추가합니다.
-2. 검토 대기 후보를 탐색하는 내부용 페이지나 문서 뷰를 추가합니다.
-3. source별 exclude 키워드를 실제 수집 결과 기준으로 정밀 보정합니다.
-4. 학습 노트 내보내기를 추가합니다.
-5. NAND/SSD 첫 글을 추가합니다.
+1. 검토 대기 후보를 탐색하는 내부용 페이지나 문서 뷰를 추가합니다.
+2. source별 exclude 키워드를 실제 수집 결과 기준으로 정밀 보정합니다.
+3. 학습 노트 내보내기를 추가합니다.
+4. NAND/SSD 첫 글을 추가합니다.
 
 ### 검증 결과
 

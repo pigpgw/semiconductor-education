@@ -3,6 +3,15 @@
 `/industry`에 공식 기술 발표나 뉴스룸 글을 추가할 때 사용합니다.
 등록한 항목은 `/industry/[id]` 상세 해설 노트로도 노출됩니다.
 
+feed 검토 후보에서 시작할 때는 먼저 초안을 생성합니다.
+
+```bash
+npm run promote:industry-draft -- --list
+npm run promote:industry-draft -- --id=후보-id --format=ts
+```
+
+출력된 초안은 그대로 게시하지 말고 원문 확인 뒤 요약과 질문을 다듬습니다.
+
 ## 기본 정보
 
 - `id`:
