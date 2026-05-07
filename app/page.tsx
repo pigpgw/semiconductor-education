@@ -79,11 +79,11 @@ export default function HomePage() {
   const featuredLesson = lessons.find((lesson) => lesson.slug === "hbm-ai-memory") ?? lessons[0];
 
   return (
-    <main className="overflow-hidden">
-      <section className="relative px-5 pb-16 pt-16 text-center sm:px-6 md:pb-20 md:pt-24 lg:px-8">
-        <div className="pointer-events-none absolute left-1/2 top-[-120px] h-[460px] w-[min(820px,100vw)] -translate-x-1/2 rounded-full bg-blue/10 blur-3xl" />
+    <main className="overflow-hidden bg-bg0">
+      <section className="relative border-b border-line/70 px-5 pb-12 pt-12 text-center sm:px-6 md:pb-16 md:pt-20 lg:px-8">
+        <div className="technical-hero-bg" aria-hidden />
         <div className="relative mx-auto max-w-4xl">
-          <p className="mb-7 inline-flex min-h-8 items-center gap-2 rounded-full border border-teal/25 bg-teal/10 px-4 text-xs font-bold text-teal">
+          <p className="mb-6 inline-flex min-h-8 items-center gap-2 rounded-full border border-teal/25 bg-teal/10 px-4 text-xs font-bold text-teal">
             <span className="h-1.5 w-1.5 rounded-full bg-teal" aria-hidden />
             로그인 없는 반도체 학습 오픈소스 프로젝트
           </p>
@@ -124,7 +124,7 @@ export default function HomePage() {
               GitHub
             </a>
           </div>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted/60">
               참고 자료 출처
             </span>
@@ -140,7 +140,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-4xl grid-cols-2 gap-px border-y border-line bg-line md:grid-cols-4">
+      <section className="mx-auto -mt-px grid max-w-5xl grid-cols-2 gap-px overflow-hidden border-y border-line bg-line sm:rounded-xl sm:border md:grid-cols-4">
         {[
           { value: "3", unit: "단계", label: "레벨 진단" },
           { value: String(lessons.length), unit: "편", label: "핵심 글" },
@@ -170,17 +170,17 @@ export default function HomePage() {
             return (
               <article
                 key={track.label}
-                className={`relative overflow-hidden rounded-2xl border border-line bg-paper p-5 transition after:absolute after:inset-x-0 after:top-0 after:h-0.5 hover:-translate-y-0.5 hover:border-white/20 hover:shadow-soft ${track.border}`}
+                className={`relative flex min-h-[250px] flex-col overflow-hidden rounded-xl border border-line bg-paper p-5 transition after:absolute after:inset-x-0 after:top-0 after:h-0.5 hover:-translate-y-0.5 hover:border-white/20 hover:shadow-soft ${track.border}`}
               >
                 <p className={`text-[10px] font-black uppercase tracking-[0.18em] ${track.tone}`}>
                   {track.label}
                 </p>
-                <div className={`mt-4 grid h-11 w-11 place-items-center rounded-xl ${track.bg}`}>
+                <div className={`mt-4 grid h-11 w-11 place-items-center rounded-lg ${track.bg}`}>
                   <Icon className={track.tone} size={22} aria-hidden />
                 </div>
                 <h2 className="mt-4 text-lg font-black">{track.title}</h2>
                 <p className="mt-3 text-sm leading-7 text-muted">{track.description}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-auto flex flex-wrap gap-2 pt-5">
                   {track.tags.map((tag) => (
                     <span
                       key={tag}
@@ -204,7 +204,7 @@ export default function HomePage() {
           title="문서형 학습 경험"
           description="사이드바 프리뷰, 핵심 콜아웃, 짧은 기술 블록으로 본문 진입 부담을 낮춥니다."
         />
-        <div className="mt-8 overflow-hidden rounded-2xl border border-line bg-paper md:grid md:grid-cols-[230px_1fr]">
+        <div className="mt-8 overflow-hidden rounded-xl border border-line bg-paper md:grid md:grid-cols-[220px_1fr]">
           <aside className="border-b border-line bg-bg0 p-5 md:border-b-0 md:border-r">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-muted/60">
               핵심 글
@@ -264,7 +264,7 @@ export default function HomePage() {
                 근거, 체크 질문 순서로 깊이를 올립니다.
               </p>
             </div>
-            <pre className="mt-5 overflow-x-auto rounded-xl border border-line bg-bg0 p-4 text-xs leading-7 text-muted">
+            <pre className="mt-5 overflow-x-auto rounded-lg border border-line bg-bg0 p-4 text-xs leading-7 text-muted">
               <code>{`// 글 하나의 읽기 흐름
 beginner: 한 줄 결론 + 쉬운 비유
 applied: 구조 + 비교표 + 용도
@@ -301,7 +301,12 @@ field: 병목 + 수율 + 패키징 + 고객 검증`}</code>
                   }`}
                   aria-hidden
                 />
-                <span className="my-2 w-px flex-1 bg-line" aria-hidden />
+                <span
+                  className={`my-2 w-px flex-1 ${
+                    index === roadmap.length - 1 ? "bg-transparent" : "bg-line"
+                  }`}
+                  aria-hidden
+                />
               </div>
               <div className="pb-9">
                 <h2 className="text-base font-black">{item.title}</h2>
@@ -316,12 +321,12 @@ field: 병목 + 수율 + 패키징 + 고객 검증`}</code>
 
       <section className="mx-auto max-w-5xl px-5 py-20 sm:px-6 lg:px-8">
         <SectionHeader tag="Latest Docs" title="최근 작성된 문서" />
-        <div className="mt-8 overflow-hidden rounded-2xl border border-line">
+        <div className="mt-8 overflow-hidden rounded-xl border border-line">
           {lessons.map((lesson, index) => (
             <Link
               key={lesson.slug}
               href={`/learn/${lesson.slug}`}
-              className="focus-ring flex min-h-16 items-center gap-4 border-b border-line bg-paper px-5 transition last:border-b-0 hover:bg-bg2"
+              className="focus-ring flex min-h-16 items-start gap-4 border-b border-line bg-paper px-5 py-4 transition last:border-b-0 hover:bg-bg2 sm:items-center"
             >
               <span
                 className={`rounded-md border px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.06em] ${
@@ -347,8 +352,8 @@ field: 병목 + 수율 + 패키징 + 고객 검증`}</code>
       </section>
 
       <section className="mx-auto max-w-5xl px-5 py-20 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-paper px-6 py-12 text-center shadow-soft sm:px-10">
-          <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-teal/10 blur-3xl" />
+        <div className="technical-panel relative overflow-hidden rounded-xl border border-white/15 bg-paper px-6 py-11 text-center shadow-soft sm:px-10">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal/60 to-transparent" aria-hidden />
           <Rocket className="mx-auto text-teal" size={32} aria-hidden />
           <h2 className="mt-5 text-2xl font-black tracking-normal sm:text-3xl">
             바로 읽고, 자기 수준에 맞게 이어갑니다.
