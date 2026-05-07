@@ -27,6 +27,7 @@ const pages = [
   "/roadmap",
   "/glossary",
   "/sources",
+  "/industry",
   "/learn",
   "/study",
   "/practice",

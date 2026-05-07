@@ -11,6 +11,7 @@ const navItems = [
   { href: "/learn", label: "교재" },
   { href: "/practice", label: "복습" },
   { href: "/glossary", label: "용어사전" },
+  { href: "/industry", label: "산업" },
   { href: "/sources", label: "출처" }
 ];
 
