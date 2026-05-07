@@ -7,9 +7,47 @@
 - 브랜치 흐름: `feature/*`, `fix/*`, `refactor/*`, `docs/*`, `style/*`, `chore/*`, `test/*` -> `dev` -> `main`
 - 핵심 화면: `/`, `/level`, `/roadmap`, `/learn`, `/learn/[slug]`, `/glossary`, `/sources`, `/industry`, `/industry/[slug]`, `/practice`, `/study`
 - 핵심 콘텐츠: DRAM, HBM, EUV 글 3편
-- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 11개, 산업 업데이트 8개
+- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, 산업 업데이트 8개
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
+
+## 2026-05-07: 공식 출처 feedUrl 메타데이터
+
+### 작업 브랜치
+
+- `feature/source-feed-metadata`
+
+### 작업한 것
+
+- `OfficialSource`에 선택 필드 `feedUrl`을 추가했습니다.
+- Samsung Global Newsroom의 반도체 카테고리를 공식 출처로 추가했습니다.
+- Samsung Global Newsroom, SK hynix, Micron, Intel, Lam Research, Applied Materials의 공식 RSS/API 후보 6개를 `feedUrl`로 정리했습니다.
+- `/sources` 상단 통계에 RSS/API 후보 수를 표시하고, feed가 있는 출처 카드에는 `RSS 피드` 외부 링크를 추가했습니다.
+- `scripts/check-sources.mjs`가 `crawlPolicy: "rss"`와 `feedUrl`의 일관성, feed URL 응답, RSS/Atom 형태를 함께 검증하도록 보강했습니다.
+- `README.md`, `docs/mvp-summary.md`, `docs/tech-news-source-strategy.md`, `docs/design-supplement.md`, `docs/planning-improvements.md`, `docs/phase-one-final-audit.md`, `docs/templates/source-addition-template.md`를 최신 기준으로 정리했습니다.
+
+### 부족한 점
+
+- 공식 feed에서 title, url, publishedAt만 가져오는 메타데이터 수집기는 아직 없습니다.
+- 자동 수집된 항목을 `검토 필요`와 `교재 반영 완료`로 나누는 리뷰 대기열은 아직 없습니다.
+- ASML, TSMC, KLA, imec은 아직 수동 또는 메타데이터 확인 대상으로 유지합니다.
+- 학습 노트 내보내기는 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 공식 feed 메타데이터 수집기 초안을 추가합니다.
+2. feed 수집 결과를 사람이 검토하는 `review-needed` 상태 데이터로 분리합니다.
+3. 학습 노트 내보내기를 추가합니다.
+4. NAND/SSD 첫 글을 추가합니다.
+5. 패키징, TSV, MR-MUF 심화 글을 추가합니다.
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run validate`: 통과
+- `npm run check:links`: 통과, 공식 출처 12개와 공식 feed 6개, 산업 업데이트 8개 확인
+- `npm audit --audit-level=moderate`: 통과, 취약점 0건
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
 
 ## 2026-05-07: 복습 질문 주제/레벨 필터 UX
 

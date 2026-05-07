@@ -28,6 +28,7 @@ function extractOfficialSources(text) {
       id: getField(block, "id"),
       name: getField(block, "name"),
       url: getField(block, "url"),
+      feedUrl: getField(block, "feedUrl"),
       crawlPolicy: getField(block, "crawlPolicy")
     })
   );
@@ -76,12 +77,33 @@ function validateSourceShape(sources) {
       return true;
     }
   });
+  const invalidFeedUrls = sources.filter((source) => {
+    if (!source.feedUrl) {
+      return false;
+    }
+
+    try {
+      new URL(source.feedUrl);
+      return false;
+    } catch {
+      return true;
+    }
+  });
+  const rssSourcesWithoutFeed = sources.filter(
+    (source) => source.crawlPolicy === "rss" && !source.feedUrl
+  );
+  const feedSourcesWithoutRssPolicy = sources.filter(
+    (source) => source.feedUrl && source.crawlPolicy !== "rss"
+  );
 
   if (
     missingFields.length > 0 ||
     duplicateIds.length > 0 ||
     duplicateUrls.length > 0 ||
-    invalidUrls.length > 0
+    invalidUrls.length > 0 ||
+    invalidFeedUrls.length > 0 ||
+    rssSourcesWithoutFeed.length > 0 ||
+    feedSourcesWithoutRssPolicy.length > 0
   ) {
     console.error(
       JSON.stringify(
@@ -91,7 +113,10 @@ function validateSourceShape(sources) {
           missingFields,
           duplicateIds,
           duplicateUrls,
-          invalidUrls
+          invalidUrls,
+          invalidFeedUrls,
+          rssSourcesWithoutFeed,
+          feedSourcesWithoutRssPolicy
         },
         null,
         2
@@ -136,10 +161,44 @@ function classifyResponse(source, response) {
   };
 }
 
+async function checkFeed(source) {
+  if (!source.feedUrl) {
+    return null;
+  }
+
+  try {
+    const response = await fetchWithTimeout(source.feedUrl);
+    const text = await response.text();
+    const reachable = response.status >= 200 && response.status < 400;
+    const feedLike = /<rss|<feed|<rdf:RDF/i.test(text);
+
+    return {
+      url: source.feedUrl,
+      status: response.status,
+      finalUrl: response.url,
+      contentType: response.headers.get("content-type"),
+      ok: reachable && feedLike
+    };
+  } catch (error) {
+    return {
+      url: source.feedUrl,
+      ok: false,
+      error: error instanceof Error ? error.message : String(error)
+    };
+  }
+}
+
 async function checkSource(source) {
   try {
     const response = await fetchWithTimeout(source.url);
-    return classifyResponse(source, response);
+    const sourceResult = classifyResponse(source, response);
+    const feed = await checkFeed(source);
+
+    return {
+      ...sourceResult,
+      feed,
+      ok: sourceResult.ok && (!feed || feed.ok)
+    };
   } catch (error) {
     return {
       id: source.id,
@@ -164,6 +223,8 @@ const failures = results.filter((result) => !result.ok);
 const report = {
   ok: failures.length === 0,
   checked: results.length,
+  feedChecked: results.filter((result) => result.feed).length,
+  feedReachable: results.filter((result) => result.feed?.ok).length,
   reachable: results.filter((result) => result.ok && !result.allowed).length,
   allowed: results.filter((result) => result.allowed).length,
   failed: failures.length,

@@ -12,6 +12,7 @@ export type OfficialSource = {
   name: string;
   companyType: SourceCompanyType;
   url: string;
+  feedUrl?: string;
   language: "ko" | "en" | "multi";
   crawlPolicy: CrawlPolicy;
   topics: string[];
@@ -52,12 +53,29 @@ export const officialSources: OfficialSource[] = [
     verifiedAt: "2026-05-07"
   },
   {
+    id: "samsung-global-semiconductor-newsroom",
+    name: "Samsung Global Newsroom Semiconductors",
+    companyType: "memory",
+    url: "https://news.samsung.com/global/semiconductors-leadership",
+    feedUrl: "https://news.samsung.com/global/feed",
+    language: "en",
+    crawlPolicy: "rss",
+    topics: ["Semiconductor Leadership", "Foundry", "Memory", "Process"],
+    readFor:
+      "삼성전자 반도체 리더십 발표를 제품 홍보가 아니라 공정, 소자, 생태계 변화 관점으로 읽습니다.",
+    note:
+      "Samsung Global Newsroom의 반도체 카테고리와 공식 RSS를 함께 관리하는 출처입니다.",
+    relatedLessons: ["dram-basics", "hbm-ai-memory", "euv-dram-scaling"],
+    verifiedAt: "2026-05-07"
+  },
+  {
     id: "sk-hynix-newsroom",
     name: "SK hynix Newsroom",
     companyType: "memory",
     url: "https://news.skhynix.co.kr/",
+    feedUrl: "https://news.skhynix.com/feed/",
     language: "ko",
-    crawlPolicy: "metadata-only",
+    crawlPolicy: "rss",
     topics: ["HBM", "DRAM", "NAND", "AI Memory", "CXL", "PIM"],
     readFor:
       "AI 메모리 포트폴리오, 시스템 병목, 기술 리더 인터뷰를 산업 맥락으로 읽습니다.",
@@ -71,8 +89,9 @@ export const officialSources: OfficialSource[] = [
     name: "Micron Newsroom",
     companyType: "memory",
     url: "https://www.micron.com/about/press/news",
+    feedUrl: "https://investors.micron.com/rss/news-releases.xml",
     language: "en",
-    crawlPolicy: "metadata-only",
+    crawlPolicy: "rss",
     topics: ["DRAM", "NAND", "Data Center", "AI Memory", "SSD"],
     readFor:
       "메모리 제품 발표를 경쟁 구도와 데이터센터 요구 조건 관점으로 읽습니다.",
@@ -116,8 +135,9 @@ export const officialSources: OfficialSource[] = [
     name: "Intel Newsroom",
     companyType: "foundry",
     url: "https://newsroom.intel.com/",
+    feedUrl: "https://newsroom.intel.com/feed",
     language: "en",
-    crawlPolicy: "metadata-only",
+    crawlPolicy: "rss",
     topics: ["Intel Foundry", "Process Roadmap", "Packaging", "AI PC"],
     readFor:
       "로직 공정, 파운드리 전략, 패키징 발표를 메모리 병목과 비교해 읽습니다.",
@@ -146,8 +166,9 @@ export const officialSources: OfficialSource[] = [
     name: "Lam Research Newsroom",
     companyType: "equipment",
     url: "https://www.lamresearch.com/newsroom/",
+    feedUrl: "https://www.lamresearch.com/newsroom/feed/",
     language: "en",
-    crawlPolicy: "metadata-only",
+    crawlPolicy: "rss",
     topics: ["Etch", "Deposition", "Wafer Fabrication", "AI-era Process"],
     readFor:
       "식각과 증착이 미세화, 3D 구조, 공정 복잡도와 어떻게 연결되는지 읽습니다.",
@@ -161,8 +182,9 @@ export const officialSources: OfficialSource[] = [
     name: "Applied Materials Newsroom",
     companyType: "equipment",
     url: "https://www.appliedmaterials.com/us/en/newsroom.html",
+    feedUrl: "https://ir.appliedmaterials.com/rss/news-releases.xml",
     language: "en",
-    crawlPolicy: "metadata-only",
+    crawlPolicy: "rss",
     topics: ["Materials Engineering", "Wiring", "DRAM Scaling", "Patterning"],
     readFor:
       "재료 공학과 배선, 패터닝 발표를 성능과 수율 제약 관점으로 읽습니다.",
@@ -210,6 +232,10 @@ export const sourceCompanyTypes = Array.from(
 export const sourceTopics = Array.from(
   new Set(officialSources.flatMap((source) => source.topics))
 ).sort();
+
+export const rssSourceCount = officialSources.filter(
+  (source) => source.feedUrl
+).length;
 
 export function getSourceHost(url: string) {
   return new URL(url).host.replace(/^www\./, "");

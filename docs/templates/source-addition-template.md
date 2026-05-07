@@ -8,6 +8,7 @@
 - `name`:
 - `companyType`: `memory | foundry | equipment | metrology | research`
 - `url`:
+- `feedUrl`: 공식 RSS/API가 있을 때만 입력
 - `language`: `ko | en | multi`
 - `crawlPolicy`: `manual | rss | metadata-only`
 - `verifiedAt`: `YYYY-MM-DD`
@@ -28,6 +29,7 @@
 ## 검증
 
 - [ ] 공식 회사/기관 도메인입니다.
+- [ ] `crawlPolicy`가 `rss`이면 `feedUrl`이 있고 RSS/Atom 응답을 반환합니다.
 - [ ] 원문 본문이나 이미지를 저장하지 않습니다.
 - [ ] `npm run check:links`를 실행했습니다.
 - [ ] 자동 요청 제한이 있으면 allowlist 필요 여부를 작업 로그에 남겼습니다.
