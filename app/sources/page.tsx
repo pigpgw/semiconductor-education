@@ -222,6 +222,44 @@ export default async function SourcesPage({ searchParams }: SourcesPageProps) {
                     </Link>
                   ))}
                 </div>
+                {source.feedUrl ? (
+                  <div className="mt-4 border-t border-line pt-4">
+                    <h3 className="flex items-center gap-2 text-sm font-black">
+                      <Rss className="text-teal" size={17} aria-hidden />
+                      Feed 필터
+                    </h3>
+                    <div className="mt-3 space-y-2">
+                      <div className="flex flex-wrap gap-1.5">
+                        <span className="mr-1 text-xs font-black text-muted">
+                          포함
+                        </span>
+                        {source.feedIncludeKeywords?.slice(0, 6).map((keyword) => (
+                          <span
+                            key={keyword}
+                            className="rounded-md border border-teal/25 bg-teal/10 px-2 py-0.5 text-[11px] font-bold text-teal"
+                          >
+                            {keyword}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        <span className="mr-1 text-xs font-black text-muted">
+                          제외
+                        </span>
+                        {source.feedExcludeKeywords
+                          ?.slice(0, 6)
+                          .map((keyword) => (
+                            <span
+                              key={keyword}
+                              className="rounded-md border border-line bg-bg3 px-2 py-0.5 text-[11px] font-bold text-muted"
+                            >
+                              {keyword}
+                            </span>
+                          ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
                 <div className="mt-auto flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex flex-wrap gap-2">
                     <a

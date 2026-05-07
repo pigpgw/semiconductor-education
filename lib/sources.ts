@@ -13,6 +13,8 @@ export type OfficialSource = {
   companyType: SourceCompanyType;
   url: string;
   feedUrl?: string;
+  feedIncludeKeywords?: string[];
+  feedExcludeKeywords?: string[];
   language: "ko" | "en" | "multi";
   crawlPolicy: CrawlPolicy;
   topics: string[];
@@ -58,6 +60,8 @@ export const officialSources: OfficialSource[] = [
     companyType: "memory",
     url: "https://news.samsung.com/global/semiconductors-leadership",
     feedUrl: "https://news.samsung.com/global/semiconductors-leadership/feed",
+    feedIncludeKeywords: ["semiconductor", "memory", "foundry", "process", "dram", "hbm", "euv", "chip", "ai"],
+    feedExcludeKeywords: ["contest", "event", "brand", "campaign"],
     language: "en",
     crawlPolicy: "rss",
     topics: ["Semiconductor Leadership", "Foundry", "Memory", "Process"],
@@ -74,6 +78,8 @@ export const officialSources: OfficialSource[] = [
     companyType: "memory",
     url: "https://news.skhynix.co.kr/",
     feedUrl: "https://news.skhynix.com/feed/",
+    feedIncludeKeywords: ["hbm", "dram", "nand", "memory", "semiconductor", "cxl", "pim", "ai computing", "gpu", "data center"],
+    feedExcludeKeywords: ["local economy", "struggling regions", "esg", "sustainability", "scholarship", "donation", "culture", "recruit", "investor", "conference call"],
     language: "ko",
     crawlPolicy: "rss",
     topics: ["HBM", "DRAM", "NAND", "AI Memory", "CXL", "PIM"],
@@ -90,6 +96,8 @@ export const officialSources: OfficialSource[] = [
     companyType: "memory",
     url: "https://www.micron.com/about/press/news",
     feedUrl: "https://investors.micron.com/rss/news-releases.xml",
+    feedIncludeKeywords: ["dram", "nand", "ssd", "memory", "data center", "hbm", "ai", "qlc", "ddr", "lpddr"],
+    feedExcludeKeywords: ["investor conference", "quarterly", "financial", "earnings", "dividend", "stockholder", "shareholder"],
     language: "en",
     crawlPolicy: "rss",
     topics: ["DRAM", "NAND", "Data Center", "AI Memory", "SSD"],
@@ -136,6 +144,8 @@ export const officialSources: OfficialSource[] = [
     companyType: "foundry",
     url: "https://newsroom.intel.com/",
     feedUrl: "https://newsroom.intel.com/feed",
+    feedIncludeKeywords: ["foundry", "process", "packaging", "semiconductor", "ai", "chip", "wafer", "technology", "computing", "data center"],
+    feedExcludeKeywords: ["investor conference", "fireside chat", "corporate", "earnings", "financial"],
     language: "en",
     crawlPolicy: "rss",
     topics: ["Intel Foundry", "Process Roadmap", "Packaging", "AI PC"],
@@ -167,6 +177,8 @@ export const officialSources: OfficialSource[] = [
     companyType: "equipment",
     url: "https://www.lamresearch.com/newsroom/",
     feedUrl: "https://newsroom.lamresearch.com/press-releases?pagetemplate=rss",
+    feedIncludeKeywords: ["etch", "deposition", "wafer", "fabrication", "semiconductor", "process", "3d", "ai", "plasma"],
+    feedExcludeKeywords: ["financial results", "conference call", "investor", "quarter", "dividend", "earnings"],
     language: "en",
     crawlPolicy: "rss",
     topics: ["Etch", "Deposition", "Wafer Fabrication", "AI-era Process"],
@@ -183,6 +195,8 @@ export const officialSources: OfficialSource[] = [
     companyType: "equipment",
     url: "https://www.appliedmaterials.com/us/en/newsroom.html",
     feedUrl: "https://ir.appliedmaterials.com/rss/news-releases.xml",
+    feedIncludeKeywords: ["packaging", "semiconductor", "materials", "wiring", "dram", "patterning", "deposition", "etch", "ai", "advanced"],
+    feedExcludeKeywords: ["investor conference", "fireside chat", "financial", "earnings", "dividend"],
     language: "en",
     crawlPolicy: "rss",
     topics: ["Materials Engineering", "Wiring", "DRAM Scaling", "Patterning"],

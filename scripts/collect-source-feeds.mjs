@@ -67,7 +67,9 @@ function extractOfficialSources(text) {
       url: getField(block, "url"),
       feedUrl: getField(block, "feedUrl"),
       crawlPolicy: getField(block, "crawlPolicy"),
-      topics: getArrayField(block, "topics")
+      topics: getArrayField(block, "topics"),
+      feedIncludeKeywords: getArrayField(block, "feedIncludeKeywords"),
+      feedExcludeKeywords: getArrayField(block, "feedExcludeKeywords")
     })
   );
 }
@@ -164,6 +166,33 @@ function makeCandidateId(sourceId, url) {
   return `${sourceId}-${createHash("sha1").update(url).digest("hex").slice(0, 10)}`;
 }
 
+function normalizeKeyword(value) {
+  return value.toLocaleLowerCase("en-US").trim();
+}
+
+function getKeywordMatches(value, keywords) {
+  const normalizedValue = normalizeKeyword(value);
+
+  return keywords.filter((keyword) => normalizedValue.includes(normalizeKeyword(keyword)));
+}
+
+function classifyByKeyword(source, item) {
+  const searchText = [item.title, item.excerpt, item.url]
+    .filter(Boolean)
+    .join(" ");
+  const includeMatches = getKeywordMatches(searchText, source.feedIncludeKeywords);
+  const excludeMatches = getKeywordMatches(searchText, source.feedExcludeKeywords);
+  const included =
+    source.feedIncludeKeywords.length === 0 || includeMatches.length > 0;
+
+  return {
+    included,
+    excluded: excludeMatches.length > 0,
+    includeMatches,
+    excludeMatches
+  };
+}
+
 function parseFeedItems(source, xml, limit, fetchedAt) {
   const blocks = Array.from(
     xml.matchAll(/<(item|entry)\b[\s\S]*?<\/\1>/gi),
@@ -194,10 +223,35 @@ function parseFeedItems(source, xml, limit, fetchedAt) {
         fetchedAt,
         topics: source.topics,
         status: "review-needed",
-        excerpt
+        excerpt,
+        matchedKeywords: []
       };
     })
     .filter(Boolean)
+    .map((item) => {
+      const filter = classifyByKeyword(source, item);
+
+      return {
+        ...item,
+        matchedKeywords: filter.includeMatches,
+        excludedKeywords: filter.excludeMatches,
+        filterPassed: filter.included && !filter.excluded
+      };
+    })
+    .filter((item) => item.filterPassed)
+    .map((item) => ({
+      id: item.id,
+      sourceId: item.sourceId,
+      sourceName: item.sourceName,
+      title: item.title,
+      url: item.url,
+      publishedAt: item.publishedAt,
+      fetchedAt: item.fetchedAt,
+      topics: item.topics,
+      status: item.status,
+      excerpt: item.excerpt,
+      matchedKeywords: item.matchedKeywords
+    }))
     .slice(0, limit);
 }
 
@@ -239,15 +293,23 @@ async function collectSource(source, limit, fetchedAt) {
     const reachable = response.status >= 200 && response.status < 400;
     const feedLike = /<rss|<feed|<rdf:RDF/i.test(xml);
     const items = reachable && feedLike ? parseFeedItems(source, xml, limit, fetchedAt) : [];
+    const rawItemCount = Array.from(xml.matchAll(/<(item|entry)\b[\s\S]*?<\/\1>/gi))
+      .length;
 
     return {
       sourceId: source.id,
       sourceName: source.name,
       feedUrl: source.feedUrl,
-      ok: reachable && feedLike && items.length > 0,
+      ok: reachable && feedLike,
       status: response.status,
       finalUrl: response.url,
+      rawItemCount,
       itemCount: items.length,
+      filteredOutCount: Math.max(rawItemCount - items.length, 0),
+      filter: {
+        includeKeywords: source.feedIncludeKeywords,
+        excludeKeywords: source.feedExcludeKeywords
+      },
       items
     };
   } catch (error) {
