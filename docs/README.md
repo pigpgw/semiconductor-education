@@ -14,6 +14,8 @@
    - MVP 이후 무엇을 먼저 보완할지 우선순위와 기준을 정리합니다.
 5. [기술 블로그와 뉴스 소스 전략](tech-news-source-strategy.md)
    - 반도체 기업 기술블로그 링크 허브, 공식 뉴스 수집, 학습자용 해설 레이어를 설계합니다.
+6. [1차 최종 점검](phase-one-final-audit.md)
+   - 1차 MVP 마감 전 코드, 문서, 설정 점검 결과와 다음 작업을 정리합니다.
 
 ## 기획 문서
 
@@ -42,6 +44,7 @@
 | [로그인 없는 정책](no-login-policy.md) | 계정 없는 학습, localStorage, 개인정보 미수집 기준 |
 | [Git workflow](git-workflow.md) | `main`, `dev`, 작업 브랜치, 커밋 규칙 |
 | [Deployment](deployment.md) | 배포 파이프라인과 환경 변수 정책 |
+| [1차 최종 점검](phase-one-final-audit.md) | 마감 점검 결과, 삭제/유지 판단, 다음 작업 |
 
 ## 문서 정리 원칙
 
