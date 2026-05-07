@@ -39,7 +39,7 @@ function DramCellVisual() {
           <SignalLine className="w-3/4" />
           <SignalLine className="w-1/2 bg-saffron/70" />
         </div>
-        <div className="grid aspect-square place-items-center border border-ink bg-paper">
+        <div className="grid aspect-square place-items-center border border-line bg-bg3">
           <div className="h-10 w-10 rounded-full border-4 border-teal bg-teal/10" />
         </div>
       </div>
@@ -60,7 +60,7 @@ function DramCellVisual() {
 function HbmStackVisual() {
   return (
     <div className="relative h-full min-h-[220px]" aria-hidden>
-      <div className="absolute inset-x-6 bottom-0 h-10 border border-ink bg-ink" />
+      <div className="absolute inset-x-6 bottom-0 h-10 border border-blue/30 bg-bg0" />
       {Array.from({ length: 6 }).map((_, index) => (
         <div
           key={index}
@@ -80,7 +80,7 @@ function HbmStackVisual() {
 function EuvBeamVisual() {
   return (
     <div className="grid h-full min-h-[220px] content-center gap-5" aria-hidden>
-      <div className="mx-auto h-10 w-28 border border-ink bg-ink" />
+      <div className="mx-auto h-10 w-28 border border-blue/30 bg-bg0" />
       <div className="mx-auto grid w-48 grid-cols-5 gap-2">
         {Array.from({ length: 5 }).map((_, index) => (
           <div key={index} className="h-20 skew-x-[-16deg] bg-saffron/20">
@@ -104,7 +104,7 @@ function EuvBeamVisual() {
 
 export function HomeTechnicalVisual() {
   return (
-    <figure className="border border-line bg-ink p-5 text-white shadow-soft">
+    <figure className="rounded-2xl border border-line bg-bg0 p-5 text-ink shadow-soft">
       <div className="grid gap-4">
         <div className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">
           <div className="border border-white/20 bg-white/10 p-4">
@@ -113,13 +113,13 @@ export function HomeTechnicalVisual() {
               <WaferPattern />
             </div>
           </div>
-          <div className="border border-white/20 bg-white p-4 text-ink">
+          <div className="border border-white/20 bg-bg2 p-4 text-ink">
             <p className="text-xs font-black uppercase text-teal">HBM stack</p>
             <HbmStackVisual />
           </div>
         </div>
         <div className="grid gap-4 lg:grid-cols-2">
-          <div className="border border-white/20 bg-white p-4 text-ink">
+          <div className="border border-white/20 bg-bg2 p-4 text-ink">
             <p className="text-xs font-black uppercase text-teal">DRAM cell</p>
             <DramCellVisual />
           </div>
@@ -129,7 +129,7 @@ export function HomeTechnicalVisual() {
           </div>
         </div>
       </div>
-      <figcaption className="mt-4 text-sm font-semibold leading-6 text-white/70">
+      <figcaption className="mt-4 text-sm font-semibold leading-6 text-muted">
         메모리 셀, 적층, 노광 패턴을 먼저 시각적으로 잡고 본문에서 구조와
         실무 제약을 이어서 읽습니다.
       </figcaption>
@@ -148,7 +148,7 @@ export function LessonMiniVisual({ slug }: LessonVisualProps) {
     );
 
   return (
-    <div className="h-36 overflow-hidden border border-line bg-surface p-3">
+    <div className="h-36 overflow-hidden rounded-xl border border-line bg-surface p-3">
       {visual}
     </div>
   );
@@ -175,7 +175,7 @@ export function LessonTechnicalVisual({ slug }: LessonVisualProps) {
           };
 
   return (
-    <figure className="mt-8 grid gap-5 border border-line bg-paper p-5 md:grid-cols-[minmax(0,0.95fr)_minmax(260px,0.75fr)] md:items-center">
+    <figure className="mt-8 grid gap-5 rounded-2xl border border-line bg-paper p-5 md:grid-cols-[minmax(0,0.95fr)_minmax(260px,0.75fr)] md:items-center">
       <div>
         <p className="text-sm font-black text-teal">Visual first</p>
         <h2 className="mt-2 text-2xl font-black leading-tight">{config.title}</h2>

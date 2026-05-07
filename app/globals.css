@@ -3,15 +3,22 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
-  --background: #f6f7f9;
-  --foreground: #151515;
-  --muted: #5d6470;
-  --line: #d7dce2;
-  --paper: #ffffff;
-  --teal: #0f766e;
-  --saffron: #b45309;
-  --berry: #9f1239;
+  color-scheme: dark;
+  --bg0: #0b0e18;
+  --bg1: #10131f;
+  --bg2: #161929;
+  --bg3: #1c2035;
+  --bg4: #222640;
+  --background: #0b0e18;
+  --foreground: #f0f2ff;
+  --muted: #8b93b8;
+  --line: rgba(255, 255, 255, 0.1);
+  --paper: #10131f;
+  --surface: #161929;
+  --blue: #4d8eff;
+  --teal: #00d4a4;
+  --saffron: #ffb84d;
+  --berry: #ff6b9d;
 }
 
 * {
@@ -36,7 +43,7 @@ a {
 }
 
 ::selection {
-  background: rgba(15, 118, 110, 0.18);
+  background: rgba(77, 142, 255, 0.28);
 }
 
 .focus-ring {
@@ -69,7 +76,7 @@ a {
 }
 
 .article-prose p {
-  color: #292d33;
+  color: #c7cdea;
   font-size: 1.02rem;
   line-height: 1.9;
 }
@@ -86,7 +93,7 @@ a {
 .article-prose ul,
 .article-prose ol {
   padding-left: 1.4rem;
-  color: #292d33;
+  color: #c7cdea;
   line-height: 1.85;
 }
 
@@ -95,10 +102,10 @@ a {
 }
 
 .article-prose blockquote {
-  border-left: 4px solid var(--teal);
-  background: rgba(15, 118, 110, 0.07);
+  border-left: 4px solid var(--blue);
+  background: rgba(77, 142, 255, 0.1);
   padding: 1rem 1.1rem;
-  color: #25312f;
+  color: #c7cdea;
 }
 
 .article-prose table {
@@ -118,14 +125,14 @@ a {
 }
 
 .article-prose th {
-  background: #eef3f2;
+  background: rgba(255, 255, 255, 0.04);
   font-weight: 800;
 }
 
 .article-prose code {
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #f1f3f5;
+  background: rgba(255, 255, 255, 0.06);
   padding: 0.12rem 0.35rem;
   font-size: 0.9em;
 }

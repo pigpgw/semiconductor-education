@@ -10,14 +10,21 @@ const config = {
   theme: {
     extend: {
       colors: {
-        ink: "#151515",
-        muted: "#5d6470",
-        line: "#d7dce2",
-        paper: "#ffffff",
-        surface: "#f6f7f9",
-        teal: "#0f766e",
-        saffron: "#b45309",
-        berry: "#9f1239"
+        bg0: "#0b0e18",
+        bg1: "#10131f",
+        bg2: "#161929",
+        bg3: "#1c2035",
+        bg4: "#222640",
+        ink: "#f0f2ff",
+        muted: "#8b93b8",
+        line: "rgba(255,255,255,0.10)",
+        paper: "#10131f",
+        surface: "#161929",
+        blue: "#4d8eff",
+        teal: "#00d4a4",
+        saffron: "#ffb84d",
+        berry: "#ff6b9d",
+        purple: "#a78bfa"
       },
       fontFamily: {
         sans: [
@@ -31,7 +38,7 @@ const config = {
         ]
       },
       boxShadow: {
-        soft: "0 16px 36px rgba(21, 21, 21, 0.08)"
+        soft: "0 18px 44px rgba(0, 0, 0, 0.28)"
       }
     }
   },

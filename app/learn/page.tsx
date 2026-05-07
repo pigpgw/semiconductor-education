@@ -94,7 +94,7 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
                 href={filterLink({ category: selectedCategory })}
                 className={`focus-ring min-h-10 rounded-md border px-3 py-2 text-sm font-bold ${
                   !selectedLevel
-                    ? "border-ink bg-ink text-white"
+                    ? "border-blue bg-blue text-bg0"
                     : "border-line bg-paper text-ink hover:border-teal hover:text-teal"
                 }`}
               >
@@ -107,7 +107,7 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
                   aria-current={selectedLevel === level ? "true" : undefined}
                   className={`focus-ring min-h-10 rounded-md border px-3 py-2 text-sm font-bold ${
                     selectedLevel === level
-                      ? "border-ink bg-ink text-white"
+                      ? "border-blue bg-blue text-bg0"
                       : "border-line bg-paper text-ink hover:border-teal hover:text-teal"
                   }`}
                 >
@@ -123,7 +123,7 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
                 href={filterLink({ level: selectedLevel })}
                 className={`focus-ring min-h-10 rounded-md border px-3 py-2 text-sm font-bold ${
                   !selectedCategory
-                    ? "border-ink bg-ink text-white"
+                    ? "border-blue bg-blue text-bg0"
                     : "border-line bg-paper text-ink hover:border-teal hover:text-teal"
                 }`}
               >
@@ -138,7 +138,7 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
                   }
                   className={`focus-ring min-h-10 rounded-md border px-3 py-2 text-sm font-bold ${
                     selectedCategory === category
-                      ? "border-ink bg-ink text-white"
+                      ? "border-blue bg-blue text-bg0"
                       : "border-line bg-paper text-ink hover:border-teal hover:text-teal"
                   }`}
                 >

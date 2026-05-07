@@ -9,7 +9,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/learn"
-        className="focus-ring mt-6 inline-flex min-h-11 items-center rounded-md bg-ink px-4 text-sm font-bold text-white hover:bg-teal"
+        className="focus-ring mt-6 inline-flex min-h-11 items-center rounded-md bg-blue px-4 text-sm font-bold text-bg0 hover:bg-teal"
       >
         교재 목록으로 이동
       </Link>
