@@ -1,0 +1,6 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 문서 인덱스
+    url: https://github.com/pigpgw/semiconductor-education/blob/main/docs/README.md
+    about: 프로젝트 기획, 콘텐츠 기준, 출처 정책 문서를 먼저 확인합니다.
+
