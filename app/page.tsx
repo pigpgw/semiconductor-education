@@ -129,12 +129,13 @@ export default function HomePage() {
               참고 자료 출처
             </span>
             {references.map((reference) => (
-              <span
+              <Link
                 key={reference}
+                href="/sources"
                 className="rounded-md border border-line bg-bg2 px-3 py-1.5 text-xs font-semibold text-muted"
               >
                 {reference}
-              </span>
+              </Link>
             ))}
           </div>
         </div>
