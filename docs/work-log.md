@@ -7,9 +7,50 @@
 - 브랜치 흐름: `feature/*`, `fix/*`, `refactor/*`, `docs/*`, `style/*`, `chore/*`, `test/*` -> `dev` -> `main`
 - 핵심 화면: `/`, `/level`, `/roadmap`, `/learn`, `/learn/[slug]`, `/glossary`, `/sources`, `/industry`, `/industry/[slug]`, `/practice`, `/study`
 - 핵심 콘텐츠: DRAM, HBM, EUV 글 3편
-- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, 검토 대기 후보 4개, 산업 업데이트 8개
+- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, 산업 업데이트 8개
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
+
+## 2026-05-07: source별 feed 키워드 필터
+
+### 작업 브랜치
+
+- `feature/feed-keyword-filter`
+
+### 작업한 것
+
+- `OfficialSource`에 `feedIncludeKeywords`, `feedExcludeKeywords` 선택 필드를 추가했습니다.
+- RSS 출처 6개에 포함/제외 키워드를 넣어 투자자 공지, 채용, 캠페인성 글을 1차로 줄이게 했습니다.
+- `scripts/collect-source-feeds.mjs`가 title, URL, feed excerpt 기준으로 키워드를 매칭하고, 통과한 항목만 `review-needed` 후보로 출력하게 했습니다.
+- source의 기본 topic은 표시용으로만 남기고 포함 판정에는 쓰지 않게 했습니다.
+- feed가 정상이고 필터 통과 항목이 0개인 출처는 네트워크 실패로 보지 않게 했습니다.
+- `/sources` 카드에 RSS 출처별 포함/제외 키워드를 표시했습니다.
+- `scripts/check-sources.mjs`가 feed URL이 있는 출처의 include/exclude 키워드 누락을 검증하게 했습니다.
+- 공식 출처 추가 템플릿에 feed 필터 입력 기준을 추가했습니다.
+
+### 부족한 점
+
+- 필터 통과 후보를 `/industry` 해설 노트 초안으로 승격하는 스크립트는 아직 없습니다.
+- 검토 후보를 직접 탐색하는 별도 UI는 아직 없습니다. 현재는 `/sources` 필터 기준과 `/industry` 검토 대기 통계만 표시합니다.
+- Intel처럼 broad AI 키워드만으로 걸리는 후보는 다음 단계에서 source별 exclude 키워드를 더 정밀하게 조정해야 합니다.
+- 학습 노트 내보내기는 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 선별된 feed 항목을 `/industry` 해설 노트 초안으로 승격하는 스크립트를 추가합니다.
+2. 검토 대기 후보를 탐색하는 내부용 페이지나 문서 뷰를 추가합니다.
+3. source별 exclude 키워드를 실제 수집 결과 기준으로 정밀 보정합니다.
+4. 학습 노트 내보내기를 추가합니다.
+5. NAND/SSD 첫 글을 추가합니다.
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run validate`: 통과
+- `npm run check:links`: 통과, 공식 출처 12개와 공식 feed 6개, 산업 업데이트 8개 확인
+- `npm run collect:feeds -- --limit=2`: 통과, source별 필터 적용 후 공식 feed 6개에서 `review-needed` 후보 9개 출력
+- `npm audit --audit-level=moderate`: 통과, 취약점 0건
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
 
 ## 2026-05-07: feed 검토 대기열 데이터 구조
 
@@ -29,18 +70,16 @@
 
 ### 부족한 점
 
-- source별 include/exclude 키워드 필터는 아직 없습니다.
 - 검토 대기 후보를 `/industry` 해설 노트 초안으로 승격하는 스크립트는 아직 없습니다.
 - 검토 후보를 직접 탐색하는 별도 UI는 아직 없습니다. 현재는 `/industry` 통계만 표시합니다.
 - 학습 노트 내보내기는 아직 없습니다.
 
 ### 다음 작업 후보
 
-1. source별 포함/제외 키워드 필터를 추가합니다.
-2. 선별된 feed 항목을 `/industry` 해설 노트 초안으로 승격하는 스크립트를 추가합니다.
-3. 검토 대기 후보를 탐색하는 내부용 페이지나 문서 뷰를 추가합니다.
-4. 학습 노트 내보내기를 추가합니다.
-5. NAND/SSD 첫 글을 추가합니다.
+1. 선별된 feed 항목을 `/industry` 해설 노트 초안으로 승격하는 스크립트를 추가합니다.
+2. 검토 대기 후보를 탐색하는 내부용 페이지나 문서 뷰를 추가합니다.
+3. 학습 노트 내보내기를 추가합니다.
+4. NAND/SSD 첫 글을 추가합니다.
 
 ### 검증 결과
 

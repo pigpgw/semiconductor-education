@@ -14,6 +14,16 @@ function getField(block, field) {
   return block.match(new RegExp(`${field}: "([^"]+)"`))?.[1];
 }
 
+function getArrayField(block, field) {
+  const match = block.match(new RegExp(`${field}: \\[([^\\]]*)\\]`));
+
+  if (!match) {
+    return [];
+  }
+
+  return Array.from(match[1].matchAll(/"([^"]+)"/g)).map(([, value]) => value);
+}
+
 function extractOfficialSources(text) {
   const arrayMatch = text.match(
     /export const officialSources: OfficialSource\[\] = \[([\s\S]*?)\];/
@@ -29,7 +39,9 @@ function extractOfficialSources(text) {
       name: getField(block, "name"),
       url: getField(block, "url"),
       feedUrl: getField(block, "feedUrl"),
-      crawlPolicy: getField(block, "crawlPolicy")
+      crawlPolicy: getField(block, "crawlPolicy"),
+      feedIncludeKeywords: getArrayField(block, "feedIncludeKeywords"),
+      feedExcludeKeywords: getArrayField(block, "feedExcludeKeywords")
     })
   );
 }
@@ -95,6 +107,12 @@ function validateSourceShape(sources) {
   const feedSourcesWithoutRssPolicy = sources.filter(
     (source) => source.feedUrl && source.crawlPolicy !== "rss"
   );
+  const rssSourcesWithoutIncludeKeywords = sources.filter(
+    (source) => source.feedUrl && source.feedIncludeKeywords.length === 0
+  );
+  const rssSourcesWithoutExcludeKeywords = sources.filter(
+    (source) => source.feedUrl && source.feedExcludeKeywords.length === 0
+  );
 
   if (
     missingFields.length > 0 ||
@@ -103,7 +121,9 @@ function validateSourceShape(sources) {
     invalidUrls.length > 0 ||
     invalidFeedUrls.length > 0 ||
     rssSourcesWithoutFeed.length > 0 ||
-    feedSourcesWithoutRssPolicy.length > 0
+    feedSourcesWithoutRssPolicy.length > 0 ||
+    rssSourcesWithoutIncludeKeywords.length > 0 ||
+    rssSourcesWithoutExcludeKeywords.length > 0
   ) {
     console.error(
       JSON.stringify(
@@ -116,7 +136,9 @@ function validateSourceShape(sources) {
           invalidUrls,
           invalidFeedUrls,
           rssSourcesWithoutFeed,
-          feedSourcesWithoutRssPolicy
+          feedSourcesWithoutRssPolicy,
+          rssSourcesWithoutIncludeKeywords,
+          rssSourcesWithoutExcludeKeywords
         },
         null,
         2
