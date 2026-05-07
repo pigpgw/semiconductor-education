@@ -11,6 +11,44 @@
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
 
+## 2026-05-07: 핵심 글 구조 도식 보강
+
+### 작업 브랜치
+
+- `feature/lesson-visual-detail`
+
+### 작업한 것
+
+- `components/technical-visual.tsx`의 DRAM/HBM/EUV 도식을 라벨형 구조 다이어그램으로 재작성했습니다.
+- DRAM 도식은 1T1C, word line, bit line, refresh, I/O width의 trade-off를 함께 보여 주도록 보강했습니다.
+- HBM 도식은 DRAM die, TSV, base die, interposer/package와 bandwidth, thermal, yield 판단 기준을 연결했습니다.
+- EUV 도식은 DUV multi-patterning과 EUV selected layers를 비교하고 overlay, defect, throughput 부담을 함께 보여 주도록 바꿨습니다.
+- 글 목록 카드에서 쓰는 mini visual은 유지하면서, 글 상세에서는 더 많은 라벨과 판단 기준을 보여 주도록 `mini`와 `detail` 모드를 분리했습니다.
+- `docs/planning-improvements.md`, `docs/design-supplement.md`, `docs/phase-one-final-audit.md`, `docs/mvp-summary.md`의 다음 작업 기준을 최신화했습니다.
+
+### 부족한 점
+
+- 본문 관련 용어를 사이드바나 인라인에서 더 빠르게 탐색하는 UX는 아직 없습니다.
+- 복습 질문은 20개지만 주제/레벨 필터 UX는 아직 없습니다.
+- 공식 RSS/API 후보는 아직 출처별 `feedUrl` 필드로 정리되지 않았습니다.
+- NAND/SSD 첫 글과 패키징/TSV/MR-MUF 심화 글은 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 본문 관련 용어 탐색 UX를 연결합니다.
+2. 복습 질문 주제/레벨 필터 UX를 추가합니다.
+3. 공식 RSS/API 후보를 출처별로 조사하고 `feedUrl` 필드 추가 여부를 결정합니다.
+4. NAND/SSD 첫 글을 추가합니다.
+5. 패키징, TSV, MR-MUF 심화 글을 추가합니다.
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run validate`: 통과
+- `npm run check:links`: 통과, 공식 출처 11개와 산업 업데이트 8개 확인
+- `npm audit --audit-level=moderate`: 통과, 취약점 0건
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
+
 ## 2026-05-07: 글 상세 90초 요약 카드 고도화
 
 ### 작업 브랜치
@@ -27,18 +65,16 @@
 
 ### 부족한 점
 
-- DRAM/HBM/EUV 도식은 여전히 기본 시각화 수준이며, 본문 표와 더 강하게 연결할 수 있습니다.
 - 본문 관련 용어를 사이드바나 인라인에서 더 빠르게 탐색하는 UX는 아직 없습니다.
 - 복습 질문은 20개지만 주제/레벨 필터 UX는 아직 없습니다.
 - 공식 RSS/API 후보는 아직 출처별 `feedUrl` 필드로 정리되지 않았습니다.
 
 ### 다음 작업 후보
 
-1. DRAM/HBM/EUV 본문에 구조 도식 또는 비교 시각화를 추가합니다.
-2. 본문 관련 용어 탐색 UX를 연결합니다.
-3. 복습 질문 주제/레벨 필터 UX를 추가합니다.
-4. 공식 RSS/API 후보를 출처별로 조사하고 `feedUrl` 필드 추가 여부를 결정합니다.
-5. NAND/SSD 첫 글을 추가합니다.
+1. 본문 관련 용어 탐색 UX를 연결합니다.
+2. 복습 질문 주제/레벨 필터 UX를 추가합니다.
+3. 공식 RSS/API 후보를 출처별로 조사하고 `feedUrl` 필드 추가 여부를 결정합니다.
+4. NAND/SSD 첫 글을 추가합니다.
 
 ### 검증 결과
 
@@ -78,15 +114,13 @@
 ### 부족한 점
 
 - 공식 RSS/API 후보는 아직 출처별 필드로 정리되지 않았습니다.
-- DRAM/HBM/EUV 도식은 현재 기본 시각화 수준이며, 본문 표와 더 강하게 연결할 수 있습니다.
 - 복습 질문은 20개지만 주제/레벨 필터 UX는 아직 없습니다.
 
 ### 다음 작업 후보
 
-1. DRAM/HBM/EUV 본문에 구조 도식 또는 비교 시각화를 추가합니다.
-2. 공식 RSS/API 후보를 출처별로 조사하고 `feedUrl` 필드 추가 여부를 결정합니다.
-3. 복습 질문 주제/레벨 필터 UX를 추가합니다.
-4. NAND/SSD 첫 글을 추가합니다.
+1. 공식 RSS/API 후보를 출처별로 조사하고 `feedUrl` 필드 추가 여부를 결정합니다.
+2. 복습 질문 주제/레벨 필터 UX를 추가합니다.
+3. NAND/SSD 첫 글을 추가합니다.
 
 ### 검증 기준
 
