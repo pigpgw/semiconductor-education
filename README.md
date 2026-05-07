@@ -31,8 +31,8 @@
 - 레벨은 콘텐츠를 막는 장치가 아니라 읽기 깊이를 추천하는 장치로 설계합니다.
 - 포트폴리오에서는 코드 구현보다 먼저 기술 지식 구조화, 출처 관리, 학습 UX 설계 능력이 보이게 합니다.
 
-상세 기획은 [docs/product-planning.md](docs/product-planning.md)에 정리했습니다.
-1차 MVP 최종 설계 기준은 [docs/final-design.md](docs/final-design.md)에 확정했습니다.
+문서 전체 목차는 [docs/README.md](docs/README.md)에서 볼 수 있습니다.
+상세 기획은 [docs/product-planning.md](docs/product-planning.md), 1차 MVP 최종 설계 기준은 [docs/final-design.md](docs/final-design.md), 현재 MVP 정리는 [docs/mvp-summary.md](docs/mvp-summary.md), 다음 보완 기획은 [docs/planning-improvements.md](docs/planning-improvements.md)에 정리했습니다.
 
 첫 글 3편:
 
@@ -72,6 +72,17 @@
 - `/study`는 계정 없이 현재 브라우저에만 진도 체크와 학습 노트를 저장합니다.
 - `/practice`는 읽은 내용을 자기 말로 설명하고 실무 포인트까지 확인하게 만듭니다.
 - `/roadmap`은 깊이 매트릭스와 포트폴리오 증거 설계를 함께 보여줍니다.
+
+## 현재 MVP 상태
+
+- 핵심 글 3편: DRAM, HBM, EUV
+- 용어 사전 12개
+- 복습 질문 6개와 실무 시나리오 3개
+- 학습 체크리스트 7개
+- 로그인 없는 로컬 학습 노트
+- 다크 문서형 반응형 UI
+
+현재 구현 범위와 일단락 기준은 [docs/mvp-summary.md](docs/mvp-summary.md)에 정리했습니다.
 
 ## 디자인 원칙
 
@@ -139,9 +150,9 @@ npm run check:viewport
 
 ## 향후 로드맵
 
-- NAND와 SSD 구조
-- 패키징, TSV, MR-MUF
-- 메모리 월과 AI 인프라
-- 공정 흐름과 포토리소그래피
-- 직무별 반도체 이해 지도
-- 영어 요약 버전
+- Phase 1.1: DRAM/HBM/EUV 글 리라이트, 출처 확인일 정리, 용어/복습 보강
+- Phase 1.2: 글별 요약 카드, 레벨별 읽기 안내, 학습 노트 내보내기
+- Phase 2: NAND, SSD, DDR/LPDDR/GDDR/HBM 비교
+- Phase 3: 패키징, TSV, MR-MUF, 공정 흐름, 직무별 반도체 이해 지도
+
+보완 우선순위는 [docs/planning-improvements.md](docs/planning-improvements.md)에 정리했습니다.
