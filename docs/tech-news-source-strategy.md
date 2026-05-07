@@ -87,6 +87,8 @@ Semiconductor Education은 반도체 기술 뉴스를 “긁어 모아 보여주
 6. 관련 교재 글
 7. 더 읽을 공식 출처
 
+현재 MVP에서는 `/industry/[slug]`를 `lib/industry.ts`의 수동 큐레이션 데이터로 생성합니다. 원문 본문은 저장하지 않고, 한 줄 요약, 중요도, 읽을 질문, 관련 교재, 출처 정책만 보여줍니다.
+
 ## 수집 방식
 
 수집은 세 단계로 나눕니다.
@@ -223,8 +225,9 @@ type IndustryUpdate = {
 | P1 | `/sources` 공식 링크 허브 | 완료: 10개 이상 공식 출처 카드, 외부 이동 버튼 |
 | P1 | 공식 출처 URL 헬스체크 | 완료: `npm run check:sources`, TSMC 403 allowlist |
 | P1 | 수동 industry notes | 1차 구현: HBM/EUV/Packaging/공정/수율 관련 공식 글 8개 큐레이션 |
-| P2 | RSS/API 수집기 | 공식 feed가 있는 출처만 title/url/date 수집 |
 | P2 | `/industry` 업데이트 목록 | 완료: 출처, 날짜, 태그, 관련 교재 글 표시 |
+| P2 | `/industry/[slug]` 상세 해설 | 완료: 원문별 질문, 출처 정책, 관련 교재 표시 |
+| P2 | RSS/API 수집기 | 공식 feed가 있는 출처만 title/url/date 수집 |
 | P3 | 자동 태깅 | HBM/EUV/NAND/TSV/Yield 키워드 기반 태그 추천 |
 | P3 | 주간 리뷰 문서 | 이번 주 공식 자료에서 배울 기술 포인트 정리 |
 

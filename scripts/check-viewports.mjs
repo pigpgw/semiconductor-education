@@ -28,6 +28,8 @@ const pages = [
   "/glossary",
   "/sources",
   "/industry",
+  "/industry/sk-hynix-12-layer-hbm3e",
+  "/industry/samsung-euv-dram-scaling",
   "/learn",
   "/study",
   "/practice",

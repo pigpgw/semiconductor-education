@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { getAllLessons } from "@/lib/content";
 import {
+  formatIndustryDate,
   getIndustrySource,
   industryCategories,
   industryLevels,
@@ -62,18 +63,6 @@ function industryLink({
 
   const query = params.toString();
   return query ? `/industry?${query}` : "/industry";
-}
-
-function formatDate(date?: string) {
-  if (!date) {
-    return "상시 업데이트";
-  }
-
-  return new Intl.DateTimeFormat("ko-KR", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  }).format(new Date(`${date}T00:00:00+09:00`));
 }
 
 export default async function IndustryPage({ searchParams }: IndustryPageProps) {
@@ -291,10 +280,15 @@ export default async function IndustryPage({ searchParams }: IndustryPageProps) 
                   <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_280px]">
                     <div>
                       <p className="text-sm font-bold text-muted">
-                        {update.sourceName} · {formatDate(update.publishedAt)}
+                        {update.sourceName} · {formatIndustryDate(update.publishedAt)}
                       </p>
                       <h2 className="mt-2 text-2xl font-black leading-snug">
-                        {update.title}
+                        <Link
+                          href={`/industry/${update.id}`}
+                          className="focus-ring rounded-sm hover:text-teal"
+                        >
+                          {update.title}
+                        </Link>
                       </h2>
                       <p className="mt-4 text-base leading-8 text-muted">
                         {update.summary}
@@ -324,6 +318,14 @@ export default async function IndustryPage({ searchParams }: IndustryPageProps) 
                           ))}
                         </ul>
                       </div>
+
+                      <Link
+                        href={`/industry/${update.id}`}
+                        className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md border border-line px-4 text-sm font-black hover:border-teal hover:text-teal"
+                      >
+                        해설 노트 보기
+                        <ArrowRight size={16} aria-hidden />
+                      </Link>
                     </div>
 
                     <aside className="border border-line bg-bg0 p-4">
