@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+  push:
+    branches:
+      - main
+      - dev
+      - "feature/**"
+      - "fix/**"
+      - "refactor/**"
+      - "docs/**"
+      - "style/**"
+      - "chore/**"
+      - "test/**"
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  branch-name:
+    name: Branch name
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate source branch
+        run: |
+          branch="${{ github.head_ref }}"
+          if [[ "$branch" =~ ^(feature|fix|refactor|docs|style|chore|test)/[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+            exit 0
+          fi
+
+          echo "Invalid branch name: $branch"
+          echo "Use type/task-name, for example feature/mvp-foundation."
+          exit 1
+
+  commitlint:
+    name: Commit convention
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate commit messages
+        run: npx commitlint --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.event.pull_request.head.sha }}" --verbose
+
+  validate:
+    name: Validate app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Start built app
+        run: npm run start -- --hostname 127.0.0.1 --port 3000 &
+
+      - name: Wait for local app
+        run: |
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:3000 >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+
+          echo "App did not become ready in time."
+          exit 1
+
+      - name: Viewport smoke test
+        env:
+          BASE_URL: http://127.0.0.1:3000
+        run: npm run check:viewport
