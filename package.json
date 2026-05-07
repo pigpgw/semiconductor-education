@@ -17,6 +17,7 @@
     "check:practice": "node scripts/check-practice.mjs",
     "check:sources": "node scripts/check-sources.mjs",
     "check:viewport": "node scripts/check-viewports.mjs",
+    "collect:feeds": "node scripts/collect-source-feeds.mjs",
     "check:content": "npm run check:lessons && npm run check:glossary && npm run check:practice",
     "check:links": "npm run check:sources && npm run check:industry",
     "lint": "eslint . --max-warnings=0",
