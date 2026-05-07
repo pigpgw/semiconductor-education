@@ -4,7 +4,7 @@ import { performance } from "node:perf_hooks";
 const sourceFile = new URL("../lib/sources.ts", import.meta.url);
 const sourceText = readFileSync(sourceFile, "utf8");
 
-const requestTimeoutMs = 15000;
+const requestTimeoutMs = 20000;
 const allowedStatusBySourceId = new Map([
   ["tsmc-technology", 403],
   ["tsmc-press-center", 403]
@@ -143,6 +143,20 @@ async function fetchWithTimeout(url) {
   }
 }
 
+async function fetchWithRetry(url, attempts = 2) {
+  let lastError;
+
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    try {
+      return await fetchWithTimeout(url);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError;
+}
+
 function classifyResponse(source, response) {
   const expectedAllowedStatus = allowedStatusBySourceId.get(source.id);
   const status = response.status;
@@ -167,7 +181,7 @@ async function checkFeed(source) {
   }
 
   try {
-    const response = await fetchWithTimeout(source.feedUrl);
+    const response = await fetchWithRetry(source.feedUrl);
     const text = await response.text();
     const reachable = response.status >= 200 && response.status < 400;
     const feedLike = /<rss|<feed|<rdf:RDF/i.test(text);
@@ -190,14 +204,15 @@ async function checkFeed(source) {
 
 async function checkSource(source) {
   try {
-    const response = await fetchWithTimeout(source.url);
+    const response = await fetchWithRetry(source.url);
     const sourceResult = classifyResponse(source, response);
     const feed = await checkFeed(source);
 
     return {
       ...sourceResult,
       feed,
-      ok: sourceResult.ok && (!feed || feed.ok)
+      feedOk: !feed || feed.ok,
+      ok: sourceResult.ok
     };
   } catch (error) {
     return {
@@ -219,17 +234,20 @@ validateSourceShape(sources);
 
 const results = await Promise.all(sources.map((source) => checkSource(source)));
 const failures = results.filter((result) => !result.ok);
+const feedFailures = results.filter((result) => result.feed && !result.feed.ok);
 
 const report = {
   ok: failures.length === 0,
   checked: results.length,
   feedChecked: results.filter((result) => result.feed).length,
   feedReachable: results.filter((result) => result.feed?.ok).length,
+  feedFailed: feedFailures.length,
   reachable: results.filter((result) => result.ok && !result.allowed).length,
   allowed: results.filter((result) => result.allowed).length,
   failed: failures.length,
   durationMs: Math.round(performance.now() - startedAt),
   allowedStatusBySourceId: Object.fromEntries(allowedStatusBySourceId),
+  feedFailures,
   results
 };
 

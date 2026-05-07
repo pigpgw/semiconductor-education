@@ -133,6 +133,15 @@ npm run check:links
 npm run check:viewport
 ```
 
+공식 feed 메타데이터 수집:
+
+```bash
+npm run collect:feeds -- --limit=5
+```
+
+이 명령은 원문 본문을 저장하지 않고 공식 RSS의 제목, URL, 날짜, 짧은 description만 JSON으로 출력합니다.
+모든 feed 성공을 강제하려면 `--strict`를 붙입니다.
+
 ## 협업/배포 흐름
 
 - `main`: 안정 배포 브랜치
