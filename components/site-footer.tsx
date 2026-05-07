@@ -8,6 +8,10 @@ export function SiteFooter() {
           Semiconductor Education. 로그인 없이 바로 읽는 반도체 학습 노트.
         </p>
         <p>
+          <Link className="font-bold hover:text-teal" href="/industry">
+            산업 업데이트
+          </Link>{" "}
+          ·{" "}
           <Link className="font-bold hover:text-teal" href="/sources">
             공식 출처
           </Link>{" "}
