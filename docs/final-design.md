@@ -2,7 +2,7 @@
 
 이 문서는 1차 MVP를 일단락하기 위한 최종 설계 기준입니다. 앞으로 기능이나 글을 늘릴 때도 이 기준을 벗어나지 않는지 먼저 확인합니다.
 
-현재 구현 상태는 [MVP 정리](mvp-summary.md), 오픈소스 문서 운영 방향은 [오픈소스 문서 전략](open-source-document-strategy.md), 이후 보완 우선순위는 [보완 기획](planning-improvements.md)에 따릅니다.
+현재 구현 상태는 [MVP 정리](mvp-summary.md), 오픈소스 문서 운영 방향은 [오픈소스 문서 전략](open-source-document-strategy.md), 이후 보완 우선순위는 [보완 기획](planning-improvements.md)에 따릅니다. 최종 설계를 다음 구현 단위로 나누는 기준은 [설계 보완](design-supplement.md)에 둡니다.
 
 ## 제품 정의
 

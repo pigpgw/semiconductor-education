@@ -6,15 +6,17 @@
 
 1. [최종 설계 확정](final-design.md)
    - 1차 MVP의 제품 정의, 핵심 사용자, 제외 범위, 일단락 기준을 확정한 문서입니다.
-2. [오픈소스 문서 전략](open-source-document-strategy.md)
+2. [설계 보완](design-supplement.md)
+   - 최종 설계를 다음 구현과 문서 리라이트 작업으로 나누는 기준입니다.
+3. [오픈소스 문서 전략](open-source-document-strategy.md)
    - Toss Frontend Fundamentals처럼 하나의 기준 있는 공개 문서로 운영하기 위한 철학과 기여 단위를 정리합니다.
-3. [MVP 정리](mvp-summary.md)
+4. [MVP 정리](mvp-summary.md)
    - 현재 구현된 화면, 콘텐츠 수량, 검증 기준, 포트폴리오 어필 포인트를 한 번에 정리합니다.
-4. [보완 기획](planning-improvements.md)
+5. [보완 기획](planning-improvements.md)
    - MVP 이후 무엇을 먼저 보완할지 우선순위와 기준을 정리합니다.
-5. [기술 블로그와 뉴스 소스 전략](tech-news-source-strategy.md)
+6. [기술 블로그와 뉴스 소스 전략](tech-news-source-strategy.md)
    - 반도체 기업 기술블로그 링크 허브, 공식 뉴스 수집, 학습자용 해설 레이어를 설계합니다.
-6. [1차 최종 점검](phase-one-final-audit.md)
+7. [1차 최종 점검](phase-one-final-audit.md)
    - 1차 MVP 마감 전 코드, 문서, 설정 점검 결과와 다음 작업을 정리합니다.
 
 ## 기획 문서
@@ -22,6 +24,7 @@
 | 문서 | 역할 |
 | --- | --- |
 | [제품 기획 보완](product-planning.md) | 문제 정의, 타깃 사용자, 포지셔닝, 운영 원칙 |
+| [설계 보완](design-supplement.md) | 정보 구조, 글 상세 UX, 레벨 UX, 출처/뉴스 보완 기준 |
 | [오픈소스 문서 전략](open-source-document-strategy.md) | 문서 중심 제품 철학, 기여 단위, 품질 게이트 |
 | [시장 조사](market-research.md) | 반도체 교육 접근성, 공식 자료 활용 방향 |
 | [기술 블로그와 뉴스 소스 전략](tech-news-source-strategy.md) | 공식 출처 링크 허브, RSS/API 수집, 크롤링 정책 |
