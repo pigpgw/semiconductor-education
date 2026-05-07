@@ -26,10 +26,10 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg0/90 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-3 sm:px-6 lg:px-8 xl:flex-row xl:items-center xl:justify-between">
+      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-2.5 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
         <Link
           href="/"
-          className="focus-ring inline-flex min-h-11 items-center gap-3 self-start rounded-md text-sm font-black"
+          className="focus-ring inline-flex min-h-10 shrink-0 items-center gap-3 self-start rounded-md text-sm font-black"
         >
           <span className="grid h-8 w-8 grid-cols-3 gap-0.5 rounded-lg border border-white/20 bg-bg3 p-1.5">
             {Array.from({ length: 9 }).map((_, index) => (
@@ -48,7 +48,7 @@ export function SiteHeader() {
         </Link>
 
         <nav
-          className="flex flex-wrap items-center gap-1 text-sm font-bold"
+          className="no-scrollbar -mx-5 flex w-[calc(100%+2.5rem)] flex-nowrap items-center gap-1 overflow-x-auto px-5 pb-1 text-sm font-bold sm:-mx-6 sm:w-[calc(100%+3rem)] sm:px-6 lg:mx-0 lg:w-auto lg:justify-end lg:px-0 lg:pb-0"
           aria-label="주요 탐색"
         >
           {navItems.map((item) => {
@@ -59,7 +59,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`focus-ring inline-flex min-h-10 items-center rounded-md px-3 transition ${
+                className={`focus-ring inline-flex min-h-10 shrink-0 items-center rounded-md px-3 transition ${
                   active
                     ? "bg-bg3 text-ink"
                     : "text-muted hover:bg-bg3 hover:text-ink"
@@ -73,7 +73,7 @@ export function SiteHeader() {
             href="https://github.com/pigpgw/semiconductor-education"
             target="_blank"
             rel="noreferrer"
-            className="focus-ring inline-flex min-h-10 items-center gap-2 rounded-full border border-line bg-bg3 px-4 text-xs font-bold text-muted transition hover:border-white/20 hover:text-ink"
+            className="focus-ring inline-flex min-h-10 shrink-0 items-center gap-2 rounded-full border border-line bg-bg3 px-4 text-xs font-bold text-muted transition hover:border-white/20 hover:text-ink"
           >
             <Github size={17} aria-hidden />
             GitHub ↗
