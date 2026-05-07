@@ -23,6 +23,13 @@ type QuickSummary = {
   outcome: string;
 };
 
+type SourceInterpretation = {
+  officialClaim: string;
+  engineeringMeaning: string;
+  readerQuestion: string;
+  freshnessNote: string;
+};
+
 type LessonFrontmatter = {
   title: string;
   description: string;
@@ -35,6 +42,7 @@ type LessonFrontmatter = {
   prerequisites: string[];
   quickSummary: QuickSummary;
   readingGuide: Record<LevelId, string>;
+  sourceInterpretation: SourceInterpretation;
   sources: Source[];
 };
 
@@ -129,6 +137,40 @@ function assertReadingGuide(value: unknown): Record<LevelId, string> {
   };
 }
 
+function assertSourceInterpretation(value: unknown): SourceInterpretation {
+  if (typeof value !== "object" || value === null) {
+    throw new Error("Invalid frontmatter field: sourceInterpretation");
+  }
+
+  if (
+    !("officialClaim" in value) ||
+    !("engineeringMeaning" in value) ||
+    !("readerQuestion" in value) ||
+    !("freshnessNote" in value)
+  ) {
+    throw new Error("Invalid frontmatter field: sourceInterpretation");
+  }
+
+  return {
+    officialClaim: assertString(
+      value.officialClaim,
+      "sourceInterpretation.officialClaim"
+    ),
+    engineeringMeaning: assertString(
+      value.engineeringMeaning,
+      "sourceInterpretation.engineeringMeaning"
+    ),
+    readerQuestion: assertString(
+      value.readerQuestion,
+      "sourceInterpretation.readerQuestion"
+    ),
+    freshnessNote: assertString(
+      value.freshnessNote,
+      "sourceInterpretation.freshnessNote"
+    )
+  };
+}
+
 function parseLesson(fileName: string): Lesson {
   const slug = fileName.replace(/\.mdx$/, "");
   const fullPath = path.join(lessonsDirectory, fileName);
@@ -148,6 +190,7 @@ function parseLesson(fileName: string): Lesson {
     prerequisites: assertStringArray(data.prerequisites, "prerequisites"),
     quickSummary: assertQuickSummary(data.quickSummary),
     readingGuide: assertReadingGuide(data.readingGuide),
+    sourceInterpretation: assertSourceInterpretation(data.sourceInterpretation),
     sources: assertSources(data.sources),
     content
   };

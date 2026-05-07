@@ -94,6 +94,7 @@ GitHub Issue로 제안할 때는 저장소의 issue template을 사용하면 됩
 npm run lint
 npm run typecheck
 npm run build
+npm run check:lessons
 npm run check:glossary
 npm run check:practice
 npm run check:sources
@@ -101,7 +102,7 @@ npm run check:industry
 npm run check:viewport
 ```
 
-문서만 수정한 경우에도 최소한 `git diff --check`와 `npm run lint`를 확인합니다. 용어 사전을 바꿨다면 `npm run check:glossary`를 실행하고, 복습 질문을 바꿨다면 `npm run check:practice`를 실행합니다. 출처나 산업 업데이트 링크를 바꿨다면 `npm run check:sources` 또는 `npm run check:industry`를 실행합니다.
+문서만 수정한 경우에도 최소한 `git diff --check`와 `npm run lint`를 확인합니다. 교재 글을 바꿨다면 `npm run check:lessons`를 실행합니다. 용어 사전을 바꿨다면 `npm run check:glossary`를 실행하고, 복습 질문을 바꿨다면 `npm run check:practice`를 실행합니다. 출처나 산업 업데이트 링크를 바꿨다면 `npm run check:sources` 또는 `npm run check:industry`를 실행합니다.
 
 ## PR 체크리스트
 
