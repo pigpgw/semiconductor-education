@@ -8,7 +8,17 @@ const requestTimeoutMs = 15000;
 const allowedStatusByUpdateId = new Map([["tsmc-3dfabric-platform", 403]]);
 
 function getField(block, field) {
-  return block.match(new RegExp(`${field}: "([^"]+)"`))?.[1];
+  return block.match(new RegExp(`${field}:\\s*"([^"]+)"`))?.[1];
+}
+
+function getArrayField(block, field) {
+  const match = block.match(new RegExp(`${field}: \\[([\\s\\S]*?)\\]`));
+
+  if (!match) {
+    return undefined;
+  }
+
+  return Array.from(match[1].matchAll(/"([^"]+)"/g)).map(([, value]) => value);
 }
 
 function extractIndustryUpdates(text) {
@@ -25,7 +35,18 @@ function extractIndustryUpdates(text) {
       id: getField(block, "id"),
       title: getField(block, "title"),
       sourceId: getField(block, "sourceId"),
-      url: getField(block, "url")
+      sourceName: getField(block, "sourceName"),
+      url: getField(block, "url"),
+      sourceType: getField(block, "sourceType"),
+      curatedAt: getField(block, "curatedAt"),
+      level: getField(block, "level"),
+      category: getField(block, "category"),
+      status: getField(block, "status"),
+      summary: getField(block, "summary"),
+      whyItMatters: getField(block, "whyItMatters"),
+      tags: getArrayField(block, "tags"),
+      readFor: getArrayField(block, "readFor"),
+      relatedLessons: getArrayField(block, "relatedLessons")
     })
   );
 }
@@ -60,7 +81,22 @@ function validateUpdateShape(updates) {
   }
 
   const missingFields = updates.filter(
-    (update) => !update.id || !update.title || !update.sourceId || !update.url
+    (update) =>
+      !update.id ||
+      !update.title ||
+      !update.sourceId ||
+      !update.sourceName ||
+      !update.url ||
+      !update.sourceType ||
+      !update.curatedAt ||
+      !update.level ||
+      !update.category ||
+      !update.status ||
+      !update.summary ||
+      !update.whyItMatters ||
+      !update.tags?.length ||
+      !update.readFor?.length ||
+      !update.relatedLessons
   );
   const duplicateIds = findDuplicates(updates.map((update) => update.id));
   const duplicateUrls = findDuplicates(updates.map((update) => update.url));
