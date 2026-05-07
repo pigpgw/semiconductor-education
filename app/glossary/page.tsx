@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookMarked } from "lucide-react";
-import { DifficultyBadge } from "@/components/difficulty-badge";
+import { ArrowRight } from "lucide-react";
+import { GlossaryBrowser } from "@/components/glossary-browser";
 import { glossary, glossaryCategories } from "@/lib/glossary";
 
 export const metadata: Metadata = {
@@ -26,66 +26,7 @@ export default function GlossaryPage() {
         </p>
       </section>
 
-      <nav className="mt-8 flex flex-wrap gap-2" aria-label="용어 카테고리">
-        {glossaryCategories.map((category) => (
-          <a
-            key={category}
-            href={`#${category}`}
-            className="focus-ring inline-flex min-h-10 items-center rounded-md border border-line bg-paper px-3 text-sm font-bold hover:border-teal hover:text-teal"
-          >
-            {category}
-          </a>
-        ))}
-      </nav>
-
-      <div className="mt-10 grid gap-10">
-        {glossaryCategories.map((category) => {
-          const terms = glossary.filter((item) => item.category === category);
-
-          return (
-            <section key={category} id={category}>
-              <div className="flex items-center gap-3 border-b border-line pb-3">
-                <BookMarked className="text-teal" size={22} aria-hidden />
-                <h2 className="text-2xl font-black">{category}</h2>
-              </div>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                {terms.map((item) => (
-                  <article
-                    key={item.term}
-                    id={item.term}
-                    className="scroll-mt-24 border border-line bg-paper p-5"
-                  >
-                    <div className="flex flex-wrap items-center gap-2">
-                      <DifficultyBadge level={item.level} />
-                      <span className="rounded-full border border-line px-3 py-1 text-xs font-bold text-muted">
-                        {item.english}
-                      </span>
-                    </div>
-                    <h3 className="mt-4 text-xl font-black">{item.term}</h3>
-                    <p className="mt-3 leading-7 text-muted">{item.simple}</p>
-                    <div className="mt-4 border-t border-line pt-4">
-                      <h4 className="text-sm font-black">실무에서는</h4>
-                      <p className="mt-2 text-sm leading-7 text-muted">
-                        {item.fieldUse}
-                      </p>
-                    </div>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {item.related.map((related) => (
-                        <span
-                          key={related}
-                          className="rounded-full bg-surface px-3 py-1 text-xs font-bold text-muted"
-                        >
-                          {related}
-                        </span>
-                      ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-          );
-        })}
-      </div>
+      <GlossaryBrowser terms={glossary} categories={glossaryCategories} />
 
       <section className="mt-10 rounded-2xl border border-line bg-bg0 p-6 text-white">
         <h2 className="text-2xl font-black">용어를 읽고 바로 글로 돌아가세요.</h2>
