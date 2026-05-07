@@ -140,6 +140,204 @@ export const glossary: GlossaryTerm[] = [
     fieldUse:
       "수율은 원가, 공급량, 고객 납기, 제품 경쟁력을 좌우하며 공정 조건과 결함 관리의 핵심 지표입니다.",
     related: ["공정", "EUV", "양산"]
+  },
+  {
+    term: "웨이퍼",
+    english: "Wafer",
+    category: "제조",
+    level: "기초",
+    simple:
+      "반도체 칩을 만들기 전에 사용하는 얇고 둥근 실리콘 판입니다.",
+    fieldUse:
+      "웨이퍼 품질, 지름, 평탄도, 결함 밀도는 한 번에 만들 수 있는 칩 수와 공정 수율에 영향을 줍니다.",
+    related: ["반도체", "공정", "수율"]
+  },
+  {
+    term: "도핑",
+    english: "Doping",
+    category: "소자",
+    level: "중급",
+    simple:
+      "실리콘에 아주 적은 불순물을 넣어 전기가 흐르는 성질을 조절하는 과정입니다.",
+    fieldUse:
+      "도핑 농도와 위치는 트랜지스터 문턱 전압, 누설 전류, 접합 특성을 바꾸기 때문에 소자 설계와 공정 제어의 핵심입니다.",
+    related: ["반도체", "PN 접합", "MOSFET"]
+  },
+  {
+    term: "PN 접합",
+    english: "PN Junction",
+    category: "소자",
+    level: "중급",
+    simple:
+      "전류가 잘 흐르는 방향과 잘 막히는 방향이 생기도록 P형과 N형 반도체를 맞댄 구조입니다.",
+    fieldUse:
+      "다이오드, 트랜지스터, 이미지 센서, 전력 소자의 기본 구조이며 누설 전류와 항복 전압 같은 신뢰성 지표와 연결됩니다.",
+    related: ["도핑", "반도체", "트랜지스터"]
+  },
+  {
+    term: "커패시터",
+    english: "Capacitor",
+    category: "소자",
+    level: "기초",
+    simple:
+      "전하를 잠깐 저장하는 부품입니다. DRAM에서는 데이터 1비트를 담는 작은 저장소 역할을 합니다.",
+    fieldUse:
+      "DRAM 셀 커패시터는 면적이 작아질수록 충분한 전하를 저장하기 어려워져 구조, 재료, 누설 전류 제어가 중요해집니다.",
+    related: ["DRAM", "1T1C", "Refresh"]
+  },
+  {
+    term: "1T1C",
+    english: "One Transistor One Capacitor",
+    category: "메모리",
+    level: "중급",
+    simple:
+      "트랜지스터 1개와 커패시터 1개로 DRAM의 1비트를 저장하는 기본 셀 구조입니다.",
+    fieldUse:
+      "셀 면적, 커패시터 용량, 누설 전류, refresh 주기가 DRAM scaling과 수율을 결정하는 주요 제약이 됩니다.",
+    related: ["DRAM", "커패시터", "Refresh"]
+  },
+  {
+    term: "DDR",
+    english: "Double Data Rate",
+    category: "메모리",
+    level: "기초",
+    simple:
+      "컴퓨터와 서버에서 널리 쓰는 DRAM 규격입니다. 한 클럭에서 데이터를 두 번 주고받는 방식에서 이름이 왔습니다.",
+    fieldUse:
+      "DDR 세대가 올라가면 전송 속도, 전압, 채널 구성, 신호 무결성 요구가 달라져 CPU와 메모리 시스템 설계에 영향을 줍니다.",
+    related: ["DRAM", "대역폭", "LPDDR"]
+  },
+  {
+    term: "LPDDR",
+    english: "Low Power Double Data Rate",
+    category: "메모리",
+    level: "중급",
+    simple:
+      "스마트폰과 노트북처럼 전력 사용이 중요한 기기에 맞춘 저전력 DRAM 규격입니다.",
+    fieldUse:
+      "대기 전력, 동작 전압, 패키지 구조, 열 제약을 함께 최적화해야 하므로 모바일과 AI PC 메모리 전략에 중요합니다.",
+    related: ["DRAM", "DDR", "전력"]
+  },
+  {
+    term: "GDDR",
+    english: "Graphics Double Data Rate",
+    category: "메모리",
+    level: "중급",
+    simple:
+      "그래픽카드처럼 많은 데이터를 빠르게 옮겨야 하는 장치에 쓰는 DRAM 계열 메모리입니다.",
+    fieldUse:
+      "GPU 주변에서 높은 대역폭을 제공하지만 HBM과 비교하면 패키징 방식, 전력, 면적, 비용 trade-off가 다릅니다.",
+    related: ["DRAM", "HBM", "대역폭"]
+  },
+  {
+    term: "SSD",
+    english: "Solid State Drive",
+    category: "메모리",
+    level: "기초",
+    simple:
+      "NAND Flash를 이용해 전원이 꺼져도 데이터를 보관하는 저장장치입니다.",
+    fieldUse:
+      "NAND, 컨트롤러, DRAM cache, 오류 정정, 인터페이스가 함께 성능과 수명, 비용을 결정합니다.",
+    related: ["NAND", "3D NAND", "비휘발성 메모리"]
+  },
+  {
+    term: "3D NAND",
+    english: "3D NAND Flash",
+    category: "메모리",
+    level: "중급",
+    simple:
+      "NAND 셀을 평면에만 놓지 않고 아파트처럼 위로 쌓아 용량을 키운 저장용 메모리입니다.",
+    fieldUse:
+      "층 수, 채널 홀 식각, 셀당 비트 수, 오류 정정, 수율이 SSD 용량과 원가 경쟁력을 좌우합니다.",
+    related: ["NAND", "SSD", "식각"]
+  },
+  {
+    term: "CXL",
+    english: "Compute Express Link",
+    category: "시스템",
+    level: "심화",
+    simple:
+      "CPU, 가속기, 메모리 장치가 더 유연하게 데이터를 공유하도록 돕는 고속 연결 표준입니다.",
+    fieldUse:
+      "데이터센터에서 메모리 확장과 풀링을 가능하게 해 HBM, DDR, 저장장치 계층과 함께 memory wall 완화 전략으로 검토됩니다.",
+    related: ["Memory wall", "대역폭", "DRAM"]
+  },
+  {
+    term: "포토리소그래피",
+    english: "Photolithography",
+    category: "공정",
+    level: "중급",
+    simple:
+      "빛을 이용해 웨이퍼 위에 회로 패턴을 그리는 공정입니다.",
+    fieldUse:
+      "노광 파장, 렌즈 개구수, 마스크, 포토레지스트, overlay 정확도가 미세 패턴과 수율을 좌우합니다.",
+    related: ["EUV", "DUV", "멀티 패터닝"]
+  },
+  {
+    term: "DUV",
+    english: "Deep Ultraviolet",
+    category: "공정",
+    level: "중급",
+    simple:
+      "EUV보다 긴 파장의 자외선을 쓰는 기존 노광 기술입니다.",
+    fieldUse:
+      "ArF immersion과 멀티 패터닝으로 오랫동안 미세화를 이끌었지만, 공정 단계와 overlay 부담이 커질 수 있습니다.",
+    related: ["EUV", "포토리소그래피", "멀티 패터닝"]
+  },
+  {
+    term: "멀티 패터닝",
+    english: "Multi-patterning",
+    category: "공정",
+    level: "심화",
+    simple:
+      "한 번에 그리기 어려운 작은 패턴을 여러 번 나누어 그리는 방법입니다.",
+    fieldUse:
+      "DUV로 더 작은 패턴을 만들 수 있게 하지만 공정 수, 비용, overlay 오류, defect 가능성을 키워 EUV 도입 이유와 연결됩니다.",
+    related: ["DUV", "EUV", "수율"]
+  },
+  {
+    term: "식각",
+    english: "Etching",
+    category: "공정",
+    level: "중급",
+    simple:
+      "필요 없는 재료를 깎아내 회로 패턴이나 구조를 만드는 공정입니다.",
+    fieldUse:
+      "선폭, 깊이, 선택비, 균일도, 손상 제어가 미세 패턴과 3D NAND, DRAM capacitor 구조의 양산성을 좌우합니다.",
+    related: ["포토리소그래피", "3D NAND", "수율"]
+  },
+  {
+    term: "증착",
+    english: "Deposition",
+    category: "공정",
+    level: "중급",
+    simple:
+      "웨이퍼 위에 절연막, 금속, 반도체 재료 같은 얇은 막을 쌓는 공정입니다.",
+    fieldUse:
+      "CVD, PVD, ALD 같은 방식이 있으며 막 두께, 균일도, 계면 품질이 소자 성능과 신뢰성에 영향을 줍니다.",
+    related: ["웨이퍼", "식각", "공정"]
+  },
+  {
+    term: "인터포저",
+    english: "Interposer",
+    category: "패키징",
+    level: "심화",
+    simple:
+      "GPU와 HBM 같은 여러 칩을 가깝게 연결하기 위해 사이에 놓는 얇은 연결 기판입니다.",
+    fieldUse:
+      "HBM 패키징에서 넓은 배선과 짧은 연결을 제공하지만 면적, 비용, 수율, 공급 병목과 연결됩니다.",
+    related: ["HBM", "TSV", "패키징"]
+  },
+  {
+    term: "양산",
+    english: "Mass Production",
+    category: "제조",
+    level: "심화",
+    simple:
+      "기술을 한두 번 성공시키는 수준을 넘어 반복해서 많이, 안정적으로 만드는 단계입니다.",
+    fieldUse:
+      "양산성은 수율, 장비 가동률, 공정 변동, 고객 인증, 공급 일정과 연결되며 기술 발표를 실무 관점으로 읽을 때 핵심입니다.",
+    related: ["수율", "공정", "고객 검증"]
   }
 ];
 

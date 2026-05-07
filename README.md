@@ -80,7 +80,7 @@
 ## 현재 MVP 상태
 
 - 핵심 글 3편: DRAM, HBM, EUV
-- 용어 사전 12개
+- 용어 사전 30개
 - 복습 질문 6개와 실무 시나리오 3개
 - 학습 체크리스트 7개
 - 공식 출처 11개와 산업 업데이트 8개
@@ -129,6 +129,7 @@ npm run dev
 npm run lint
 npm run typecheck
 npm run build
+npm run check:glossary
 npm run check:sources
 npm run check:industry
 npm run check:viewport
