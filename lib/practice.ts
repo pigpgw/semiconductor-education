@@ -1,6 +1,7 @@
 import type { LevelId } from "@/lib/levels";
 
 export type PracticeQuestion = {
+  topic: string;
   question: string;
   hint: string;
   answer: string;
@@ -35,6 +36,7 @@ export const practiceSets: PracticeSet[] = [
       "정답 암기보다 큰 그림을 자기 말로 설명하는 것이 목표입니다. 초등학생에게 설명한다고 생각하고 답해 보세요.",
     questions: [
       {
+        topic: "DRAM",
         question: "DRAM과 SSD는 왜 둘 다 저장처럼 보이지만 역할이 다를까요?",
         hint: "책상과 책장 비유를 떠올려 보세요.",
         answer:
@@ -47,6 +49,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "소자",
         question: "반도체에서 트랜지스터를 스위치라고 부르는 이유는 무엇일까요?",
         hint: "전류가 흐르는 길을 열고 닫는다는 관점으로 답해 보세요.",
         answer:
@@ -59,6 +62,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "기초",
         question: "반도체가 도체와 부도체의 중간이라는 말은 무슨 뜻일까요?",
         hint: "항상 전기가 잘 통하거나 항상 막히는 물질이 아니라는 점을 생각하세요.",
         answer:
@@ -71,6 +75,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "DRAM",
         question: "DRAM이 빠른데도 컴퓨터가 SSD만으로 동작하지 않는 이유는 무엇일까요?",
         hint: "오래 보관하는 능력과 빠르게 꺼내 쓰는 능력을 구분해 보세요.",
         answer:
@@ -83,6 +88,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "HBM",
         question: "HBM을 데이터가 지나가는 넓은 도로라고 비유할 수 있는 이유는 무엇일까요?",
         hint: "한 번에 지나갈 수 있는 데이터 양을 떠올려 보세요.",
         answer:
@@ -95,6 +101,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "EUV",
         question: "EUV에서 빛의 파장이 짧다는 말은 왜 중요할까요?",
         hint: "두꺼운 펜과 얇은 펜으로 작은 글씨를 쓰는 차이를 떠올려 보세요.",
         answer:
@@ -107,6 +114,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "제조",
         question: "수율이 낮으면 기술이 좋아 보여도 왜 문제가 될까요?",
         hint: "100개를 만들었을 때 정상 제품이 몇 개인지 생각해 보세요.",
         answer:
@@ -140,6 +148,7 @@ export const practiceSets: PracticeSet[] = [
       "용어를 아는 것에서 끝내지 않고 왜 그 구조가 필요한지, 어떤 대가를 치르는지까지 확인합니다.",
     questions: [
       {
+        topic: "HBM",
         question: "HBM은 왜 단순히 DRAM 용량을 키운 제품이 아닐까요?",
         hint: "적층, TSV, 대역폭, GPU와의 거리를 함께 생각하세요.",
         answer:
@@ -152,6 +161,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "DRAM",
         question: "DRAM refresh는 왜 성능과 전력 관점에서도 중요한가요?",
         hint: "데이터를 유지하려면 주기적으로 다시 써야 한다는 점에서 출발하세요.",
         answer:
@@ -164,6 +174,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "DRAM",
         question: "DDR, LPDDR, GDDR, HBM은 모두 DRAM 계열인데 왜 용도가 다를까요?",
         hint: "속도 하나만 보지 말고 전력, 거리, 패키징, 시스템 종류를 같이 보세요.",
         answer:
@@ -176,6 +187,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "NAND",
         question: "3D NAND가 셀을 위로 쌓는 방식으로 용량을 늘리는 이유는 무엇인가요?",
         hint: "땅이 부족할 때 건물을 높게 짓는 상황을 떠올려 보세요.",
         answer:
@@ -188,6 +200,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "HBM",
         question: "TSV는 HBM에서 어떤 문제를 풀고, 어떤 문제를 새로 만들까요?",
         hint: "칩을 쌓았을 때 위아래를 어떻게 연결할지 생각하세요.",
         answer:
@@ -200,6 +213,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "EUV",
         question: "DUV에서 멀티 패터닝을 쓰면 왜 비용과 오차 부담이 커질까요?",
         hint: "한 번에 그릴 그림을 여러 번 나누어 맞추는 상황을 생각하세요.",
         answer:
@@ -212,6 +226,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "시스템",
         question: "메모리 성능을 볼 때 대역폭과 지연 시간을 구분해야 하는 이유는 무엇인가요?",
         hint: "도로의 차선 수와 목적지까지 걸리는 시간을 나눠 생각하세요.",
         answer:
@@ -245,6 +260,7 @@ export const practiceSets: PracticeSet[] = [
       "기술이 좋다는 말 뒤에 어떤 병목, 양산 난이도, 비용, 검증 문제가 있는지 분리해 보는 단계입니다.",
     questions: [
       {
+        topic: "EUV",
         question: "EUV가 더 짧은 파장을 쓰는데도 도입이 어렵다고 말하는 이유는 무엇인가요?",
         hint: "장비만 사면 끝나는 문제가 아니라는 점을 생각하세요.",
         answer:
@@ -257,6 +273,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "AI 메모리",
         question: "AI 메모리에서 memory wall을 설명할 때 HBM만 말하면 부족한 이유는 무엇인가요?",
         hint: "GPU, 메모리, 저장장치, 데이터 이동 전체를 시스템으로 보세요.",
         answer:
@@ -269,6 +286,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "DRAM",
         question: "DRAM 미세화에서 커패시터가 작아질수록 어떤 실무 문제가 커질까요?",
         hint: "작은 컵에 물을 담으면 조금만 새어도 티가 많이 난다는 비유를 떠올리세요.",
         answer:
@@ -281,6 +299,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "HBM",
         question: "HBM 패키징에서 열 문제가 성능 문제로 바뀌는 과정은 무엇인가요?",
         hint: "칩을 쌓으면 열이 빠져나가는 길이 어떻게 달라지는지 생각하세요.",
         answer:
@@ -293,6 +312,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "시스템",
         question: "CXL 같은 메모리 확장 기술이 HBM을 바로 대체한다고 보기 어려운 이유는 무엇인가요?",
         hint: "가까운 초고속 작업 공간과 멀리 있는 확장 공간을 나눠 보세요.",
         answer:
@@ -305,6 +325,7 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "산업 해석",
         question: "새 공정이나 새 패키징 기술이 발표되면 어떤 질문으로 실무성을 확인해야 할까요?",
         hint: "좋다는 말 뒤에 양산과 고객 적용을 확인하는 질문을 붙여 보세요.",
         answer:
@@ -331,3 +352,9 @@ export const practiceSets: PracticeSet[] = [
     ]
   }
 ];
+
+export const practiceTopics = Array.from(
+  new Set(
+    practiceSets.flatMap((set) => set.questions.map((question) => question.topic))
+  )
+).sort((a, b) => a.localeCompare(b));

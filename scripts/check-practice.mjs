@@ -18,6 +18,7 @@ function extractPracticeSets(text) {
     const questions = Array.from(
       questionsBlock.matchAll(/\{\n([\s\S]*?)\n {6}\}/g)
     ).map(([, block]) => ({
+      topic: getField(block, "topic"),
       question: getField(block, "question"),
       hint: getField(block, "hint"),
       answer: getField(block, "answer"),
@@ -60,6 +61,7 @@ const missingLevels = Array.from(requiredLevelIds).filter(
 const emptyLevels = practiceSets.filter((set) => set.questions.length === 0);
 const missingFields = questions.filter(
   (question) =>
+    !question.topic ||
     !question.question ||
     !question.hint ||
     !question.answer ||
@@ -88,6 +90,10 @@ const report = {
   byLevel: Object.fromEntries(
     practiceSets.map((set) => [set.levelId, set.questions.length])
   ),
+  byTopic: questions.reduce((counts, question) => {
+    counts[question.topic] = (counts[question.topic] ?? 0) + 1;
+    return counts;
+  }, {}),
   missingLevels,
   emptyLevels,
   missingFields,
