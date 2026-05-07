@@ -71,6 +71,8 @@ refactor(content): tighten lesson frontmatter parsing
 6. Open a release PR from `dev` to `main`.
 7. Deploy production only from `main`.
 
+The branch-name check allows task branches into `dev` and the release path `dev -> main`.
+
 ## Protected Branches
 
 `main` and `dev` should block direct pushes and require CI before merge.
