@@ -124,7 +124,7 @@ export function LevelDiagnostic() {
                     key={answer.label}
                     className={`flex min-h-12 cursor-pointer items-center rounded-md border px-3 text-sm font-bold transition ${
                       selected
-                        ? "border-ink bg-ink text-white"
+                        ? "border-blue bg-blue text-bg0"
                         : "border-line bg-surface text-ink hover:border-teal"
                     }`}
                   >
@@ -166,7 +166,7 @@ export function LevelDiagnostic() {
         </p>
         <Link
           href={recommendedLevel.href}
-          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-ink px-4 text-sm font-bold text-white hover:bg-teal"
+          className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-blue px-4 text-sm font-bold text-bg0 hover:bg-teal"
         >
           {recommendedLevel.label} 글 보기 <ArrowRight size={17} aria-hidden />
         </Link>

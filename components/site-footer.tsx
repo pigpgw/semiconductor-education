@@ -1,6 +1,6 @@
 export function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-line bg-paper">
+    <footer className="mt-16 border-t border-line bg-bg0">
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-8 text-sm text-muted sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
         <p className="font-semibold">
           Semiconductor Education. 로그인 없이 바로 읽는 반도체 학습 노트.

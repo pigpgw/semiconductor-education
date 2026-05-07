@@ -6,11 +6,11 @@ import type { LessonSummary } from "@/lib/content";
 
 export function ArticleCard({ lesson }: { lesson: LessonSummary }) {
   return (
-    <article className="flex min-h-[420px] flex-col border border-line bg-paper p-4 transition hover:-translate-y-0.5 hover:shadow-soft">
+    <article className="flex min-h-[420px] flex-col overflow-hidden rounded-2xl border border-line bg-paper p-4 transition hover:-translate-y-0.5 hover:border-white/20 hover:shadow-soft">
       <LessonMiniVisual slug={lesson.slug} />
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <DifficultyBadge level={lesson.level} />
-        <span className="rounded-full border border-line px-3 py-1 text-xs font-bold text-muted">
+        <span className="rounded-full border border-line bg-bg3 px-3 py-1 text-xs font-bold text-muted">
           {lesson.category}
         </span>
       </div>
@@ -27,7 +27,7 @@ export function ArticleCard({ lesson }: { lesson: LessonSummary }) {
         </span>
         <Link
           href={`/learn/${lesson.slug}`}
-          className="focus-ring inline-flex min-h-10 items-center gap-2 self-start rounded-md font-bold text-teal hover:text-ink sm:self-auto"
+          className="focus-ring inline-flex min-h-10 items-center gap-2 self-start rounded-md font-bold text-blue hover:text-teal sm:self-auto"
         >
           읽기 <ArrowRight size={16} aria-hidden />
         </Link>
