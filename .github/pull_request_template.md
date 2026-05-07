@@ -7,6 +7,7 @@
 - [ ] `npm run lint`
 - [ ] `npm run typecheck`
 - [ ] `npm run build`
+- [ ] `npm run check:lessons` when lesson MDX frontmatter changed.
 - [ ] `npm run check:glossary` when glossary terms changed.
 - [ ] `npm run check:practice` when practice questions changed.
 - [ ] `npm run check:sources` when official source links changed.

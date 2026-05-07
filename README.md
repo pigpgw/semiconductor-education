@@ -129,6 +129,7 @@ npm run dev
 npm run lint
 npm run typecheck
 npm run build
+npm run check:lessons
 npm run check:glossary
 npm run check:practice
 npm run check:sources
@@ -160,8 +161,8 @@ npm run check:viewport
 
 ## 향후 로드맵
 
-- Phase 1.1: DRAM/HBM/EUV 글 리라이트, 출처 확인일 정리, 용어/복습 보강
-- Phase 1.2: 글별 요약 카드, 레벨별 읽기 안내, 학습 노트 내보내기
+- Phase 1.1: DRAM/HBM/EUV 글 리라이트, 출처 해석 고도화, 요약 카드 고도화
+- Phase 1.2: 용어 사전 탐색 개선, 레벨별 읽기 안내 고도화, 학습 노트 내보내기
 - Phase 2: NAND, SSD, DDR/LPDDR/GDDR/HBM 비교
 - Phase 3: 패키징, TSV, MR-MUF, 공정 흐름, 직무별 반도체 이해 지도
 
