@@ -11,6 +11,15 @@ export const metadata: Metadata = {
 };
 
 export default function PracticePage() {
+  const totalQuestions = practiceSets.reduce(
+    (sum, set) => sum + set.questions.length,
+    0
+  );
+  const totalScenarios = practiceSets.reduce(
+    (sum, set) => sum + set.scenarios.length,
+    0
+  );
+
   return (
     <main className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
       <section className="max-w-3xl">
@@ -24,6 +33,10 @@ export default function PracticePage() {
           반도체 공부는 글을 읽는 것에서 끝나면 오래 남지 않습니다. 질문에
           답하고, 힌트를 보고, 실무 포인트까지 확인하면서 자기 설명 능력을
           키웁니다.
+        </p>
+        <p className="mt-4 text-sm font-bold text-teal">
+          현재 {totalQuestions}개 질문과 {totalScenarios}개 실무 시나리오를
+          제공합니다.
         </p>
       </section>
 
@@ -61,7 +74,7 @@ export default function PracticePage() {
             href={`#${set.levelId}`}
             className="focus-ring inline-flex min-h-10 items-center rounded-md border border-line bg-paper px-3 text-sm font-bold hover:border-teal hover:text-teal"
           >
-            {set.levelLabel}
+            {set.levelLabel} · {set.questions.length}문항
           </a>
         ))}
       </nav>
