@@ -128,14 +128,8 @@ npm run dev
 검증:
 
 ```bash
-npm run lint
-npm run typecheck
-npm run build
-npm run check:lessons
-npm run check:glossary
-npm run check:practice
-npm run check:sources
-npm run check:industry
+npm run validate
+npm run check:links
 npm run check:viewport
 ```
 

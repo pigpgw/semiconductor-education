@@ -4,14 +4,8 @@
 
 ## Validation
 
-- [ ] `npm run lint`
-- [ ] `npm run typecheck`
-- [ ] `npm run build`
-- [ ] `npm run check:lessons` when lesson MDX frontmatter changed.
-- [ ] `npm run check:glossary` when glossary terms changed.
-- [ ] `npm run check:practice` when practice questions changed.
-- [ ] `npm run check:sources` when official source links changed.
-- [ ] `npm run check:industry` when industry update links changed.
+- [ ] `npm run validate`
+- [ ] `npm run check:links` when official source or industry update links changed.
 - [ ] `npm run check:viewport`
 
 ## Content And Source Check
