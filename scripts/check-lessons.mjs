@@ -4,6 +4,7 @@ import matter from "gray-matter";
 
 const lessonsDir = path.join(process.cwd(), "content", "lessons");
 const minimumLessonCount = 3;
+const minimumH2Count = 7;
 const requiredReadingLevels = ["basic", "applied", "field"];
 const requiredQuickSummaryFields = [
   "conclusion",
@@ -16,6 +17,14 @@ const requiredSourceInterpretationFields = [
   "engineeringMeaning",
   "readerQuestion",
   "freshnessNote"
+];
+const requiredContentBlocks = [
+  "## 쉬운 비유",
+  "## 실제 구조",
+  "## 현업 관점에서 보는 핵심",
+  "## 공식 자료 기반 근거",
+  "<IndustryKeywords",
+  "<CheckQuestions"
 ];
 
 function isNonEmptyString(value) {
@@ -32,8 +41,9 @@ function hasDateFormat(value) {
 
 function validateLesson(fileName) {
   const file = readFileSync(path.join(lessonsDir, fileName), "utf8");
-  const { data } = matter(file);
+  const { data, content } = matter(file);
   const issues = [];
+  const h2Count = Array.from(content.matchAll(/^## /gm)).length;
 
   for (const field of [
     "title",
@@ -114,6 +124,16 @@ function validateLesson(fileName) {
         issues.push(`missing ${prefix}.usedFor`);
       }
     });
+  }
+
+  if (h2Count < minimumH2Count) {
+    issues.push(`expected at least ${minimumH2Count} h2 sections`);
+  }
+
+  for (const block of requiredContentBlocks) {
+    if (!content.includes(block)) {
+      issues.push(`missing content block ${block}`);
+    }
   }
 
   return {

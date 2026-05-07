@@ -2,6 +2,70 @@
 
 이 문서는 다음 작업자가 바로 이어서 개발할 수 있도록 최근 작업, 검증 결과, 부족한 점, 다음 우선순위를 기록합니다.
 
+## 2026-05-07: 핵심 글 3편 1차 리라이트
+
+### 작업 브랜치
+
+- `feature/core-lesson-rewrite`
+
+### 작업한 것
+
+- DRAM 글에 스펙을 읽는 순서와 면적·전력·대역폭 trade-off를 추가했습니다.
+- HBM 글에 적층 수, 대역폭, 전력 효율, 패키징, 고객 검증을 읽는 순서와 HBM의 한계를 추가했습니다.
+- EUV 글에 적용 레이어, overlay, 결함, 장비 처리량, 수율을 기준으로 발표를 읽는 방법과 EUV가 모든 문제의 답은 아닌 이유를 추가했습니다.
+- 각 글의 `quickSummary`, `readingGuide`, `sourceInterpretation`을 새 본문 깊이에 맞게 조정했습니다.
+- `npm run check:lessons`가 최소 7개 `h2` 섹션과 핵심 MDX 블록을 검증하도록 보강했습니다.
+- README, 콘텐츠 작성 기준, MVP 정리, 보완 기획, 설계 보완, 로드맵, 1차 점검 문서에 1차 리라이트 상태를 반영했습니다.
+
+### 일부러 넣지 않은 것
+
+- 새 글 추가
+- 이미지나 인터랙티브 도식 추가
+- 공식 자료 원문 본문 저장
+- 최신 제품 세대 자동 업데이트
+- 로그인 기반 개인화
+
+### 부족한 점
+
+- 문장 밀도는 아직 높으므로 다음 단계에서 더 짧은 문단과 도식으로 나눌 여지가 있습니다.
+- 글 상세 90초 요약 카드에 비유, 예상 소요 시간, 난이도별 읽기 목표는 아직 추가하지 않았습니다.
+- 관련 용어를 본문 옆에서 바로 탐색하는 UX는 아직 없습니다.
+- 공식 RSS/API 후보 조사는 아직 데이터 필드로 정리하지 않았습니다.
+
+### 다음 작업 후보
+
+1. 글 상세 90초 요약 카드를 고도화합니다.
+2. DRAM/HBM/EUV 본문에 간단한 구조 도식 또는 비교 시각화를 추가합니다.
+3. 공식 RSS/API 후보를 출처별로 조사하고 `feedUrl` 필드 추가 여부를 결정합니다.
+4. NAND/SSD 첫 글을 추가합니다.
+5. 패키징/TSV/MR-MUF 심화 글을 추가합니다.
+
+### 검증 기준
+
+- `npm run check:lessons`
+- `git diff --check`
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- `npm run check:glossary`
+- `npm run check:practice`
+- `npm run check:sources`
+- `npm run check:industry`
+- `npm run check:viewport`
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run check:lessons`: 통과, 핵심 글 3편과 필수 본문 블록 확인
+- `npm run lint`: 통과
+- `npm run typecheck`: 통과
+- `npm run build`: 통과
+- `npm run check:glossary`: 통과, 용어 30개 확인
+- `npm run check:practice`: 통과, 복습 질문 20개 확인
+- `npm run check:sources`: 통과, 공식 출처 11개 확인
+- `npm run check:industry`: 통과, 산업 업데이트 8개 확인
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
+
 ## 2026-05-07: 산업 업데이트 상세 해설 노트 구현
 
 ### 작업 브랜치
