@@ -142,6 +142,7 @@ npm run check:viewport
 
 작업은 `feature/* -> dev -> main` 순서로 PR을 거쳐 반영합니다. 커밋 메시지는 Conventional Commits를 따릅니다.
 
+기여 기준과 템플릿은 [CONTRIBUTING.md](CONTRIBUTING.md)에 정리했습니다.
 자세한 규칙은 [docs/git-workflow.md](docs/git-workflow.md), 배포 설정은 [docs/deployment.md](docs/deployment.md)에 정리했습니다.
 
 ## 정보 출처 정책

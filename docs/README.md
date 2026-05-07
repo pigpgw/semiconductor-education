@@ -20,6 +20,8 @@
    - 1차 MVP 마감 전 코드, 문서, 설정 점검 결과와 다음 작업을 정리합니다.
 8. [작업 로그](work-log.md)
    - 최근 작업, 부족한 점, 다음 개발 후보를 이어서 볼 수 있게 기록합니다.
+9. [기여 가이드](../CONTRIBUTING.md)
+   - 설명 개선, 출처 보강, 글 추가, 검증 흐름을 확인합니다.
 
 ## 기획 문서
 
@@ -49,8 +51,17 @@
 | [로그인 없는 정책](no-login-policy.md) | 계정 없는 학습, localStorage, 개인정보 미수집 기준 |
 | [Git workflow](git-workflow.md) | `main`, `dev`, 작업 브랜치, 커밋 규칙 |
 | [Deployment](deployment.md) | 배포 파이프라인과 환경 변수 정책 |
+| [기여 가이드](../CONTRIBUTING.md) | 기여 단위, 출처 기준, 작업 흐름, 검증 명령 |
 | [1차 최종 점검](phase-one-final-audit.md) | 마감 점검 결과, 삭제/유지 판단, 다음 작업 |
 | [작업 로그](work-log.md) | 최근 작업 내용, 검증 결과, 부족한 점, 다음 작업 후보 |
+
+## 템플릿
+
+| 문서 | 역할 |
+| --- | --- |
+| [교재 글 템플릿](templates/lesson-template.mdx) | 새 MDX 교재 글 작성 뼈대 |
+| [공식 출처 추가 템플릿](templates/source-addition-template.md) | `/sources`에 공식 출처를 추가할 때 필요한 필드와 체크리스트 |
+| [산업 업데이트 템플릿](templates/industry-update-template.md) | `/industry` 수동 큐레이션 항목을 추가할 때 필요한 필드와 체크리스트 |
 
 ## 문서 정리 원칙
 
