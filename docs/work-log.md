@@ -2,6 +2,56 @@
 
 이 문서는 다음 작업자가 바로 이어서 개발할 수 있도록 최근 작업, 검증 결과, 부족한 점, 다음 우선순위를 기록합니다.
 
+## 2026-05-07: 기여 가이드와 템플릿 추가
+
+### 작업 브랜치
+
+- `docs/contribution-guide`
+
+### 작업한 것
+
+- `CONTRIBUTING.md`를 추가해 기여 유형, 콘텐츠 품질 기준, 출처 원칙, 작업 흐름, 검증 명령, PR 체크리스트를 정리했습니다.
+- `docs/templates/lesson-template.mdx`를 추가해 새 교재 글의 frontmatter와 본문 구조를 표준화했습니다.
+- `docs/templates/source-addition-template.md`를 추가해 `/sources` 공식 출처 추가 기준을 정리했습니다.
+- `docs/templates/industry-update-template.md`를 추가해 `/industry` 수동 큐레이션 항목 추가 기준을 정리했습니다.
+- GitHub issue template 2개를 추가했습니다: 콘텐츠 개선, 공식 출처 제안.
+- PR template에 `check:sources`, `check:industry`, `CONTRIBUTING.md`/템플릿 확인 항목을 추가했습니다.
+- README, 문서 인덱스, 보완 기획, 설계 보완, 1차 점검 문서에 기여 가이드 구현 상태를 반영했습니다.
+
+### 일부러 넣지 않은 것
+
+- 자동 contributor 봇
+- 문서 생성 CLI
+- GitHub Actions 필수 link-check 게이트
+- CODEOWNERS
+- 라이선스 변경
+
+### 부족한 점
+
+- 용어 사전 추가 전용 템플릿은 아직 없습니다.
+- `/industry/[slug]` 상세 해설 노트 구조는 아직 없습니다.
+- 공식 RSS/API 후보 조사는 아직 별도 데이터로 정리하지 않았습니다.
+- 용어 사전은 아직 12개이고 목표 30개까지 확장되지 않았습니다.
+- 복습 질문은 아직 6개이고 목표 20개까지 확장되지 않았습니다.
+
+### 다음 작업 후보
+
+1. 용어 사전 추가 템플릿과 용어 사전 30개 확장을 진행합니다.
+2. 복습 질문을 6개에서 20개로 확장합니다.
+3. `/industry/[slug]` 상세 해설 노트 구조를 설계합니다.
+4. 공식 RSS/API 후보를 출처별로 조사하고 `feedUrl` 필드 추가 여부를 결정합니다.
+5. NAND/SSD 첫 글을 추가합니다.
+
+### 검증 기준
+
+- `git diff --check`
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- `npm run check:sources`
+- `npm run check:industry`
+- `npm run check:viewport`
+
 ## 2026-05-07: `/industry` 수동 큐레이션 목록 구현
 
 ### 작업 브랜치
