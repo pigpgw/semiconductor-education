@@ -344,3 +344,73 @@ export const glossary: GlossaryTerm[] = [
 export const glossaryCategories = Array.from(
   new Set(glossary.map((item) => item.category))
 );
+
+function normalizeGlossaryText(value: string) {
+  return value.toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+function getTermScore(term: GlossaryTerm, primaryKeywords: string[]) {
+  const normalizedTerm = normalizeGlossaryText(term.term);
+  const normalizedEnglish = normalizeGlossaryText(term.english);
+  const normalizedRelated = term.related.map(normalizeGlossaryText);
+  const normalizedHaystack = normalizeGlossaryText(
+    [
+      term.term,
+      term.english,
+      term.category,
+      term.level,
+      term.simple,
+      term.fieldUse,
+      ...term.related
+    ].join(" ")
+  );
+
+  return primaryKeywords.reduce((score, keyword) => {
+    if (!keyword) {
+      return score;
+    }
+
+    if (keyword === normalizedTerm || keyword === normalizedEnglish) {
+      return score + 100;
+    }
+
+    if (normalizedRelated.includes(keyword)) {
+      return score + 55;
+    }
+
+    if (normalizedTerm.includes(keyword) || normalizedEnglish.includes(keyword)) {
+      return score + 30;
+    }
+
+    if (normalizedHaystack.includes(keyword)) {
+      return score + 10;
+    }
+
+    return score;
+  }, 0);
+}
+
+export function getRelatedGlossaryTerms(keywords: string[], limit = 8) {
+  const primaryKeywords = Array.from(
+    new Set(keywords.map(normalizeGlossaryText).filter(Boolean))
+  );
+  const directMatches = glossary.filter(
+    (term) => getTermScore(term, primaryKeywords) >= 100
+  );
+  const expandedKeywords = Array.from(
+    new Set([
+      ...primaryKeywords,
+      ...directMatches.flatMap((term) => term.related.map(normalizeGlossaryText))
+    ])
+  );
+
+  return glossary
+    .map((term) => ({
+      term,
+      score: getTermScore(term, expandedKeywords)
+    }))
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.term.term.localeCompare(b.term.term))
+    .slice(0, limit)
+    .map((item) => item.term);
+}

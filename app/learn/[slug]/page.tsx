@@ -13,6 +13,7 @@ import {
   FileSearch,
   Layers,
   Lightbulb,
+  Tags,
   Target
 } from "lucide-react";
 import { DifficultyBadge } from "@/components/difficulty-badge";
@@ -24,6 +25,7 @@ import {
   getLessonBySlug,
   getNextLesson
 } from "@/lib/content";
+import { getRelatedGlossaryTerms, type GlossaryTerm } from "@/lib/glossary";
 import { levels } from "@/lib/levels";
 
 type LessonPageProps = {
@@ -66,6 +68,12 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   const headings = extractHeadings(lesson.content);
   const nextLesson = getNextLesson(lesson.slug);
+  const relatedTerms = getRelatedGlossaryTerms([
+    ...lesson.quickSummary.keyTerms,
+    ...lesson.quickSummary.fieldKeywords,
+    ...lesson.tags,
+    lesson.category
+  ]);
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-10 sm:px-6 lg:px-8">
@@ -227,6 +235,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
           <LessonTechnicalVisual slug={lesson.slug} />
 
+          <RelatedTermsSection terms={relatedTerms} />
+
           <section className="mt-8 border border-line bg-surface p-5">
             <p className="text-sm font-black text-teal">공식 자료 해석</p>
             <h2 className="mt-2 text-2xl font-black">
@@ -344,6 +354,72 @@ export default async function LessonPage({ params }: LessonPageProps) {
         </aside>
       </div>
     </main>
+  );
+}
+
+function RelatedTermsSection({ terms }: { terms: GlossaryTerm[] }) {
+  if (terms.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="mt-8 border border-line bg-paper p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="inline-flex items-center gap-2 text-sm font-black text-teal">
+            <Tags size={17} aria-hidden />
+            본문 관련 용어
+          </p>
+          <h2 className="mt-2 text-2xl font-black">
+            막히는 단어는 여기서 먼저 풀고 본문으로 돌아옵니다.
+          </h2>
+        </div>
+        <Link
+          href="/glossary"
+          className="focus-ring inline-flex min-h-11 items-center justify-center rounded-md border border-line px-4 text-sm font-bold text-muted hover:border-teal hover:text-teal"
+        >
+          용어 사전 전체
+        </Link>
+      </div>
+      <div className="mt-5 grid gap-3 md:grid-cols-2">
+        {terms.map((term) => (
+          <article key={term.term} className="border border-line bg-surface p-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <DifficultyBadge level={term.level} />
+              <span className="rounded-full border border-line bg-bg3 px-3 py-1 text-xs font-bold text-muted">
+                {term.category}
+              </span>
+              <span className="rounded-full border border-line bg-bg3 px-3 py-1 text-xs font-bold text-muted">
+                {term.english}
+              </span>
+            </div>
+            <h3 className="mt-4 text-xl font-black">
+              <Link
+                href={`/glossary#${encodeURIComponent(term.term)}`}
+                className="focus-ring rounded-sm hover:text-teal"
+              >
+                {term.term}
+              </Link>
+            </h3>
+            <p className="mt-3 text-sm leading-7 text-muted">{term.simple}</p>
+            <div className="mt-4 border-t border-line pt-4">
+              <p className="text-sm font-black">실무에서는</p>
+              <p className="mt-2 text-sm leading-7 text-muted">{term.fieldUse}</p>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {term.related.slice(0, 3).map((related) => (
+                <span
+                  key={related}
+                  className="rounded-full bg-bg3 px-3 py-1 text-xs font-bold text-muted"
+                >
+                  {related}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
