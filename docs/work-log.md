@@ -2,6 +2,56 @@
 
 이 문서는 다음 작업자가 바로 이어서 개발할 수 있도록 최근 작업, 검증 결과, 부족한 점, 다음 우선순위를 기록합니다.
 
+## 2026-05-07: 공식 출처 헬스체크 스크립트 추가
+
+### 작업 브랜치
+
+- `chore/source-healthcheck`
+
+### 작업한 것
+
+- `npm run check:sources`를 추가해 `/sources`의 공식 출처 URL을 한 번에 점검할 수 있게 했습니다.
+- `lib/sources.ts`의 `officialSources`에서 `id`, `name`, `url`, `crawlPolicy`를 읽어 중복 id, 중복 URL, 잘못된 URL 형식을 먼저 검증합니다.
+- 외부 요청은 Node 내장 `fetch`만 사용하고 별도 크롤링 의존성은 추가하지 않았습니다.
+- 200~399 응답은 정상으로 보고, 자동 요청을 제한하는 TSMC 공식 링크 2개는 `403` allowlist로 관리합니다.
+
+### URL 확인 메모
+
+- 정상 접근 확인: Samsung Semiconductor Tech Blog, SK hynix Newsroom, Micron Newsroom, Intel Newsroom, ASML Stories, Lam Research Newsroom, Applied Materials Newsroom, KLA Newsroom, imec Reading Room
+- 정책적 허용: TSMC Technology, TSMC Press Center는 Node fetch에서 `403`이지만 브라우저 이동용 공식 링크로 유지합니다.
+
+### 일부러 넣지 않은 것
+
+- 원문 본문 수집
+- 이미지 다운로드와 재배포
+- robots.txt 우회
+- RSS/API 자동 수집기
+- GitHub Actions 필수 게이트 편입
+
+### 부족한 점
+
+- 헬스체크는 로컬 명령으로 추가했지만, 외부 사이트 일시 장애가 PR을 막지 않도록 CI 필수 게이트에는 아직 넣지 않았습니다.
+- `/industry` 공식 업데이트 목록은 아직 구현하지 않았습니다.
+- 출처별 RSS/API 주소는 아직 조사하지 않았습니다.
+- 관련 교재 글은 DRAM/HBM/EUV 3편에만 연결되어 있습니다.
+
+### 다음 작업 후보
+
+1. `CONTRIBUTING.md`와 글/출처 기여 템플릿을 추가합니다.
+2. `/industry` 수동 큐레이션 데이터 모델을 설계합니다.
+3. 공식 RSS/API 후보를 출처별로 조사하고 `feedUrl` 필드 추가 여부를 결정합니다.
+4. 용어 사전을 12개에서 30개로 확장합니다.
+5. 복습 질문을 6개에서 20개로 확장합니다.
+
+### 검증 기준
+
+- `npm run check:sources`
+- `git diff --check`
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- `npm run check:viewport`
+
 ## 2026-05-07: 공식 출처 허브 구현
 
 ### 작업 브랜치
