@@ -11,6 +11,7 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
+    "check:glossary": "node scripts/check-glossary.mjs",
     "check:industry": "node scripts/check-industry-links.mjs",
     "check:sources": "node scripts/check-sources.mjs",
     "check:viewport": "node scripts/check-viewports.mjs",
