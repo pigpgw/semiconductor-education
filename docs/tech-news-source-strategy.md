@@ -129,6 +129,21 @@ MVP 다음 단계에서는 자동 크롤링보다 수동 큐레이션을 먼저 
 - robots.txt에서 막은 페이지 수집
 - 비공식 루머를 사실처럼 표시
 
+## MVP에서 확정한 공식 feed 후보
+
+`/sources`에는 공식 링크와 별도로 `feedUrl`을 둡니다. `crawlPolicy`가 `rss`인 출처는 `npm run check:sources`에서 사이트 URL과 feed URL을 함께 확인합니다.
+
+| sourceId | feedUrl | 사용 기준 |
+| --- | --- | --- |
+| `samsung-global-semiconductor-newsroom` | `https://news.samsung.com/global/feed` | Samsung Global Newsroom의 반도체 카테고리를 함께 확인 |
+| `sk-hynix-newsroom` | `https://news.skhynix.com/feed/` | SK hynix 공식 뉴스룸 업데이트 확인 |
+| `micron-newsroom` | `https://investors.micron.com/rss/news-releases.xml` | Micron 공식 발표 중 메모리/스토리지 관련 발표 확인 |
+| `intel-newsroom` | `https://newsroom.intel.com/feed` | Intel Foundry, packaging, manufacturing 맥락 확인 |
+| `lam-research-newsroom` | `https://www.lamresearch.com/newsroom/feed/` | 식각, 증착, 공정 장비 업데이트 확인 |
+| `applied-materials-newsroom` | `https://ir.appliedmaterials.com/rss/news-releases.xml` | 재료 공학, 배선, DRAM scaling, 패키징 발표 확인 |
+
+Samsung Semiconductor Tech Blog, ASML, TSMC, KLA, imec은 현재 MVP에서 수동 또는 메타데이터 확인 대상으로 유지합니다. feed가 없거나 Node 요청 제한이 있는 출처는 자동 수집 대상으로 승격하지 않습니다.
+
 ### Phase C: 학습자용 해설 생성
 
 자동 수집된 링크 중 중요한 글만 사람이 검토해 해설 노트로 승격합니다.
@@ -180,7 +195,7 @@ MVP 다음 단계에서는 자동 크롤링보다 수동 큐레이션을 먼저 
 
 기술적으로는 user-agent, 요청 간격, 캐시, 실패 재시도 제한, source별 allowlist를 둡니다.
 
-현재 MVP에는 원문 수집기가 아니라 공식 링크 상태를 점검하는 `npm run check:links`만 둡니다. 이 명령은 `/sources`와 `/industry`에 노출되는 공식 URL이 살아 있는지 확인하고, 자동 요청을 제한하는 TSMC 링크처럼 브라우저 이동은 가능하지만 Node 요청은 `403`이 나는 출처를 명시적 allowlist로 관리합니다.
+현재 MVP에는 원문 수집기가 아니라 공식 링크와 공식 feed 상태를 점검하는 `npm run check:links`만 둡니다. 이 명령은 `/sources`와 `/industry`에 노출되는 공식 URL이 살아 있는지 확인하고, 자동 요청을 제한하는 TSMC 링크처럼 브라우저 이동은 가능하지만 Node 요청은 `403`이 나는 출처를 명시적 allowlist로 관리합니다.
 
 ## 데이터 모델 초안
 
@@ -224,6 +239,7 @@ type IndustryUpdate = {
 | --- | --- | --- |
 | P1 | `/sources` 공식 링크 허브 | 완료: 10개 이상 공식 출처 카드, 외부 이동 버튼 |
 | P1 | 공식 출처 URL 헬스체크 | 완료: `npm run check:links`, TSMC 403 allowlist |
+| P1 | 공식 RSS/API 후보 정리 | 완료: 공식 feed 6개 `feedUrl`과 응답 검증 |
 | P1 | 수동 industry notes | 1차 구현: HBM/EUV/Packaging/공정/수율 관련 공식 글 8개 큐레이션 |
 | P2 | `/industry` 업데이트 목록 | 완료: 출처, 날짜, 태그, 관련 교재 글 표시 |
 | P2 | `/industry/[slug]` 상세 해설 | 완료: 원문별 질문, 출처 정책, 관련 교재 표시 |
