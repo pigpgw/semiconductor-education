@@ -8,8 +8,11 @@ import {
   ArrowLeft,
   ArrowRight,
   BookOpenCheck,
+  Clock,
   ExternalLink,
   FileSearch,
+  Layers,
+  Lightbulb,
   Target
 } from "lucide-react";
 import { DifficultyBadge } from "@/components/difficulty-badge";
@@ -114,103 +117,115 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
           <section className="mt-8 overflow-hidden rounded-xl border border-line bg-paper">
             <div className="border-b border-line bg-bg0 p-5 sm:p-6">
-              <p className="text-sm font-black text-teal">90초 요약</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-sm font-black text-teal">90초 요약</p>
+                <span className="inline-flex min-h-8 items-center gap-1.5 rounded-full border border-line bg-paper px-3 text-xs font-bold text-muted">
+                  <Clock size={14} aria-hidden />
+                  {lesson.quickSummary.estimatedReadTime}
+                </span>
+              </div>
               <h2 className="mt-2 max-w-3xl text-2xl font-black leading-snug sm:text-3xl">
                 {lesson.quickSummary.conclusion}
               </h2>
+              <p className="mt-4 flex max-w-3xl gap-2 text-sm leading-7 text-muted">
+                <Lightbulb
+                  className="mt-1 shrink-0 text-saffron"
+                  size={17}
+                  aria-hidden
+                />
+                <span>{lesson.quickSummary.analogy}</span>
+              </p>
             </div>
-            <div className="grid gap-px bg-line md:grid-cols-2">
-              <SummaryBlock
-                icon={<BookOpenCheck size={18} aria-hidden />}
-                label="먼저 알아야 할 말"
-              >
-                <div className="flex flex-wrap gap-2">
-                  {lesson.quickSummary.keyTerms.map((term) => (
-                    <Link
-                      key={term}
-                      href={`/glossary#${encodeURIComponent(term)}`}
-                      className="focus-ring rounded-md border border-line bg-bg3 px-2.5 py-1 text-xs font-bold text-ink hover:border-teal hover:text-teal"
+            <div className="grid gap-px bg-line lg:grid-cols-[minmax(0,1fr)_320px]">
+              <div className="bg-paper p-5 sm:p-6">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-teal">
+                  <Layers size={18} aria-hidden />
+                  레벨별 읽기 목표
+                </div>
+                <div className="mt-4 divide-y divide-line border-y border-line">
+                  {levels.map((level) => (
+                    <div
+                      key={level.id}
+                      className="grid gap-2 py-3 sm:grid-cols-[132px_1fr]"
                     >
-                      {term}
-                    </Link>
+                      <div>
+                        <p className="text-xs font-black text-saffron">
+                          {level.badge}
+                        </p>
+                        <p className="mt-1 text-sm font-black">{level.label}</p>
+                      </div>
+                      <p className="text-sm leading-7 text-muted">
+                        {lesson.readingGuide[level.id]}
+                      </p>
+                    </div>
                   ))}
                 </div>
-              </SummaryBlock>
-              <SummaryBlock
-                icon={<FileSearch size={18} aria-hidden />}
-                label="현업 키워드"
-              >
-                <div className="flex flex-wrap gap-2">
-                  {lesson.quickSummary.fieldKeywords.map((keyword) => (
-                    <span
-                      key={keyword}
-                      className="rounded-md border border-line bg-bg3 px-2.5 py-1 text-xs font-bold text-muted"
-                    >
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
-              </SummaryBlock>
-              <SummaryBlock
-                icon={<Target size={18} aria-hidden />}
-                label="읽고 나면"
-              >
-                <p className="text-sm leading-7 text-muted">
-                  {lesson.quickSummary.outcome}
-                </p>
-              </SummaryBlock>
-              <SummaryBlock
-                icon={<ExternalLink size={18} aria-hidden />}
-                label="공식 출처"
-              >
-                <ul className="grid gap-2">
-                  {lesson.sources.slice(0, 2).map((source) => (
-                    <li key={source.url}>
-                      <a
-                        href={source.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="focus-ring inline-flex items-center gap-1 text-sm font-bold text-muted hover:text-teal"
+              </div>
+              <div className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-1">
+                <SummaryBlock
+                  icon={<BookOpenCheck size={18} aria-hidden />}
+                  label="먼저 알아야 할 말"
+                >
+                  <div className="flex flex-wrap gap-2">
+                    {lesson.quickSummary.keyTerms.map((term) => (
+                      <Link
+                        key={term}
+                        href={`/glossary#${encodeURIComponent(term)}`}
+                        className="focus-ring rounded-md border border-line bg-bg3 px-2.5 py-1 text-xs font-bold text-ink hover:border-teal hover:text-teal"
                       >
-                        {source.title}
-                        <ExternalLink size={14} aria-hidden />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </SummaryBlock>
+                        {term}
+                      </Link>
+                    ))}
+                  </div>
+                </SummaryBlock>
+                <SummaryBlock
+                  icon={<FileSearch size={18} aria-hidden />}
+                  label="현업 키워드"
+                >
+                  <div className="flex flex-wrap gap-2">
+                    {lesson.quickSummary.fieldKeywords.map((keyword) => (
+                      <span
+                        key={keyword}
+                        className="rounded-md border border-line bg-bg3 px-2.5 py-1 text-xs font-bold text-muted"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </SummaryBlock>
+                <SummaryBlock
+                  icon={<Target size={18} aria-hidden />}
+                  label="읽고 나면"
+                >
+                  <p className="text-sm leading-7 text-muted">
+                    {lesson.quickSummary.outcome}
+                  </p>
+                </SummaryBlock>
+                <SummaryBlock
+                  icon={<ExternalLink size={18} aria-hidden />}
+                  label="공식 출처"
+                >
+                  <ul className="grid gap-2">
+                    {lesson.sources.slice(0, 2).map((source) => (
+                      <li key={source.url}>
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="focus-ring inline-flex items-center gap-1 text-sm font-bold text-muted hover:text-teal"
+                        >
+                          {source.title}
+                          <ExternalLink size={14} aria-hidden />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </SummaryBlock>
+              </div>
             </div>
           </section>
 
           <LessonTechnicalVisual slug={lesson.slug} />
-
-          <section className="mt-8 border border-line bg-paper p-5">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <p className="text-sm font-black text-teal">레벨별 읽기 안내</p>
-                <h2 className="mt-2 text-2xl font-black">
-                  한 글을 세 가지 깊이로 읽습니다.
-                </h2>
-              </div>
-              <Link
-                href="/glossary"
-                className="focus-ring inline-flex min-h-11 items-center justify-center rounded-md border border-line px-4 text-sm font-bold hover:border-teal hover:text-teal"
-              >
-                용어 사전
-              </Link>
-            </div>
-            <div className="mt-5 grid gap-3 md:grid-cols-3">
-              {levels.map((level) => (
-                <article key={level.id} className="border border-line bg-surface p-4">
-                  <p className="text-xs font-black text-saffron">{level.badge}</p>
-                  <h3 className="mt-2 text-base font-black">{level.label}</h3>
-                  <p className="mt-2 text-sm leading-6 text-muted">
-                    {lesson.readingGuide[level.id]}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
 
           <section className="mt-8 border border-line bg-surface p-5">
             <p className="text-sm font-black text-teal">공식 자료 해석</p>

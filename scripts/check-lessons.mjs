@@ -8,6 +8,8 @@ const minimumH2Count = 7;
 const requiredReadingLevels = ["basic", "applied", "field"];
 const requiredQuickSummaryFields = [
   "conclusion",
+  "analogy",
+  "estimatedReadTime",
   "keyTerms",
   "fieldKeywords",
   "outcome"

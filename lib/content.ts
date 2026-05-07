@@ -18,6 +18,8 @@ type Source = {
 
 type QuickSummary = {
   conclusion: string;
+  analogy: string;
+  estimatedReadTime: string;
   keyTerms: string[];
   fieldKeywords: string[];
   outcome: string;
@@ -103,6 +105,8 @@ function assertQuickSummary(value: unknown): QuickSummary {
 
   if (
     !("conclusion" in value) ||
+    !("analogy" in value) ||
+    !("estimatedReadTime" in value) ||
     !("keyTerms" in value) ||
     !("fieldKeywords" in value) ||
     !("outcome" in value)
@@ -112,6 +116,11 @@ function assertQuickSummary(value: unknown): QuickSummary {
 
   return {
     conclusion: assertString(value.conclusion, "quickSummary.conclusion"),
+    analogy: assertString(value.analogy, "quickSummary.analogy"),
+    estimatedReadTime: assertString(
+      value.estimatedReadTime,
+      "quickSummary.estimatedReadTime"
+    ),
     keyTerms: assertStringArray(value.keyTerms, "quickSummary.keyTerms"),
     fieldKeywords: assertStringArray(
       value.fieldKeywords,
