@@ -30,12 +30,18 @@ jobs:
       - name: Validate source branch
         run: |
           branch="${{ github.head_ref }}"
+          base="${{ github.base_ref }}"
+
+          if [[ "$branch" == "dev" && "$base" == "main" ]]; then
+            exit 0
+          fi
+
           if [[ "$branch" =~ ^(feature|fix|refactor|docs|style|chore|test)/[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
             exit 0
           fi
 
           echo "Invalid branch name: $branch"
-          echo "Use type/task-name, for example feature/mvp-foundation."
+          echo "Use type/task-name, for example feature/mvp-foundation. Release PRs may use dev -> main."
           exit 1
 
   commitlint:
