@@ -229,6 +229,32 @@ export const industryStatuses = Array.from(
   new Set(industryUpdates.map((update) => update.status))
 );
 
+export function formatIndustryDate(date?: string) {
+  if (!date) {
+    return "상시 업데이트";
+  }
+
+  return new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  }).format(new Date(`${date}T00:00:00+09:00`));
+}
+
+export function getIndustryUpdateById(id: string) {
+  return industryUpdates.find((update) => update.id === id);
+}
+
+export function getNextIndustryUpdate(id: string) {
+  const currentIndex = industryUpdates.findIndex((update) => update.id === id);
+
+  if (currentIndex < 0) {
+    return undefined;
+  }
+
+  return industryUpdates[currentIndex + 1];
+}
+
 export function getIndustrySource(sourceId: string) {
   return officialSources.find((source) => source.id === sourceId);
 }
