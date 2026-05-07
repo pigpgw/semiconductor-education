@@ -1,87 +1,84 @@
-# 1차 최종 점검
+# 프로젝트 총점검
 
-이 문서는 1차 MVP 마감 전에 코드, 문서, 설정을 점검한 결과를 기록합니다. 목적은 불필요한 항목을 제거하고, 남은 작업을 다음 단계로 명확히 넘기는 것입니다.
+이 문서는 1차 MVP 기준으로 코드, 문서, 설정을 다시 점검한 결과입니다. 목적은 불필요한 항목을 줄이고, 다음 작업자가 바로 이어서 개발할 수 있게 현재 상태와 다음 작업을 분리하는 것입니다.
 
 ## 점검 범위
 
-- Next.js App Router 페이지
-- 공통 컴포넌트
-- MDX 콘텐츠 로더와 글 3편
-- 학습 데이터 라이브러리
-- 문서 폴더
-- 패키지 의존성
-- GitHub Actions와 배포 설정
-- 로컬 생성 파일과 무시 규칙
+- Next.js App Router 화면 11개
+- 공통 컴포넌트와 MDX 렌더링 컴포넌트
+- DRAM, HBM, EUV 핵심 글 3편
+- 용어, 복습 질문, 공식 출처, 산업 업데이트 데이터
+- GitHub Actions, Vercel workflow, 검증 스크립트
+- README와 `docs/` 문서 구조
+- 로컬 생성 파일과 `.gitignore`
 
 ## 정리한 항목
 
 | 항목 | 처리 | 이유 |
 | --- | --- | --- |
-| `HomeTechnicalVisual` | 삭제 | 현재 홈 디자인에서 더 이상 사용하지 않는 예전 hero 시각화 |
-| `WaferPattern` | 삭제 | `HomeTechnicalVisual` 제거 후 참조가 사라진 내부 함수 |
+| `docs/work-log.md` 과거 상세 로그 | 최신 상태 중심으로 압축 | 이전 작업의 “아직 구현 안 됨” 문장이 현재 구현 상태와 충돌함 |
 | `next-env.d.ts` | 로컬 삭제 | Next.js가 생성하는 파일이며 `.gitignore` 대상 |
 | `tsconfig.tsbuildinfo` | 로컬 삭제 | TypeScript 증분 빌드 생성 파일이며 `.gitignore` 대상 |
-| `@mdx-js/react` 루트 의존성 | 삭제 | 코드에서 직접 쓰지 않고 `next-mdx-remote`가 자체 의존성으로 관리 |
-| 프로젝트 설명 문구 | 정리 | “온라인 교재”보다 현재 방향인 “오픈소스 문서”에 맞춤 |
+| CI 검증 명령 | `npm run validate`로 통합 | lint, typecheck, 콘텐츠 구조 검증, build를 한 명령으로 확인하기 위함 |
+| 외부 링크 점검 | `npm run check:links`로 분리 | 공식 사이트 일시 차단이 PR 필수 검증을 막지 않게 하기 위함 |
+| `postcss` audit advisory | `overrides`로 8.5.x 고정 | `npm audit fix --force`가 Next를 9.x로 낮추는 breaking change라 직접 적용하지 않음 |
 
 ## 유지한 항목
 
 | 항목 | 유지 이유 |
 | --- | --- |
-| `docs/product-planning.md` | 제품 문제 정의와 사용자 포지셔닝을 설명 |
 | `docs/final-design.md` | 1차 MVP 판단 기준 |
-| `docs/mvp-summary.md` | 현재 구현 범위와 콘텐츠 수량 기록 |
-| `docs/planning-improvements.md` | 다음 보완 우선순위 |
-| `docs/tech-news-source-strategy.md` | 공식 기술블로그 링크 허브와 뉴스 수집 전략 |
-| `/industry/[slug]` | 공식 업데이트별 학습 질문, 출처 정책, 관련 교재 연결 |
+| `docs/mvp-summary.md` | 현재 구현 범위와 콘텐츠 수량 |
+| `docs/planning-improvements.md` | 다음 작업 우선순위 |
+| `docs/tech-news-source-strategy.md` | 공식 기술블로그 링크 허브와 RSS/API 전략 |
+| `docs/open-source-document-strategy.md` | 오픈소스 문서 운영 원칙 |
+| `docs/templates/` | 작은 단위 기여를 위한 작성 템플릿 |
+| Vercel workflow | 기본 비활성 상태지만 배포 파이프라인 기준으로 필요 |
 | `/study` 로컬 학습 기능 | 로그인 없이 학습 흐름을 이어가는 MVP 보조 장치 |
-| Vercel workflow | 현재 비활성화 상태지만 배포 파이프라인 기준으로 유지 |
 
 ## 코드 점검 결과
 
 - 추적 중인 불필요한 생성 파일은 없습니다.
-- 사용하지 않는 공통 컴포넌트 export를 제거했습니다.
-- 주요 라우트는 MVP 범위와 일치합니다.
+- 공통 컴포넌트와 `lib/` 모듈은 현재 라우트나 검증 스크립트에서 사용 중입니다.
 - `node_modules`, `.next`, `*.tsbuildinfo`, `next-env.d.ts`는 `.gitignore`로 제외됩니다.
-- 직접 사용하지 않는 루트 의존성을 제거했습니다.
-
-## 의존성 점검 결과
-
-- `npm audit`에서 `next@16.2.5` 내부 `postcss` 의존성 관련 moderate advisory가 보고됩니다.
-- `npm audit fix --force`는 `next@9.3.3`으로 내리는 breaking change를 제안하므로 적용하지 않습니다.
-- 현재 대응은 Next.js 패치 버전이 정상 제공될 때 업데이트하는 것입니다.
+- 핵심 화면은 `scripts/check-viewports.mjs`에서 360, 390, 768, 1280px 폭으로 확인합니다.
+- 공식 출처와 산업 업데이트 URL은 네트워크 영향이 있으므로 로컬 감사 명령인 `npm run check:links`로 분리합니다.
+- `npm audit --audit-level=moderate`는 0건입니다.
 
 ## 문서 점검 결과
 
-- `docs/README.md`가 문서 인덱스 역할을 합니다.
-- 문서들은 역할별로 분리되어 있어 삭제하지 않았습니다.
-- 현재 상태와 보완 목표는 `docs/mvp-summary.md`와 `docs/planning-improvements.md`로 분리되어 있습니다.
-- 오픈소스 문서 운영 방향은 `docs/open-source-document-strategy.md`에 정리되어 있습니다.
-- 외부 기술블로그와 뉴스 수집 전략은 `docs/tech-news-source-strategy.md`에 정리되어 있습니다.
+- `docs/README.md`는 문서 인덱스 역할을 유지합니다.
+- `docs/work-log.md`는 전체 히스토리 보관소가 아니라 최신 상태와 다음 작업 인계 문서로 사용합니다.
+- 과거 상세 작업 내역은 Git 커밋과 PR 기록으로 추적합니다.
+- 현재 구현 상태는 `docs/mvp-summary.md`, 다음 보완 우선순위는 `docs/planning-improvements.md`에 둡니다.
+- 출처와 뉴스 수집 전략은 `docs/source-policy.md`와 `docs/tech-news-source-strategy.md`로 분리해 유지합니다.
 
-## 1차 완료 기준
+## 완료 기준
 
 1차 MVP는 다음을 만족하면 마감 상태로 봅니다.
 
 - 핵심 페이지 11개가 유지된다.
-- 핵심 글 3편이 유지되고, 스펙 읽기와 실무 판단 기준을 포함한다.
-- 레벨 진단, 용어 사전, 복습 질문, 로컬 학습 노트가 동작한다.
+- 핵심 글 3편이 스펙 읽기와 실무 판단 기준을 포함한다.
+- 레벨 진단, 용어 사전, 복습 질문, 산업 해설 노트, 로컬 학습 노트가 동작한다.
 - README와 docs에서 제품 방향, MVP 범위, 출처 정책, 보완 계획을 확인할 수 있다.
-- `npm run lint`, `npm run typecheck`, `npm run build`, `npm run check:lessons`, `npm run check:glossary`, `npm run check:practice`, `npm run check:sources`, `npm run check:industry`, `npm run check:viewport`가 통과한다.
+- `npm run validate`, `npm run check:links`, `npm run check:viewport`가 통과한다.
 
 ## 다음 작업
 
 ### P0
 
-- 글별 상단 요약 카드 설계
-- DRAM, HBM, EUV 문장 밀도 다듬기와 도식 보강
+- 글별 상단 90초 요약 카드 고도화
+- DRAM, HBM, EUV 도식 보강
+- 본문 관련 용어 탐색 UX 연결
+
+### P1
+
+- 공식 RSS/API 후보 조사와 `feedUrl` 필드 추가 여부 결정
+- 복습 질문 주제/레벨 필터 UX
+- 학습 노트 내보내기
 
 ### P2
 
-- NAND/SSD 글 추가
-- 패키징, TSV, MR-MUF 글 추가
+- NAND/SSD 첫 글 추가
+- 패키징, TSV, MR-MUF 심화 글 추가
 - 직무별 읽기 경로 추가
-
-## 마감 판단
-
-1차는 기능 추가보다 “기준 있는 오픈소스 문서”로서의 방향을 확정하는 단계입니다. 이후 작업은 많은 기능을 빠르게 늘리기보다, 핵심 글의 깊이와 공식 출처 기반 신뢰를 먼저 높이는 순서로 진행합니다.

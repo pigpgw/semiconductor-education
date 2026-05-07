@@ -91,18 +91,12 @@ GitHub Issue로 제안할 때는 저장소의 issue template을 사용하면 됩
 변경 범위에 맞게 아래 명령을 실행합니다.
 
 ```bash
-npm run lint
-npm run typecheck
-npm run build
-npm run check:lessons
-npm run check:glossary
-npm run check:practice
-npm run check:sources
-npm run check:industry
+npm run validate
+npm run check:links
 npm run check:viewport
 ```
 
-문서만 수정한 경우에도 최소한 `git diff --check`와 `npm run lint`를 확인합니다. 교재 글을 바꿨다면 `npm run check:lessons`를 실행합니다. 용어 사전을 바꿨다면 `npm run check:glossary`를 실행하고, 복습 질문을 바꿨다면 `npm run check:practice`를 실행합니다. 출처나 산업 업데이트 링크를 바꿨다면 `npm run check:sources` 또는 `npm run check:industry`를 실행합니다.
+문서만 수정한 경우에도 최소한 `git diff --check`와 `npm run validate`를 확인합니다. 교재 글, 용어 사전, 복습 질문은 `npm run validate` 안에서 함께 검증합니다. 출처나 산업 업데이트 링크를 바꿨다면 `npm run check:links`를 실행합니다.
 
 ## PR 체크리스트
 
