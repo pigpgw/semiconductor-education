@@ -6,7 +6,7 @@
 
 - Next.js App Router 화면 11개
 - 공통 컴포넌트와 MDX 렌더링 컴포넌트
-- DRAM, HBM, EUV 핵심 글 3편
+- DRAM, NAND/SSD, HBM, EUV 핵심 글 4편
 - 용어, 복습 질문, 공식 출처, 산업 업데이트 데이터
 - GitHub Actions, Vercel workflow, 검증 스크립트
 - README와 `docs/` 문서 구조
@@ -58,7 +58,7 @@
 1차 MVP는 다음을 만족하면 마감 상태로 봅니다.
 
 - 핵심 페이지 11개가 유지된다.
-- 핵심 글 3편이 스펙 읽기와 실무 판단 기준을 포함한다.
+- 핵심 글 4편이 스펙 읽기와 실무 판단 기준을 포함한다.
 - 레벨 진단, 용어 사전, 복습 질문, 산업 해설 노트, 로컬 학습 노트가 동작한다.
 - README와 docs에서 제품 방향, MVP 범위, 출처 정책, 보완 계획을 확인할 수 있다.
 - `npm run validate`, `npm run check:links`, `npm run check:viewport`가 통과한다.
@@ -73,6 +73,6 @@
 
 - 교재 반영 상태 표시
 - 검토 대기 후보를 탐색하는 내부용 페이지나 문서 뷰
-- NAND/SSD 첫 글 추가
+- DDR/LPDDR/GDDR/HBM 비교 글 추가
 - 패키징, TSV, MR-MUF 심화 글 추가
 - 직무별 읽기 경로 추가

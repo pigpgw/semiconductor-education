@@ -6,10 +6,40 @@
 
 - 브랜치 흐름: `feature/*`, `fix/*`, `refactor/*`, `docs/*`, `style/*`, `chore/*`, `test/*` -> `dev` -> `main`
 - 핵심 화면: `/`, `/level`, `/roadmap`, `/learn`, `/learn/[slug]`, `/glossary`, `/sources`, `/industry`, `/industry/[slug]`, `/practice`, `/study`
-- 핵심 콘텐츠: DRAM, HBM, EUV 글 3편
-- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, promotion 품질 메타데이터 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
+- 핵심 콘텐츠: DRAM, NAND/SSD, HBM, EUV 글 4편
+- 콘텐츠 데이터: 용어 34개, 복습 질문 23개, 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, promotion 품질 메타데이터 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
+
+## 2026-05-09: NAND/SSD 교재 확장
+
+### 작업 브랜치
+
+- `feature/nand-ssd-foundation`
+
+### 작업한 것
+
+- `content/lessons/nand-ssd-storage.mdx`를 추가했습니다.
+- NAND를 DRAM과 대비되는 비휘발성 저장 메모리로 설명하고, SSD를 NAND+컨트롤러+펌웨어+오류 정정이 결합된 저장 시스템으로 정리했습니다.
+- 3D NAND, V-NAND, 4D NAND, TLC/QLC, 내구성, SSD 컨트롤러, 오류 정정 trade-off를 공식 자료 기반으로 보강했습니다.
+- 글 상세 시각 자료에 NAND/SSD 전용 3D 적층과 컨트롤러 구조 도식을 추가했습니다.
+- 용어 사전에 QLC, SSD 컨트롤러, 오류 정정, 내구성을 추가했습니다.
+- 복습 질문을 23개로 늘리고 NAND/SSD 글 연결을 추가했습니다.
+- 로드맵의 DRAM/NAND 단계에 TLC/QLC, 오류 정정, SSD 컨트롤러를 보강했습니다.
+
+### 부족한 점
+
+- NAND/SSD 전용 산업 업데이트 상세 노트는 아직 없습니다.
+- DDR/LPDDR/GDDR/HBM 비교 글은 아직 없습니다.
+- 패키징/TSV/MR-MUF 심화 글은 아직 없습니다.
+- 수율, metrology, inspection 전용 글은 아직 없습니다.
+
+### 다음 작업 후보
+
+1. DDR/LPDDR/GDDR/HBM 비교 글을 추가합니다.
+2. 패키징, TSV, MR-MUF 글을 추가합니다.
+3. NAND/SSD 관련 산업 업데이트 후보를 `/industry`에 승격합니다.
+4. 학습 노트 내보내기를 추가합니다.
 
 ## 2026-05-07: 승격 초안 품질 보정
 
@@ -52,7 +82,7 @@
 - `npm run check:links`: 통과, 공식 출처 12개와 공식 feed 6개, 산업 업데이트 8개 확인
 - `npm run collect:feeds -- --limit=2`: 통과, source별 필터 적용 후 공식 feed 6개에서 `review-needed` 후보 9개 출력
 - `npm audit --audit-level=moderate`: 통과, 취약점 0건
-- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 15개 경로와 360/390/768/1280px 확인
 
 ## 2026-05-07: industry 초안 승격 스크립트
 
