@@ -6,7 +6,7 @@ import { getLevelByLabel } from "@/lib/levels";
 
 export const metadata: Metadata = {
   title: "교재",
-  description: "DRAM, HBM, EUV 중심 반도체 교재 목록"
+  description: "DRAM, NAND/SSD, HBM, EUV 중심 반도체 교재 목록"
 };
 
 type LearnPageProps = {
@@ -64,8 +64,9 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
           반도체 핵심 글을 난이도와 주제로 찾아 읽습니다.
         </h1>
         <p className="mt-5 text-lg leading-8 text-muted">
-          첫 공개 버전은 DRAM, HBM, EUV 3편으로 시작합니다. 모든 글은 쉬운
-          비유에서 출발해 산업 키워드와 공식 출처까지 연결합니다.
+          첫 공개 버전은 DRAM, DRAM 제품군 비교, NAND/SSD, HBM, EUV
+          글로 시작합니다. 모든 글은 쉬운 비유에서 출발해 산업 키워드와
+          공식 출처까지 연결합니다.
         </p>
       </section>
 

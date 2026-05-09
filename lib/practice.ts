@@ -195,8 +195,8 @@ export const practiceSets: PracticeSet[] = [
         fieldPoint:
           "제품 선택은 최고 성능 하나로 끝나지 않고 전력 예산, 보드 면적, 패키징 비용, 공급 안정성까지 포함합니다.",
         relatedLesson: {
-          title: "DRAM은 왜 빠른 작업 메모리인가",
-          href: "/learn/dram-basics"
+          title: "DDR, LPDDR, GDDR, HBM은 어떻게 다른가",
+          href: "/learn/dram-family-comparison"
         }
       },
       {
@@ -348,6 +348,19 @@ export const practiceSets: PracticeSet[] = [
         relatedLesson: {
           title: "용어 사전",
           href: "/glossary"
+        }
+      },
+      {
+        topic: "DRAM",
+        question: "고객 시스템이 AI PC인지, 그래픽카드인지, AI 가속기인지에 따라 DRAM 제품군 선택이 달라지는 이유는 무엇인가요?",
+        hint: "같은 DRAM이라도 전력, 대역폭, 패키징 위치가 달라진다는 점을 떠올리세요.",
+        answer:
+          "AI PC는 전력과 폼팩터 때문에 LPDDR이 중요할 수 있고, 그래픽카드는 GPU 주변 대역폭과 비용 균형 때문에 GDDR이 적합할 수 있습니다. AI 가속기는 매우 높은 대역폭과 전력 효율이 필요해 HBM이 중요해집니다.",
+        fieldPoint:
+          "현업에서는 메모리 제품군을 빠른 순서로 고르지 않고 고객 workload, 전력 예산, 패키징 가능성, 공급 안정성 기준으로 선택합니다.",
+        relatedLesson: {
+          title: "DDR, LPDDR, GDDR, HBM은 어떻게 다른가",
+          href: "/learn/dram-family-comparison"
         }
       },
       {

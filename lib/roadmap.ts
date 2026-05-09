@@ -27,7 +27,7 @@ export const roadmap = [
     description: "삼성전자와 SK하이닉스 포트폴리오의 중심이 되는 메모리입니다.",
     items: [
       "DRAM refresh와 지연 시간",
-      "DDR, LPDDR, GDDR의 용도",
+      "DDR, LPDDR, GDDR, HBM의 용도와 trade-off",
       "NAND와 SSD의 관계",
       "V-NAND와 3D 적층",
       "TLC/QLC, 오류 정정, SSD 컨트롤러"
