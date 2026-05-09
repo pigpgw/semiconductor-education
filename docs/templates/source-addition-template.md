@@ -6,13 +6,17 @@
 
 - `id`:
 - `name`:
-- `companyType`: `memory | foundry | equipment | metrology | research`
+- `companyType`: `memory | foundry | equipment | metrology | standards | industry | research`
+- `sourceKind`: `newsroom | tech-blog | technology-page | product-page | standards | industry-data | research-library`
+- `recommendedLevel`: `basic | applied | field`
 - `url`:
 - `feedUrl`: 공식 RSS/API가 있을 때만 입력
 - `feedIncludeKeywords`: 공식 feed 후보로 남길 포함 키워드
 - `feedExcludeKeywords`: 투자자 공지, 채용, 캠페인처럼 학습 후보에서 제외할 키워드
 - `language`: `ko | en | multi`
 - `crawlPolicy`: `manual | rss | metadata-only`
+- `refreshCadence`: 예: `주 1회 feed 확인`, `월 1회 수동 확인`, `분기 1회 수동 확인`
+- `evidenceType`: 예: `제품 발표`, `표준 문서`, `장비 해설`, `산업 데이터`
 - `verifiedAt`: `YYYY-MM-DD`
 
 ## 주제
@@ -25,14 +29,19 @@
 
 - `readFor`: 이 출처를 읽을 때 확인해야 할 기술 관점
 - `note`: 사이트에 노출할 짧은 설명
+- `useCases`:
+  - 교재에서 어떤 주장에 쓸지
+  - 용어 사전이나 산업 업데이트에 어떻게 연결할지
 - `relatedLessons`:
   - `dram-basics`
 
 ## 검증
 
 - [ ] 공식 회사/기관 도메인입니다.
+- [ ] 자료 유형, 추천 난이도, 근거 유형, 확인 주기를 입력했습니다.
 - [ ] `crawlPolicy`가 `rss`이면 `feedUrl`이 있고 RSS/Atom 응답을 반환합니다.
 - [ ] `feedUrl`이 있으면 source별 `feedIncludeKeywords`와 `feedExcludeKeywords`를 함께 작성했습니다.
+- [ ] `useCases`가 최소 1개 이상 있습니다.
 - [ ] 원문 본문이나 이미지를 저장하지 않습니다.
 - [ ] `npm run check:links`를 실행했습니다.
 - [ ] 자동 요청 제한이 있으면 allowlist 필요 여부를 작업 로그에 남겼습니다.

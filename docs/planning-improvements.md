@@ -27,8 +27,8 @@
 | P1 | 복습 질문 20개 이상으로 확장 | 읽은 내용을 자기 말로 설명하게 함 | 구현됨: 기초 8개, 중급 8개, 심화 7개와 `check:practice` |
 | P1 | 복습 질문 주제/레벨 필터 UX | 사용자가 자기 수준과 관심 주제에 맞게 질문을 고르게 함 | 구현됨: 난이도/주제 필터, 결과 수, 빈 상태, 필터 초기화, 주제 배지 |
 | P1 | 기여 가이드 추가 | 오픈소스 문서로 확장하기 위함 | 구현됨: `CONTRIBUTING.md`, 글/출처/산업 업데이트 템플릿 |
-| P1 | 공식 기술블로그 링크 허브 | 여러 기업의 공식 자료로 바로 이동하게 함 | 구현됨: `/sources`에서 회사/분야별 공식 출처 카드 제공 |
-| P1 | 공식 RSS/API 후보 `feedUrl` 정리 | 뉴스 자동화 전 공식 feed만 분리함 | 구현됨: 공식 출처 12개 중 RSS 후보 6개와 `check:sources` feed 검증 |
+| P1 | 공식 기술블로그 링크 허브 | 여러 기업의 공식 자료로 바로 이동하게 함 | 구현됨: `/sources`에서 회사/분야별 공식 출처 16개와 자료 유형, 추천 난이도, 확인 주기 제공 |
+| P1 | 공식 RSS/API 후보 `feedUrl` 정리 | 뉴스 자동화 전 공식 feed만 분리함 | 구현됨: 공식 출처 16개 중 RSS 후보 6개와 `check:sources` feed 검증 |
 | P2 | 공식 feed 메타데이터 수집기 | 실시간 뉴스 전 단계로 원문 복제 없이 title/url/date만 수집 | 구현됨: `npm run collect:feeds -- --limit=5`, `review-needed` 상태 JSON 출력 |
 | P2 | feed 검토 대기열 데이터 구조 | 자동 게시 전 사람이 선별할 후보를 관리함 | 구현됨: `review-needed` 후보 4개, source/URL/lesson 중복 검증, `/industry` 검토 대기 통계 |
 | P2 | source별 feed 키워드 필터 | 무관한 투자자 공지, 채용, 캠페인성 글을 1차로 줄임 | 구현됨: RSS 출처 6개 include/exclude 키워드, collector 필터, `/sources` 필터 표시 |

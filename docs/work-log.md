@@ -7,9 +7,36 @@
 - 브랜치 흐름: `feature/*`, `fix/*`, `refactor/*`, `docs/*`, `style/*`, `chore/*`, `test/*` -> `dev` -> `main`
 - 핵심 화면: `/`, `/level`, `/roadmap`, `/learn`, `/learn/[slug]`, `/glossary`, `/sources`, `/industry`, `/industry/[slug]`, `/practice`, `/study`
 - 핵심 콘텐츠: DRAM, NAND/SSD, HBM, EUV 글 4편
-- 콘텐츠 데이터: 용어 34개, 복습 질문 23개, 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, promotion 품질 메타데이터 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
+- 콘텐츠 데이터: 용어 34개, 복습 질문 23개, 공식 출처 16개, RSS/API 후보 6개, source별 feed 필터 6개, 출처별 자료 유형/추천 난이도/확인 주기, 검토 대기 후보 4개, promotion 품질 메타데이터 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
+
+## 2026-05-09: 공식 자료 정보 보강
+
+### 작업 브랜치
+
+- `feature/nand-ssd-foundation`
+
+### 작업한 것
+
+- `/sources` 공식 출처 데이터를 12개에서 16개로 확장했습니다.
+- KIOXIA BiCS FLASH, JEDEC Standards, NVM Express Specifications, SIA Semiconductor Industry Fact Sheet를 추가했습니다.
+- 모든 공식 출처에 자료 유형, 추천 난이도, 근거 유형, 확인 주기, 학습 활용 방식을 추가했습니다.
+- `/sources` 카드에서 해당 메타데이터를 확인할 수 있게 UI를 보강했습니다.
+- `check:sources`가 새 메타데이터 누락을 검증하게 했습니다.
+- 출처 정책, 뉴스 소스 전략, 공식 출처 추가 템플릿, MVP 상태 문서를 갱신했습니다.
+
+### 부족한 점
+
+- 새로 추가한 KIOXIA/JEDEC/NVM Express/SIA 출처를 `/industry` 해설 노트로 승격하지는 않았습니다.
+- DDR/LPDDR/GDDR/HBM 비교 글에서 JEDEC 출처를 직접 활용하는 작업이 남아 있습니다.
+- NAND/SSD 글은 KIOXIA, NVM Express 출처를 본문 하단 sources로 추가 확장할 수 있습니다.
+
+### 다음 작업 후보
+
+1. NAND/SSD 글에 KIOXIA 3D NAND와 NVM Express 공식 규격 근거를 추가합니다.
+2. DDR/LPDDR/GDDR/HBM 비교 글을 만들고 JEDEC 표준 출처를 연결합니다.
+3. SIA 산업 데이터를 README와 프로젝트 소개의 시장 필요성 근거로 더 얇게 연결합니다.
 
 ## 2026-05-09: NAND/SSD 교재 확장
 

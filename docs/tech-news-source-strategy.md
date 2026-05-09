@@ -27,6 +27,7 @@ Semiconductor Education은 반도체 기술 뉴스를 “긁어 모아 보여주
 | 메모리 | Samsung Semiconductor | https://semiconductor.samsung.com/news-events/tech-blog/ | DRAM, HBM, CXL, SSD, Foundry, EUV 관련 기술 글 |
 | 메모리 | SK hynix Newsroom | https://news.skhynix.co.kr/ | HBM, DRAM, NAND, AI memory, 기술 리더 인터뷰 |
 | 메모리 | Micron Newsroom | https://www.micron.com/about/press/news | DRAM, NAND, data center, AI memory, 제품 발표 |
+| 메모리 | KIOXIA BiCS FLASH | https://americas.kioxia.com/en-us/business/memory/bics.html | 3D NAND, BiCS FLASH, SSD/UFS 제품 연결 |
 | 파운드리 | TSMC Technology | https://www.tsmc.com/english/dedicatedFoundry/technology | 공정 노드, advanced packaging, OIP, R&D 방향 |
 | 파운드리 | TSMC Press Center | https://pr.tsmc.com/english/news | 기술 심포지엄, 공정/패키징 발표 |
 | 파운드리/로직 | Intel Newsroom | https://newsroom.intel.com/ | Intel Foundry, process roadmap, packaging, AI PC |
@@ -34,6 +35,9 @@ Semiconductor Education은 반도체 기술 뉴스를 “긁어 모아 보여주
 | 장비 | Lam Research Newsroom | https://www.lamresearch.com/newsroom/ | etch, deposition, wafer fabrication, AI-era process |
 | 장비 | Applied Materials Newsroom | https://www.appliedmaterials.com/us/en/newsroom.html | materials engineering, wiring, DRAM scaling, advanced patterning |
 | 계측/수율 | KLA Newsroom | https://www.kla.com/newsroom | inspection, metrology, yield management |
+| 표준/규격 | JEDEC Standards | https://www.jedec.org/ | DDR, LPDDR, HBM, UFS, eMMC, SSD 표준 |
+| 표준/규격 | NVM Express Specifications | https://nvmexpress.org/specifications/ | NVMe base, command set, transport, management interface |
+| 산업 데이터 | SIA Fact Sheet | https://www.semiconductors.org/resources/semiconductor-industry-fact-sheet/ | 반도체 산업 규모, 공급망, 인력, 시장 배경 |
 | 연구 | imec Reading Room | https://www.imec-int.com/en/reading-room | sub-2nm, EUV, silicon photonics, advanced research |
 
 ## 사이트 기능 설계
@@ -45,6 +49,9 @@ Semiconductor Education은 반도체 기술 뉴스를 “긁어 모아 보여주
 - 회사/기관별 카드
 - 분야 태그: `Memory`, `Foundry`, `Equipment`, `EDA`, `Research`, `Packaging`
 - 주요 키워드: `DRAM`, `HBM`, `NAND`, `EUV`, `High-NA`, `TSV`, `Yield`
+- 자료 유형: 뉴스룸, 기술 블로그, 기술 페이지, 제품 페이지, 표준 문서, 산업 데이터
+- 추천 난이도: 기초부터, 중급부터, 실무/심화
+- 근거 유형과 확인 주기
 - `공식 사이트로 이동` 버튼
 - 이 출처를 읽을 때 봐야 할 관점
 
@@ -142,7 +149,7 @@ MVP 다음 단계에서는 자동 크롤링보다 수동 큐레이션을 먼저 
 | `lam-research-newsroom` | `https://newsroom.lamresearch.com/press-releases?pagetemplate=rss` | 식각, 증착, 공정 장비 업데이트 확인 |
 | `applied-materials-newsroom` | `https://ir.appliedmaterials.com/rss/news-releases.xml` | 재료 공학, 배선, DRAM scaling, 패키징 발표 확인 |
 
-Samsung Semiconductor Tech Blog, ASML, TSMC, KLA, imec은 현재 MVP에서 수동 또는 메타데이터 확인 대상으로 유지합니다. feed가 없거나 Node 요청 제한이 있는 출처는 자동 수집 대상으로 승격하지 않습니다.
+Samsung Semiconductor Tech Blog, ASML, TSMC, KLA, imec, KIOXIA, JEDEC, NVM Express, SIA는 현재 MVP에서 수동 또는 메타데이터 확인 대상으로 유지합니다. feed가 없거나 Node 요청 제한이 있는 출처는 자동 수집 대상으로 승격하지 않습니다.
 
 ## source별 feed 필터
 
@@ -323,7 +330,7 @@ type IndustryUpdate = {
 
 | 우선순위 | 작업 | 완료 기준 |
 | --- | --- | --- |
-| P1 | `/sources` 공식 링크 허브 | 완료: 10개 이상 공식 출처 카드, 외부 이동 버튼 |
+| P1 | `/sources` 공식 링크 허브 | 완료: 16개 공식 출처 카드, 외부 이동 버튼, 자료 유형/추천 난이도/확인 주기 |
 | P1 | 공식 출처 URL 헬스체크 | 완료: `npm run check:links`, TSMC 403 allowlist |
 | P1 | 공식 RSS/API 후보 정리 | 완료: 공식 feed 6개 `feedUrl`과 응답 검증 |
 | P1 | 수동 industry notes | 1차 구현: HBM/EUV/Packaging/공정/수율 관련 공식 글 8개 큐레이션 |
