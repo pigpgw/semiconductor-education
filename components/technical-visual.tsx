@@ -396,26 +396,45 @@ export function LessonTechnicalVisual({ slug }: LessonVisualProps) {
   const config = getVisualConfig(slug, "detail");
 
   return (
-    <figure className="mt-8 grid gap-5 rounded-2xl border border-line bg-paper p-5 md:grid-cols-[minmax(0,0.95fr)_minmax(300px,0.85fr)] md:items-center">
-      <div>
-        <p className="text-sm font-black text-teal">Visual first</p>
-        <h2 className="mt-2 text-2xl font-black leading-tight">{config.title}</h2>
-        <figcaption className="mt-3 leading-7 text-muted">
-          {config.caption}
-        </figcaption>
-        <div className="mt-5 grid gap-2 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
-          {config.highlights.map((highlight) => (
-            <HighlightChip
-              key={highlight.label}
-              label={highlight.label}
-              text={highlight.text}
-            />
-          ))}
+    <figure className="mt-8 rounded-2xl border border-line bg-paper p-5">
+      <div className="grid gap-5 md:grid-cols-[minmax(0,0.95fr)_minmax(300px,0.85fr)] md:items-center">
+        <div>
+          <p className="text-sm font-black text-teal">Visual first</p>
+          <h2 className="mt-2 text-2xl font-black leading-tight">{config.title}</h2>
+          <figcaption className="mt-3 leading-7 text-muted">
+            {config.caption}
+          </figcaption>
+          <div className="mt-5 grid gap-2 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
+            {config.highlights.map((highlight) => (
+              <HighlightChip
+                key={highlight.label}
+                label={highlight.label}
+                text={highlight.text}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="min-h-[280px] overflow-hidden border border-line bg-surface p-4">
+          {config.visual}
         </div>
       </div>
-      <div className="min-h-[280px] overflow-hidden border border-line bg-surface p-4">
-        {config.visual}
-      </div>
+      <details className="mt-4 border border-line bg-surface">
+        <summary className="focus-ring flex min-h-12 cursor-pointer items-center justify-between gap-3 px-4 py-3 text-sm font-black text-teal">
+          그림을 더 크게 펼쳐서 보기
+          <span className="rounded-full border border-teal/30 bg-teal/10 px-2 py-1 text-[11px] text-teal">
+            click
+          </span>
+        </summary>
+        <div className="border-t border-line bg-bg0 p-4">
+          <div className="min-h-[420px] overflow-hidden border border-line bg-surface p-4">
+            {config.visual}
+          </div>
+          <p className="mt-3 text-sm leading-7 text-muted">
+            확대 뷰에서는 구조를 먼저 보고, 아래 하이라이트의 병목과 실무 판단을
+            다시 연결해 읽습니다.
+          </p>
+        </div>
+      </details>
     </figure>
   );
 }

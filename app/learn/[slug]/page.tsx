@@ -16,7 +16,11 @@ import {
   Tags,
   Target
 } from "lucide-react";
+import { AppliedModeExplorer } from "@/components/applied-mode-explorer";
+import { BasicModeExplorer } from "@/components/basic-mode-explorer";
 import { DifficultyBadge } from "@/components/difficulty-badge";
+import { FieldModeExplorer } from "@/components/field-mode-explorer";
+import { LessonLearningLab } from "@/components/lesson-learning-lab";
 import { mdxComponents } from "@/components/mdx-components";
 import { LessonTechnicalVisual } from "@/components/technical-visual";
 import {
@@ -233,11 +237,47 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </div>
           </section>
 
-          <LessonTechnicalVisual slug={lesson.slug} />
+          <LessonLearningLab
+            title={lesson.title}
+            conclusion={lesson.quickSummary.conclusion}
+            readingGuide={lesson.readingGuide}
+            sourceCount={lesson.sources.length}
+            termCount={relatedTerms.length}
+          />
 
-          <RelatedTermsSection terms={relatedTerms} />
+          <div id="basic-mode" className="scroll-mt-24">
+            <BasicModeExplorer
+              slug={lesson.slug}
+              title={lesson.title}
+              conclusion={lesson.quickSummary.conclusion}
+              analogy={lesson.quickSummary.analogy}
+              keyTerms={lesson.quickSummary.keyTerms}
+              fieldKeywords={lesson.quickSummary.fieldKeywords}
+              sources={lesson.sources}
+              relatedTerms={relatedTerms}
+            />
+          </div>
 
-          <section className="mt-8 border border-line bg-surface p-5">
+          <div id="applied-mode" className="scroll-mt-24">
+            <AppliedModeExplorer slug={lesson.slug} sources={lesson.sources} />
+          </div>
+
+          <div id="field-mode" className="scroll-mt-24">
+            <FieldModeExplorer slug={lesson.slug} sources={lesson.sources} />
+          </div>
+
+          <div id="visual-map" className="scroll-mt-24">
+            <LessonTechnicalVisual slug={lesson.slug} />
+          </div>
+
+          <div id="related-terms" className="scroll-mt-24">
+            <RelatedTermsSection terms={relatedTerms} />
+          </div>
+
+          <section
+            id="source-reading"
+            className="mt-8 scroll-mt-24 border border-line bg-surface p-5"
+          >
             <p className="text-sm font-black text-teal">공식 자료 해석</p>
             <h2 className="mt-2 text-2xl font-black">
               원문을 그대로 외우지 않고, 판단 기준으로 바꿉니다.
@@ -262,7 +302,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </div>
           </section>
 
-          <div className="article-prose mt-8">
+          <div id="article-body" className="article-prose mt-8 scroll-mt-24">
             <MDXRemote
               source={lesson.content}
               components={mdxComponents}
@@ -274,7 +314,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
             />
           </div>
 
-          <section className="mt-12 border-t border-line pt-8">
+          <section
+            id="official-sources"
+            className="mt-12 scroll-mt-24 border-t border-line pt-8"
+          >
             <h2 className="text-2xl font-black">공식 출처</h2>
             <ul className="mt-4 grid gap-3">
               {lesson.sources.map((source) => (
@@ -315,7 +358,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </nav>
           ) : null}
 
-          <section className="mt-10 border border-line bg-surface p-5">
+          <section
+            id="practice-check"
+            className="mt-10 scroll-mt-24 border border-line bg-surface p-5"
+          >
             <p className="text-sm font-black text-teal">읽은 뒤 복습</p>
             <h2 className="mt-2 text-2xl font-black">
               이 글을 자기 말로 설명할 수 있는지 확인하세요.
@@ -338,6 +384,12 @@ export default async function LessonPage({ params }: LessonPageProps) {
             <h2 className="text-sm font-black">이 글의 흐름</h2>
             <nav className="mt-4" aria-label="본문 목차">
               <ol className="space-y-3">
+                <LessonFlowLink href="#study-flow" title="학습 인터랙션" />
+                <LessonFlowLink href="#basic-mode" title="기초 모드" />
+                <LessonFlowLink href="#applied-mode" title="중급 모드" />
+                <LessonFlowLink href="#field-mode" title="고급 모드" />
+                <LessonFlowLink href="#visual-map" title="구조 그림" />
+                <LessonFlowLink href="#article-body" title="본문 읽기" />
                 {headings.map((heading) => (
                   <li key={heading.id}>
                     <a
@@ -348,12 +400,27 @@ export default async function LessonPage({ params }: LessonPageProps) {
                     </a>
                   </li>
                 ))}
+                <LessonFlowLink href="#official-sources" title="공식 출처" />
+                <LessonFlowLink href="#practice-check" title="복습" />
               </ol>
             </nav>
           </div>
         </aside>
       </div>
     </main>
+  );
+}
+
+function LessonFlowLink({ href, title }: { href: string; title: string }) {
+  return (
+    <li>
+      <a
+        href={href}
+        className="focus-ring block rounded-sm text-sm font-black leading-6 text-ink hover:text-teal"
+      >
+        {title}
+      </a>
+    </li>
   );
 }
 
