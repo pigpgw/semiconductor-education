@@ -6,10 +6,38 @@
 
 - 브랜치 흐름: `feature/*`, `fix/*`, `refactor/*`, `docs/*`, `style/*`, `chore/*`, `test/*` -> `dev` -> `main`
 - 핵심 화면: `/`, `/level`, `/roadmap`, `/learn`, `/learn/[slug]`, `/glossary`, `/sources`, `/industry`, `/industry/[slug]`, `/practice`, `/study`
-- 핵심 콘텐츠: DRAM, NAND/SSD, HBM, EUV 글 4편
-- 콘텐츠 데이터: 용어 34개, 복습 질문 23개, 공식 출처 16개, RSS/API 후보 6개, source별 feed 필터 6개, 출처별 자료 유형/추천 난이도/확인 주기, 검토 대기 후보 4개, promotion 품질 메타데이터 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
+- 핵심 콘텐츠: DRAM, DRAM 제품군 비교, NAND/SSD, HBM, EUV 글 5편
+- 콘텐츠 데이터: 용어 34개, 복습 질문 24개, 공식 출처 16개, RSS/API 후보 6개, source별 feed 필터 6개, 출처별 자료 유형/추천 난이도/확인 주기, 검토 대기 후보 4개, promotion 품질 메타데이터 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
+
+## 2026-05-09: DRAM 제품군 비교 교재 보강
+
+### 작업 브랜치
+
+- `feature/nand-ssd-foundation`
+
+### 작업한 것
+
+- `content/lessons/dram-family-comparison.mdx`를 추가했습니다.
+- DDR, LPDDR, GDDR, HBM을 같은 DRAM 계열로 묶되 용도, 전력, 대역폭, 폼팩터, 패키징, 고객 검증 기준으로 비교했습니다.
+- Samsung DDR, LPDDR5X, GDDR7, HBM과 JEDEC 공식 자료를 출처로 연결했습니다.
+- 글 상세 시각 자료에 DRAM 제품군 비교 전용 도식을 추가했습니다.
+- 복습 질문을 24개로 늘리고 기존 DDR/LPDDR/GDDR/HBM 질문을 새 글로 연결했습니다.
+- 로드맵과 MVP 문서에서 핵심 글 수와 다음 작업 후보를 갱신했습니다.
+
+### 부족한 점
+
+- 패키징/TSV/MR-MUF 심화 글은 아직 없습니다.
+- 수율, metrology, inspection 전용 글은 아직 없습니다.
+- 직무별 읽기 경로는 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 패키징, TSV, MR-MUF 글을 추가합니다.
+2. 8대 공정 입문 글을 추가합니다.
+3. 수율과 품질 글을 추가합니다.
+4. 직무별 읽기 경로를 추가합니다.
 
 ## 2026-05-09: 공식 자료 정보 보강
 
@@ -29,14 +57,13 @@
 ### 부족한 점
 
 - 새로 추가한 KIOXIA/JEDEC/NVM Express/SIA 출처를 `/industry` 해설 노트로 승격하지는 않았습니다.
-- DDR/LPDDR/GDDR/HBM 비교 글에서 JEDEC 출처를 직접 활용하는 작업이 남아 있습니다.
-- NAND/SSD 글은 KIOXIA, NVM Express 출처를 본문 하단 sources로 추가 확장할 수 있습니다.
+- SIA 산업 데이터를 README와 프로젝트 소개의 시장 필요성 근거로 더 얇게 연결하는 작업이 남아 있습니다.
 
 ### 다음 작업 후보
 
-1. NAND/SSD 글에 KIOXIA 3D NAND와 NVM Express 공식 규격 근거를 추가합니다.
-2. DDR/LPDDR/GDDR/HBM 비교 글을 만들고 JEDEC 표준 출처를 연결합니다.
-3. SIA 산업 데이터를 README와 프로젝트 소개의 시장 필요성 근거로 더 얇게 연결합니다.
+1. KIOXIA/JEDEC/NVM Express/SIA 출처를 `/industry` 해설 노트 후보로 승격합니다.
+2. SIA 산업 데이터를 README와 프로젝트 소개의 시장 필요성 근거로 더 얇게 연결합니다.
+3. source별 확인 주기를 실제 운영 후 보정합니다.
 
 ## 2026-05-09: NAND/SSD 교재 확장
 
@@ -57,15 +84,14 @@
 ### 부족한 점
 
 - NAND/SSD 전용 산업 업데이트 상세 노트는 아직 없습니다.
-- DDR/LPDDR/GDDR/HBM 비교 글은 아직 없습니다.
 - 패키징/TSV/MR-MUF 심화 글은 아직 없습니다.
 - 수율, metrology, inspection 전용 글은 아직 없습니다.
 
 ### 다음 작업 후보
 
-1. DDR/LPDDR/GDDR/HBM 비교 글을 추가합니다.
-2. 패키징, TSV, MR-MUF 글을 추가합니다.
-3. NAND/SSD 관련 산업 업데이트 후보를 `/industry`에 승격합니다.
+1. 패키징, TSV, MR-MUF 글을 추가합니다.
+2. NAND/SSD 관련 산업 업데이트 후보를 `/industry`에 승격합니다.
+3. 수율, metrology, inspection 글을 추가합니다.
 4. 학습 노트 내보내기를 추가합니다.
 
 ## 2026-05-07: 승격 초안 품질 보정
