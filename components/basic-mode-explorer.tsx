@@ -10,12 +10,13 @@ import {
   ZoomIn
 } from "lucide-react";
 import type { GlossaryTerm } from "@/lib/glossary";
-
-type LessonSource = {
-  title: string;
-  url: string;
-  usedFor: string;
-};
+import {
+  basicModeTabs,
+  getBasicConceptCards,
+  type BasicConceptCard,
+  type BasicModeId,
+  type LessonSource
+} from "@/lib/lesson-interactions";
 
 type BasicModeExplorerProps = {
   slug: string;
@@ -28,141 +29,6 @@ type BasicModeExplorerProps = {
   relatedTerms: GlossaryTerm[];
 };
 
-type ModeId = "first" | "structure" | "source";
-
-type ConceptCard = {
-  label: string;
-  title: string;
-  beginner: string;
-  structure: string;
-  field: string;
-};
-
-const modes: {
-  id: ModeId;
-  label: string;
-  description: string;
-}[] = [
-  {
-    id: "first",
-    label: "처음 보기",
-    description: "비유와 한 줄 결론으로 큰 그림을 먼저 잡습니다."
-  },
-  {
-    id: "structure",
-    label: "구조 보기",
-    description: "클릭한 개념을 실제 구조와 trade-off까지 크게 봅니다."
-  },
-  {
-    id: "source",
-    label: "공식 자료 읽기",
-    description: "Big 10 공식 자료를 어떤 질문으로 읽을지 연결합니다."
-  }
-];
-
-const conceptCardsBySlug: Record<string, ConceptCard[]> = {
-  "dram-basics": [
-    {
-      label: "역할",
-      title: "DRAM은 책상입니다",
-      beginner:
-        "SSD가 책장이라면 DRAM은 지금 펼쳐 둔 책상입니다. 전원이 꺼지면 치워지지만, 작업 중에는 바로 손이 닿습니다.",
-      structure:
-        "DRAM은 작은 셀 배열에 데이터를 전하로 저장하고, CPU/GPU가 필요한 데이터를 빠르게 가져가게 합니다.",
-      field:
-        "실무에서는 용량, 대역폭, 지연 시간, 전력, 고객 시스템 검증을 함께 봅니다."
-    },
-    {
-      label: "셀",
-      title: "1T1C는 1비트를 담는 최소 방입니다",
-      beginner:
-        "트랜지스터는 문이고 커패시터는 물컵입니다. 컵에 전하가 있으면 1, 부족하면 0으로 봅니다.",
-      structure:
-        "셀은 word line과 bit line으로 선택되고, sense amplifier가 아주 작은 전하 차이를 읽습니다.",
-      field:
-        "셀을 작게 만들수록 집적도는 좋아지지만 전하 여유와 refresh 부담이 커집니다."
-    },
-    {
-      label: "제품군",
-      title: "DDR, LPDDR, GDDR, HBM은 같은 뿌리입니다",
-      beginner:
-        "같은 DRAM이라도 서버, 모바일, 그래픽, AI 가속기에서 원하는 조건이 다릅니다.",
-      structure:
-        "DDR은 범용성, LPDDR은 저전력, GDDR/HBM은 높은 대역폭에 더 강하게 최적화됩니다.",
-      field:
-        "제품 이름보다 어떤 시스템 병목을 줄이려는 메모리인지 먼저 읽어야 합니다."
-    }
-  ],
-  "hbm-ai-memory": [
-    {
-      label: "병목",
-      title: "HBM은 GPU가 기다리지 않게 합니다",
-      beginner:
-        "GPU가 요리사라면 HBM은 주방 바로 옆에 붙은 넓은 재료 출입구입니다.",
-      structure:
-        "DRAM die를 위로 쌓고 TSV로 연결해 GPU 가까이에서 넓은 데이터 통로를 만듭니다.",
-      field:
-        "AI 시스템에서는 bandwidth, capacity, power, package capacity를 함께 맞춰야 성능이 납니다."
-    },
-    {
-      label: "연결",
-      title: "TSV는 위아래 칩을 잇는 수직 통로입니다",
-      beginner:
-        "아파트 층마다 엘리베이터가 있어야 위아래가 빠르게 이어지는 것과 비슷합니다.",
-      structure:
-        "TSV는 stacked DRAM die를 관통해 base die와 package로 신호를 전달합니다.",
-      field:
-        "정렬, 열, 수율, warpage, 고객 검증이 HBM 경쟁력의 일부가 됩니다."
-    },
-    {
-      label: "시스템",
-      title: "HBM은 메모리 기술이면서 패키징 기술입니다",
-      beginner:
-        "빠른 메모리를 만드는 것만으로 끝나지 않고, GPU 옆에 안정적으로 붙여야 합니다.",
-      structure:
-        "Interposer, substrate, power delivery, cooling 조건이 HBM 성능을 실제 서버 성능으로 바꿉니다.",
-      field:
-        "TSMC 3DFabric 같은 패키징 플랫폼과 메모리 기업의 HBM 발표를 같이 읽어야 합니다."
-    }
-  ],
-  "euv-dram-scaling": [
-    {
-      label: "노광",
-      title: "EUV는 더 얇은 펜입니다",
-      beginner:
-        "굵은 펜으로 촘촘한 도면을 여러 번 나눠 그리던 일을 더 얇은 펜으로 줄일 수 있습니다.",
-      structure:
-        "EUV는 13.5nm 파장의 빛을 써서 일부 미세 패턴의 multi-patterning 부담을 낮춥니다.",
-      field:
-        "양산에서는 파장뿐 아니라 mask, resist, throughput, defect, 장비 가동률을 함께 봅니다."
-    },
-    {
-      label: "공정",
-      title: "노광 뒤에는 식각과 계측이 이어집니다",
-      beginner:
-        "도면을 찍었다고 건물이 완성되는 것이 아닙니다. 실제 재료를 깎고 검사해야 합니다.",
-      structure:
-        "Photo로 만든 패턴은 etch/deposition/metrology를 거쳐 실제 막질 구조가 됩니다.",
-      field:
-        "Lam Research와 KLA 자료를 같이 읽으면 EUV가 공정 통합 문제라는 점이 보입니다."
-    },
-    {
-      label: "양산",
-      title: "EUV 도입은 수율과 생산성의 문제입니다",
-      beginner:
-        "작게 그릴 수 있어도 많이, 반복해서, 안정적으로 만들어야 제품이 됩니다.",
-      structure:
-        "적용 레이어, overlay, defect, process window, yield learning이 실제 양산성을 가릅니다.",
-      field:
-        "EUV 발표는 어느 제품과 어느 레이어에 적용됐는지, 수율을 어떻게 확보했는지 질문해야 합니다."
-    }
-  ]
-};
-
-function getConceptCards(slug: string) {
-  return conceptCardsBySlug[slug] ?? conceptCardsBySlug["dram-basics"];
-}
-
 export function BasicModeExplorer({
   slug,
   title,
@@ -173,8 +39,8 @@ export function BasicModeExplorer({
   sources,
   relatedTerms
 }: BasicModeExplorerProps) {
-  const concepts = getConceptCards(slug);
-  const [mode, setMode] = useState<ModeId>("first");
+  const concepts = getBasicConceptCards(slug);
+  const [mode, setMode] = useState<BasicModeId>("first");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selected = concepts[selectedIndex];
   const beginnerTerms = relatedTerms.filter((term) => term.level === "기초").slice(0, 3);
@@ -203,7 +69,7 @@ export function BasicModeExplorer({
       <div className="grid gap-px bg-teal/20 lg:grid-cols-[220px_1fr]">
         <div className="bg-paper p-4">
           <div className="grid gap-2">
-            {modes.map((item) => (
+            {basicModeTabs.map((item) => (
               <button
                 key={item.id}
                 type="button"
@@ -379,7 +245,7 @@ function ConceptButton({
   selected,
   onClick
 }: {
-  concept: ConceptCard;
+  concept: BasicConceptCard;
   selected: boolean;
   onClick: () => void;
 }) {
@@ -408,7 +274,7 @@ function ConceptButton({
   );
 }
 
-function ExpandedConcept({ concept }: { concept: ConceptCard }) {
+function ExpandedConcept({ concept }: { concept: BasicConceptCard }) {
   return (
     <article className="border border-blue/30 bg-blue/10 p-5">
       <div className="flex items-center gap-2 text-sm font-black text-blue">
