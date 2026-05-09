@@ -24,8 +24,9 @@ export default function RoadmapPage() {
           반도체를 어디서 시작하고 어디까지 깊게 볼지 정리합니다.
         </h1>
         <p className="mt-5 text-lg leading-8 text-muted">
-          첫 MVP는 메모리 반도체를 중심축으로 잡습니다. 기초 개념에서 시작해
-          DRAM, NAND, HBM, 공정, 패키징, AI 인프라까지 이어지는 흐름입니다.
+          첫 MVP는 메모리 반도체를 중심축으로 잡되, Big 10 공식 출처를 따라
+          기초 개념에서 DRAM, NAND, HBM, 공정, 장비, 수율, 패키징,
+          AI 인프라까지 이어지는 흐름입니다.
         </p>
       </section>
 
