@@ -17,6 +17,15 @@
 
 - `docs/big10-source-curriculum`
 
+### 1차 공개 마무리
+
+- 사이트 공통 설정을 `lib/site.ts`로 분리했습니다.
+- production URL 기준 메타데이터, Open Graph, Twitter metadata를 보강했습니다.
+- `/robots.txt`와 `/sitemap.xml`을 추가해 무료 배포 후 검색/공유 기본 요건을 맞췄습니다.
+- `docs/launch-checklist.md`를 추가해 Vercel Hobby 무료 배포, GitHub About, v0.1.0 릴리즈, 홍보 문구를 한 번에 확인하게 했습니다.
+- `docs/release-notes-v0.1.0.md`를 추가해 첫 공개 범위와 다음 버전 후보를 정리했습니다.
+- README, MVP 정리, 배포 문서, 문서 인덱스를 1차 공개 기준으로 갱신했습니다.
+
 ### 작업한 것
 
 - `docs/big10-source-curriculum.md`를 추가해 Samsung, SK hynix, Micron, TSMC, Intel, ASML, Lam Research, Applied Materials, KLA, imec 기준의 공식 출처 맵을 정리했습니다.
@@ -43,15 +52,20 @@
 - 고급 모드 리스크/판단 데이터도 현재 DRAM/HBM/EUV 3편에 맞춘 정적 설명입니다.
 - 학습 인터랙션의 원칙 문구도 현재 핵심 글 3편 기준입니다. NAND/패키징 글을 추가하면 원칙 예시를 확장해야 합니다.
 - 커뮤니티 운영 기준은 문서화 단계입니다. 실제 기여가 쌓이면 라벨, 리뷰어, 콘텐츠 상태 운영 방식을 더 조정해야 합니다.
+- production 배포 URL은 아직 실제 Vercel 프로젝트 연결 후 README 상단과 GitHub About에 확정 반영해야 합니다.
 
 ### 다음 작업 후보
 
-1. NAND/SSD 첫 글을 추가합니다.
-2. 패키징과 chiplet 글을 추가합니다.
-3. 수율, metrology, inspection 글을 추가합니다.
-4. `/sources`에 Big 10 학습 순서 필터나 추천 순서를 추가합니다.
-5. NVIDIA, AMD, Qualcomm, Broadcom 같은 fabless/AI 시스템 출처를 별도 보조 카테고리로 분리할지 결정합니다.
-6. 기초/중급/고급 모드 데이터를 MDX frontmatter나 별도 content 파일로 분리할지 결정합니다.
+1. 현재 브랜치를 `dev`로 PR 생성하고 CI를 통과시킵니다.
+2. `dev -> main` release PR을 만들고 Vercel production 배포를 연결합니다.
+3. GitHub About과 README 상단에 실제 production URL을 반영합니다.
+4. `v0.1.0` GitHub Release를 생성합니다.
+5. NAND/SSD 첫 글을 추가합니다.
+6. 패키징과 chiplet 글을 추가합니다.
+7. 수율, metrology, inspection 글을 추가합니다.
+8. `/sources`에 Big 10 학습 순서 필터나 추천 순서를 추가합니다.
+9. NVIDIA, AMD, Qualcomm, Broadcom 같은 fabless/AI 시스템 출처를 별도 보조 카테고리로 분리할지 결정합니다.
+10. 기초/중급/고급 모드 데이터를 MDX frontmatter나 별도 content 파일로 분리할지 결정합니다.
 
 ### 검증 결과
 

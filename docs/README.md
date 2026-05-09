@@ -20,9 +20,11 @@
    - 반도체 기업 기술블로그 링크 허브, 공식 뉴스 수집, 학습자용 해설 레이어를 설계합니다.
 8. [1차 최종 점검](phase-one-final-audit.md)
    - 현재 코드, 문서, 설정의 총점검 결과와 삭제/유지 판단을 정리합니다.
-9. [작업 로그](work-log.md)
+9. [1차 공개 체크리스트](launch-checklist.md)
+   - 무료 배포, GitHub 정리, v0.1.0 릴리즈, 홍보 문구를 확인합니다.
+10. [작업 로그](work-log.md)
    - 최신 작업, 현재 부족한 점, 다음 개발 후보를 이어서 볼 수 있게 기록합니다.
-10. [기여 가이드](../CONTRIBUTING.md)
+11. [기여 가이드](../CONTRIBUTING.md)
    - 설명 개선, 출처 보강, 글 추가, 검증 흐름을 확인합니다.
 
 ## 기획 문서
@@ -53,6 +55,8 @@
 | [로그인 없는 정책](no-login-policy.md) | 계정 없는 학습, localStorage, 개인정보 미수집 기준 |
 | [Git workflow](git-workflow.md) | `main`, `dev`, 작업 브랜치, 커밋 규칙 |
 | [Deployment](deployment.md) | 배포 파이프라인과 환경 변수 정책 |
+| [1차 공개 체크리스트](launch-checklist.md) | 무료 배포, GitHub About, 릴리즈, 홍보 문구 |
+| [v0.1.0 릴리즈 노트](release-notes-v0.1.0.md) | 첫 공개 버전의 포함 범위와 다음 버전 후보 |
 | [기여 가이드](../CONTRIBUTING.md) | 기여 단위, 출처 기준, 작업 흐름, 검증 명령 |
 | [1차 최종 점검](phase-one-final-audit.md) | 총점검 결과, 삭제/유지 판단, 다음 작업 |
 | [작업 로그](work-log.md) | 최신 작업 내용, 검증 기준, 부족한 점, 다음 작업 후보 |

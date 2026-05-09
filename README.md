@@ -38,7 +38,7 @@
 문서 전체 목차는 [docs/README.md](docs/README.md)에서 볼 수 있습니다.
 오픈소스 문서 운영 방향은 [docs/open-source-document-strategy.md](docs/open-source-document-strategy.md)에 정리했습니다.
 공식 Big 10 출처 기반 커리큘럼은 [docs/big10-source-curriculum.md](docs/big10-source-curriculum.md)에 정리했습니다.
-상세 기획은 [docs/product-planning.md](docs/product-planning.md), 1차 MVP 최종 설계 기준은 [docs/final-design.md](docs/final-design.md), 현재 MVP 정리는 [docs/mvp-summary.md](docs/mvp-summary.md), 다음 보완 기획은 [docs/planning-improvements.md](docs/planning-improvements.md)에 정리했습니다.
+상세 기획은 [docs/product-planning.md](docs/product-planning.md), 1차 MVP 최종 설계 기준은 [docs/final-design.md](docs/final-design.md), 현재 MVP 정리는 [docs/mvp-summary.md](docs/mvp-summary.md), 1차 공개 체크리스트는 [docs/launch-checklist.md](docs/launch-checklist.md), 다음 보완 기획은 [docs/planning-improvements.md](docs/planning-improvements.md)에 정리했습니다.
 
 첫 글 3편:
 
@@ -151,6 +151,18 @@ npm run promote:industry-draft -- --id=sk-hynix-ieee-hbm-award --format=ts
 ```
 
 이 명령은 `lib/industry.ts`를 자동으로 수정하지 않습니다. 초안의 category, level, tags, summary는 검토 후보의 promotion 메타데이터를 우선 사용하며, 원문 확인 뒤 `industryUpdates`에 추가합니다.
+
+## 1차 공개
+
+첫 공개는 Vercel Hobby 무료 배포를 기준으로 준비합니다.
+
+- Production branch: `main`
+- Site URL env: `NEXT_PUBLIC_SITE_URL`
+- 예상 기본 URL: `https://semiconductor-education.vercel.app`
+- 공개 체크리스트: [docs/launch-checklist.md](docs/launch-checklist.md)
+- 릴리즈 노트: [docs/release-notes-v0.1.0.md](docs/release-notes-v0.1.0.md)
+
+실제 production URL이 확정되면 README 상단과 GitHub About의 Website에 반영합니다.
 
 ## 협업/배포 흐름
 
