@@ -232,6 +232,27 @@ export function getNextLesson(slug: string) {
   return lessons[index + 1];
 }
 
+export function getLessonNavigation(slug: string) {
+  const lessons = getAllLessons();
+  const index = lessons.findIndex((lesson) => lesson.slug === slug);
+
+  if (index === -1) {
+    return {
+      previousLesson: undefined,
+      nextLesson: undefined,
+      index: -1,
+      total: lessons.length
+    };
+  }
+
+  return {
+    previousLesson: lessons[index - 1],
+    nextLesson: lessons[index + 1],
+    index,
+    total: lessons.length
+  };
+}
+
 export function getLessonFilters() {
   const lessons = getAllLessons();
 

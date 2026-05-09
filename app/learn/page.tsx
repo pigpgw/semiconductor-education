@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowRight, BookOpenCheck, Route } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
 import { getAllLessons, getLessonFilters } from "@/lib/content";
 import { getLevelByLabel } from "@/lib/levels";
@@ -68,6 +69,48 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
           글로 시작합니다. 모든 글은 쉬운 비유에서 출발해 산업 키워드와
           공식 출처까지 연결합니다.
         </p>
+      </section>
+
+      <section className="mt-8 overflow-hidden rounded-2xl border border-line bg-paper">
+        <div className="border-b border-line bg-bg0 p-5 sm:p-6">
+          <p className="inline-flex items-center gap-2 text-sm font-black text-teal">
+            <Route size={18} aria-hidden />
+            추천 읽기 순서
+          </p>
+          <h2 className="mt-2 text-2xl font-black">
+            기초 개념에서 제품군 비교, 저장장치, AI 메모리, 공정으로 이어집니다.
+          </h2>
+        </div>
+        <ol className="grid gap-px bg-line md:grid-cols-5">
+          {lessons.map((lesson, index) => (
+            <li key={lesson.slug} className="bg-paper">
+              <Link
+                href={`/learn/${lesson.slug}`}
+                className="focus-ring group flex h-full min-h-[190px] flex-col p-4 hover:bg-bg2"
+              >
+                <span className="flex items-center justify-between gap-3">
+                  <span className="grid h-8 w-8 place-items-center rounded-full border border-line bg-bg3 text-xs font-black text-muted">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <BookOpenCheck
+                    className="text-muted group-hover:text-teal"
+                    size={17}
+                    aria-hidden
+                  />
+                </span>
+                <span className="mt-4 text-sm font-black leading-6 group-hover:text-teal">
+                  {lesson.title}
+                </span>
+                <span className="mt-3 text-xs font-bold text-muted">
+                  {lesson.level} · {lesson.quickSummary.estimatedReadTime}
+                </span>
+                <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-black text-blue group-hover:text-teal">
+                  읽기 <ArrowRight size={14} aria-hidden />
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section className="mt-8 border-y border-line py-5" aria-label="글 필터">

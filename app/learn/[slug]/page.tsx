@@ -23,7 +23,8 @@ import {
   extractHeadings,
   getAllLessons,
   getLessonBySlug,
-  getNextLesson
+  getLessonNavigation,
+  type LessonSummary
 } from "@/lib/content";
 import { getRelatedGlossaryTerms, type GlossaryTerm } from "@/lib/glossary";
 import { levels } from "@/lib/levels";
@@ -67,7 +68,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
   }
 
   const headings = extractHeadings(lesson.content);
-  const nextLesson = getNextLesson(lesson.slug);
+  const { previousLesson, nextLesson, index, total } = getLessonNavigation(
+    lesson.slug
+  );
   const relatedTerms = getRelatedGlossaryTerms([
     ...lesson.quickSummary.keyTerms,
     ...lesson.quickSummary.fieldKeywords,
@@ -91,6 +94,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
               <DifficultyBadge level={lesson.level} />
               <span className="rounded-full border border-line bg-paper px-3 py-1 text-xs font-bold text-muted">
                 {lesson.category}
+              </span>
+              <span className="rounded-full border border-line bg-paper px-3 py-1 text-xs font-bold text-muted">
+                {index + 1}/{total}
               </span>
             </div>
             <h1 className="mt-5 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">
@@ -233,6 +239,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </div>
           </section>
 
+          <MobileToc headings={headings} />
+
           <LessonTechnicalVisual slug={lesson.slug} />
 
           <RelatedTermsSection terms={relatedTerms} />
@@ -300,20 +308,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </ul>
           </section>
 
-          {nextLesson ? (
-            <nav
-              className="mt-10 border border-line bg-paper p-5"
-              aria-label="다음 글"
-            >
-              <p className="text-sm font-black text-teal">다음 글</p>
-              <Link
-                href={`/learn/${nextLesson.slug}`}
-                className="focus-ring mt-2 inline-flex min-h-11 items-center gap-2 text-lg font-black hover:text-teal"
-              >
-                {nextLesson.title} <ArrowRight size={18} aria-hidden />
-              </Link>
-            </nav>
-          ) : null}
+          <LessonStepNav
+            previousLesson={previousLesson}
+            nextLesson={nextLesson}
+          />
 
           <section className="mt-10 border border-line bg-surface p-5">
             <p className="text-sm font-black text-teal">읽은 뒤 복습</p>
@@ -335,6 +333,18 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
         <aside className="hidden lg:block">
           <div className="sticky top-24 border-l border-line pl-5">
+            <div className="mb-6 border border-line bg-paper p-4">
+              <p className="text-xs font-black uppercase tracking-[0.12em] text-teal">
+                학습 순서
+              </p>
+              <p className="mt-2 text-2xl font-black">
+                {index + 1}
+                <span className="text-base text-muted"> / {total}</span>
+              </p>
+              <p className="mt-2 text-xs font-bold leading-5 text-muted">
+                {lesson.quickSummary.estimatedReadTime}
+              </p>
+            </div>
             <h2 className="text-sm font-black">이 글의 흐름</h2>
             <nav className="mt-4" aria-label="본문 목차">
               <ol className="space-y-3">
@@ -354,6 +364,83 @@ export default async function LessonPage({ params }: LessonPageProps) {
         </aside>
       </div>
     </main>
+  );
+}
+
+function MobileToc({
+  headings
+}: {
+  headings: { title: string; id: string }[];
+}) {
+  if (headings.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="mt-8 border border-line bg-paper p-4 lg:hidden">
+      <p className="text-sm font-black text-teal">이 글의 흐름</p>
+      <nav
+        className="no-scrollbar mt-3 flex gap-2 overflow-x-auto pb-1"
+        aria-label="본문 목차"
+      >
+        {headings.map((heading, index) => (
+          <a
+            key={heading.id}
+            href={`#${heading.id}`}
+            className="focus-ring inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md border border-line bg-bg3 px-3 text-xs font-bold text-muted hover:border-teal hover:text-teal"
+          >
+            <span className="text-teal">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            {heading.title}
+          </a>
+        ))}
+      </nav>
+    </section>
+  );
+}
+
+function LessonStepNav({
+  previousLesson,
+  nextLesson
+}: {
+  previousLesson?: LessonSummary;
+  nextLesson?: LessonSummary;
+}) {
+  if (!previousLesson && !nextLesson) {
+    return null;
+  }
+
+  return (
+    <nav className="mt-10 grid gap-3 md:grid-cols-2" aria-label="이전/다음 글">
+      {previousLesson ? (
+        <Link
+          href={`/learn/${previousLesson.slug}`}
+          className="focus-ring group border border-line bg-paper p-5 hover:border-teal"
+        >
+          <p className="inline-flex items-center gap-2 text-sm font-black text-muted group-hover:text-teal">
+            <ArrowLeft size={16} aria-hidden /> 이전 글
+          </p>
+          <h2 className="mt-3 text-lg font-black leading-7">
+            {previousLesson.title}
+          </h2>
+        </Link>
+      ) : null}
+
+      {nextLesson ? (
+        <Link
+          href={`/learn/${nextLesson.slug}`}
+          className="focus-ring group border border-line bg-paper p-5 hover:border-teal md:text-right"
+        >
+          <p className="inline-flex items-center gap-2 text-sm font-black text-muted group-hover:text-teal md:justify-end">
+            다음 글 <ArrowRight size={16} aria-hidden />
+          </p>
+          <h2 className="mt-3 text-lg font-black leading-7">
+            {nextLesson.title}
+          </h2>
+        </Link>
+      ) : null}
+    </nav>
   );
 }
 
