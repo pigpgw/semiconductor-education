@@ -6,7 +6,7 @@
 
 - 기능이 많은 교육 플랫폼보다 글이 중심인 오픈소스 문서로 운영
 - 초보자도 이해할 수 있는 반도체 기초 설명
-- 삼성전자와 SK하이닉스가 공개한 공식 기술 자료를 바탕으로 한 메모리 중심 학습 콘텐츠
+- Samsung, SK hynix, Micron, TSMC, Intel, ASML, Lam Research, Applied Materials, KLA, imec 공식 자료를 바탕으로 한 기초-실무 연결형 학습 콘텐츠
 - DRAM, HBM, EUV처럼 채용과 산업 맥락에서 중요한 키워드를 구조적으로 설명
 - 프론트엔드 포트폴리오로도 보일 수 있는 읽기 좋은 문서 UX
 
@@ -37,6 +37,7 @@
 
 문서 전체 목차는 [docs/README.md](docs/README.md)에서 볼 수 있습니다.
 오픈소스 문서 운영 방향은 [docs/open-source-document-strategy.md](docs/open-source-document-strategy.md)에 정리했습니다.
+공식 Big 10 출처 기반 커리큘럼은 [docs/big10-source-curriculum.md](docs/big10-source-curriculum.md)에 정리했습니다.
 상세 기획은 [docs/product-planning.md](docs/product-planning.md), 1차 MVP 최종 설계 기준은 [docs/final-design.md](docs/final-design.md), 현재 MVP 정리는 [docs/mvp-summary.md](docs/mvp-summary.md), 다음 보완 기획은 [docs/planning-improvements.md](docs/planning-improvements.md)에 정리했습니다.
 
 첫 글 3편:
@@ -159,7 +160,18 @@ npm run promote:industry-draft -- --id=sk-hynix-ieee-hbm-award --format=ts
 
 작업은 `feature/* -> dev -> main` 순서로 PR을 거쳐 반영합니다. 커밋 메시지는 Conventional Commits를 따릅니다.
 
+## 함께 만드는 방식
+
+이 저장소는 개인 학습 노트가 아니라 여러 사람이 함께 발전시키는 공개 문서로 운영합니다.
+
+- 아이디어는 GitHub Issue로 제안합니다.
+- 오탈자, 문장 개선, 깨진 링크 수정처럼 작은 PR을 환영합니다.
+- 새 교재 글은 `proposal -> draft -> source-check -> review -> ready` 흐름으로 진행합니다.
+- 리뷰는 개인 취향보다 콘텐츠 기준, 공식 출처, 학습 흐름을 기준으로 봅니다.
+- 기여자는 원문을 복사하지 않고 공식 링크와 학습 질문을 연결합니다.
+
 기여 기준과 템플릿은 [CONTRIBUTING.md](CONTRIBUTING.md)에 정리했습니다.
+커뮤니티 운영 기준은 [docs/community-governance.md](docs/community-governance.md)에 정리했습니다.
 자세한 규칙은 [docs/git-workflow.md](docs/git-workflow.md), 배포 설정은 [docs/deployment.md](docs/deployment.md)에 정리했습니다.
 
 ## 정보 출처 정책
