@@ -49,6 +49,19 @@ export const practiceSets: PracticeSet[] = [
         }
       },
       {
+        topic: "NAND",
+        question: "NAND와 SSD는 왜 전원이 꺼져도 데이터를 보관할 수 있을까요?",
+        hint: "DRAM처럼 작업 중 잠깐 쓰는 공간인지, 오래 남기는 저장 공간인지 나눠 보세요.",
+        answer:
+          "NAND는 전하 상태를 오래 유지하는 비휘발성 메모리라 전원이 꺼져도 데이터가 남습니다. SSD는 이 NAND를 컨트롤러와 펌웨어로 관리해 실제 저장장치로 동작하게 합니다.",
+        fieldPoint:
+          "저장장치는 용량뿐 아니라 오류 정정, 내구성, 전력, 컨트롤러 정책이 함께 성능과 신뢰성을 결정합니다.",
+        relatedLesson: {
+          title: "NAND와 SSD는 왜 오래 저장하는 메모리인가",
+          href: "/learn/nand-ssd-storage"
+        }
+      },
+      {
         topic: "소자",
         question: "반도체에서 트랜지스터를 스위치라고 부르는 이유는 무엇일까요?",
         hint: "전류가 흐르는 길을 열고 닫는다는 관점으로 답해 보세요.",
@@ -195,8 +208,21 @@ export const practiceSets: PracticeSet[] = [
         fieldPoint:
           "층 수가 늘면 채널 홀 식각, 균일도, 결함 관리, 수율 같은 제조 난이도도 함께 올라갑니다.",
         relatedLesson: {
-          title: "용어 사전",
-          href: "/glossary"
+          title: "NAND와 SSD는 왜 오래 저장하는 메모리인가",
+          href: "/learn/nand-ssd-storage"
+        }
+      },
+      {
+        topic: "NAND",
+        question: "QLC NAND를 볼 때 용량이 커진다는 장점 말고 무엇을 함께 봐야 할까요?",
+        hint: "한 셀에 더 많은 비트를 넣으면 셀 상태를 더 촘촘히 구분해야 합니다.",
+        answer:
+          "QLC는 셀 하나에 4비트를 저장해 용량과 비용 면에서 유리할 수 있습니다. 대신 오류 정정, 캐싱, 쓰기 수명, 컨트롤러 정책이 더 중요해집니다.",
+        fieldPoint:
+          "제품 발표에서 QLC는 용량 숫자뿐 아니라 고객 workload, 전력 효율, 내구성, 공급 안정성까지 함께 확인해야 합니다.",
+        relatedLesson: {
+          title: "NAND와 SSD는 왜 오래 저장하는 메모리인가",
+          href: "/learn/nand-ssd-storage"
         }
       },
       {
@@ -322,6 +348,19 @@ export const practiceSets: PracticeSet[] = [
         relatedLesson: {
           title: "용어 사전",
           href: "/glossary"
+        }
+      },
+      {
+        topic: "NAND",
+        question: "SSD 신제품 발표를 실무 관점으로 읽을 때 어떤 질문을 던져야 하나요?",
+        hint: "용량, 인터페이스, 컨트롤러, 내구성, 고객 workload를 나눠 보세요.",
+        answer:
+          "몇 단 NAND인지, TLC/QLC인지, 어떤 인터페이스와 컨트롤러를 쓰는지, 랜덤 I/O와 순차 성능이 어떤 workload 기준인지, 내구성과 전력 효율을 어떻게 관리하는지 확인해야 합니다.",
+        fieldPoint:
+          "SSD 경쟁력은 NAND 셀 밀도뿐 아니라 컨트롤러, 펌웨어, 오류 정정, 고객 인증, 공급 규모가 함께 만드는 제품 경쟁력입니다.",
+        relatedLesson: {
+          title: "NAND와 SSD는 왜 오래 저장하는 메모리인가",
+          href: "/learn/nand-ssd-storage"
         }
       },
       {
