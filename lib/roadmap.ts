@@ -29,7 +29,8 @@ export const roadmap = [
       "DRAM refresh와 지연 시간",
       "DDR, LPDDR, GDDR의 용도",
       "NAND와 SSD의 관계",
-      "V-NAND와 3D 적층"
+      "V-NAND와 3D 적층",
+      "TLC/QLC, 오류 정정, SSD 컨트롤러"
     ]
   },
   {

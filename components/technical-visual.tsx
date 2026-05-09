@@ -170,6 +170,112 @@ function MiniHbmVisual() {
   );
 }
 
+function MiniNandVisual() {
+  return (
+    <div className="grid h-full content-center gap-3" aria-label="3D NAND stack mini visual">
+      <div className="mx-auto grid w-28 gap-1">
+        {Array.from({ length: 7 }).map((_, index) => (
+          <div
+            key={index}
+            className={`h-3 border border-line ${
+              index % 2 === 0 ? "bg-teal/15" : "bg-blue/10"
+            }`}
+          />
+        ))}
+      </div>
+      <div className="mx-auto grid w-44 grid-cols-8 gap-1">
+        {Array.from({ length: 24 }).map((_, index) => (
+          <span
+            key={index}
+            className={`h-4 border border-line ${
+              index % 5 === 0 ? "bg-saffron/20" : "bg-paper"
+            }`}
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-[1fr_48px] items-center gap-3">
+        <SignalLine className="bg-saffron/70" />
+        <div className="grid h-10 place-items-center border border-teal/40 bg-teal/10 text-[10px] font-black text-teal">
+          SSD
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NandStorageVisual({ mode }: { mode: VisualMode }) {
+  if (mode === "mini") {
+    return <MiniNandVisual />;
+  }
+
+  return (
+    <div className="grid gap-4" aria-label="NAND stack, SSD controller, endurance trade-off visual">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_230px]">
+        <div className="grid gap-4 border border-line bg-bg0 p-4">
+          <div className="grid gap-4 md:grid-cols-[150px_1fr] md:items-center">
+            <div className="grid gap-1">
+              {Array.from({ length: 12 }).map((_, index) => (
+                <div
+                  key={index}
+                  className={`h-4 border border-line ${
+                    index % 3 === 0 ? "bg-teal/15" : "bg-paper"
+                  }`}
+                >
+                  {index === 1 ? (
+                    <span className="ml-2 text-[10px] font-black text-teal">
+                      3D NAND layers
+                    </span>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+            <div className="grid gap-3">
+              <div className="grid grid-cols-8 gap-1">
+                {Array.from({ length: 48 }).map((_, index) => (
+                  <span
+                    key={index}
+                    className={`h-5 border border-line ${
+                      index % 7 === 0 ? "bg-saffron/25" : "bg-bg3"
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="grid gap-2 sm:grid-cols-[1fr_150px] sm:items-center">
+                <SignalLine className="bg-saffron/70" />
+                <div className="border border-blue/40 bg-blue/10 p-3 text-center text-xs font-black text-blue">
+                  SSD controller
+                </div>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-3">
+                <VisualLabel>ECC</VisualLabel>
+                <VisualLabel>Wear leveling</VisualLabel>
+                <VisualLabel>NVMe/SATA</VisualLabel>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="grid gap-3">
+          <TradeoffCard
+            label="Capacity"
+            gain="층 수와 셀당 비트 수를 늘려 저장 밀도를 키웁니다."
+            cost="공정 균일도와 셀 상태 구분이 더 어려워집니다."
+          />
+          <TradeoffCard
+            label="Controller"
+            gain="NAND를 실제 SSD 제품처럼 안정적으로 관리합니다."
+            cost="오류 정정, 주소 매핑, 캐싱 정책이 성능과 수명을 좌우합니다."
+          />
+          <TradeoffCard
+            label="Endurance"
+            gain="많은 데이터를 저렴하게 오래 보관할 수 있습니다."
+            cost="쓰기 수명과 workload 조건을 함께 확인해야 합니다."
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function HbmStackVisual({ mode }: { mode: VisualMode }) {
   if (mode === "mini") {
     return <MiniHbmVisual />;
@@ -366,6 +472,20 @@ function getVisualConfig(slug: string | undefined, mode: VisualMode): VisualConf
         { label: "실무 판단", text: "수율과 장비 처리량" }
       ],
       visual: <EuvBeamVisual mode={mode} />
+    };
+  }
+
+  if (slug === "nand-ssd-storage") {
+    return {
+      title: "NAND는 셀 적층, SSD 컨트롤러, 오류 정정을 함께 봐야 저장장치가 됩니다.",
+      caption:
+        "전원이 꺼져도 남는 메모리라는 큰 장점 뒤에 3D 적층, 셀당 비트 수, 내구성, 컨트롤러 관리가 함께 따라옵니다.",
+      highlights: [
+        { label: "구조", text: "3D NAND layers + cell array" },
+        { label: "병목", text: "오류 정정, 내구성, 주소 관리" },
+        { label: "실무 판단", text: "용량, 전력, 수율, workload" }
+      ],
+      visual: <NandStorageVisual mode={mode} />
     };
   }
 

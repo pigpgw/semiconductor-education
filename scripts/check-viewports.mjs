@@ -34,6 +34,7 @@ const pages = [
   "/study",
   "/practice",
   "/learn/dram-basics",
+  "/learn/nand-ssd-storage",
   "/learn/hbm-ai-memory",
   "/learn/euv-dram-scaling"
 ];
