@@ -8,7 +8,7 @@ tags:
   - "TSV"
   - "AI Memory"
 publishedAt: "2026-05-08"
-updatedAt: "2026-05-08"
+updatedAt: "2026-05-09"
 learningGoals:
   - "HBM이 기존 DRAM보다 대역폭을 키우는 방식을 설명할 수 있다"
   - "TSV와 적층 구조가 왜 중요한지 이해한다"
@@ -34,23 +34,31 @@ readingGuide:
   applied: "TSV, 적층, bandwidth 표를 중심으로 일반 DRAM과 HBM의 구조 차이를 비교합니다."
   field: "스펙 읽기, 패키징, 열, 수율, 차세대 메모리 계층을 함께 보며 AI 인프라 병목 관점으로 읽습니다."
 sourceInterpretation:
-  officialClaim: "Samsung과 SK hynix 자료는 HBM을 TSV 기반 적층 구조와 AI 메모리 병목 완화에 연결해 설명합니다."
+  officialClaim: "Samsung, SK hynix, Micron 자료는 HBM을 TSV 기반 적층 DRAM과 AI/HPC용 초고대역폭 메모리로 설명하고, TSMC 자료는 이 메모리가 고급 패키징 플랫폼과 연결된다는 점을 보여줍니다."
   engineeringMeaning: "이 주장은 HBM의 가치를 용량 증가보다 대역폭, 짧은 연결, 패키징, 열, 수율, 공급 안정성, 고객 검증이 묶인 시스템 문제로 읽어야 한다는 뜻입니다."
   readerQuestion: "HBM 발표를 볼 때 몇 단 적층인지보다 그 구조가 GPU 대기 시간, 전력 효율, 패키지 신뢰성, 실제 AI 서버 공급 능력에 어떤 영향을 주는지 질문합니다."
-  freshnessNote: "HBM 세대와 고객 적용 상황은 빠르게 바뀔 수 있으므로 2026-05-07 확인 링크를 기준으로 구조와 병목 해석에 집중했습니다."
+  freshnessNote: "HBM 세대와 고객 적용 상황은 빠르게 바뀔 수 있으므로 2026-05-09 확인 링크를 기준으로 구조와 병목 해석에 집중했습니다."
 sources:
   - title: "HBM | DRAM | 삼성반도체"
     url: "https://semiconductor.samsung.com/kr/dram/hbm/"
-    checkedAt: "2026-05-07"
+    checkedAt: "2026-05-09"
     usedFor: "HBM을 TSV 기반 적층 DRAM과 초고대역폭 메모리로 설명하는 공식 근거로 사용했습니다."
   - title: "SK하이닉스, SK AI Summit 2025서 풀 스택 AI 메모리 비전 제시"
     url: "https://news.skhynix.co.kr/sk-ai-summit-2025/"
-    checkedAt: "2026-05-07"
+    checkedAt: "2026-05-09"
     usedFor: "AI 메모리 포트폴리오와 데이터 이동 병목을 산업 관점으로 연결하는 근거로 사용했습니다."
   - title: "SK hynix and Sandisk Begin Global Standardization of Next-Generation Memory HBF"
     url: "https://news.skhynix.com/sk-hynix-and-sandisk-begin-global-standardization-ofnext-generation-memory-hbf/"
-    checkedAt: "2026-05-07"
+    checkedAt: "2026-05-09"
     usedFor: "HBM과 SSD 사이의 차세대 메모리 계층 논의를 시스템 병목 관점으로 설명하는 근거로 사용했습니다."
+  - title: "Micron HBM4"
+    url: "https://www.micron.com/products/memory/hbm/hbm4"
+    checkedAt: "2026-05-09"
+    usedFor: "HBM을 AI/HPC용 고대역폭 메모리로 비교하고, 세대별 발표를 읽을 때 bandwidth와 capacity를 분리하는 근거로 사용했습니다."
+  - title: "TSMC 3DFabric"
+    url: "https://3dfabric.tsmc.com/english/dedicatedFoundry/technology/3DFabric.htm"
+    checkedAt: "2026-05-09"
+    usedFor: "HBM이 GPU 가까이에 붙는 이유를 2.5D/3D 패키징과 시스템 연결 관점으로 확장하는 근거로 사용했습니다."
 ---
 
 <OneLine>
@@ -203,6 +211,8 @@ SK하이닉스와 Sandisk가 언급한 HBF 같은 다음 계층의 논의도 이
 ## 공식 자료 기반 근거
 
 삼성반도체는 HBM을 TSV 기반 적층 기술을 적용한 초고대역폭 메모리로 소개합니다. SK하이닉스는 AI 시대에 데이터 이동량 증가와 memory wall을 중요한 문제로 설명하고, HBM과 차세대 메모리 계층이 AI 인프라 최적화에 연결된다고 설명합니다.
+
+Micron의 HBM4 자료는 HBM을 AI와 HPC workload를 위한 고대역폭 메모리 제품군으로 확인하는 비교축입니다. TSMC 3DFabric 자료는 HBM이 단독 부품이 아니라 interposer와 2.5D/3D packaging 생태계 안에서 성능을 낸다는 점을 보강합니다.
 
 이 글에서는 그 내용을 학습자 관점에서 “GPU가 기다리지 않게 하는 데이터 공급 구조”로 다시 정리했습니다. HBM의 공식 설명은 성능 홍보 문구로만 읽지 않고, TSV, 적층, 패키징, 시스템 병목을 함께 보는 근거로 사용했습니다.
 
