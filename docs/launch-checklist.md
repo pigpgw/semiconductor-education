@@ -25,6 +25,16 @@
 
 Vercel Hobby는 공식 문서 기준 개인/소규모 프로젝트용 무료 플랜이며, 비상업적 개인 사용 제한이 있습니다. 상업 서비스, 유료 강의, 광고 기반 운영으로 바뀌면 Pro 또는 Cloudflare Pages 전환을 재검토합니다.
 
+## 환경값
+
+로컬과 Vercel 모두 `NEXT_PUBLIC_SITE_URL`을 기준으로 metadata, robots, sitemap URL을 만듭니다.
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://semiconductor-education.vercel.app
+```
+
+실제 Vercel URL이나 커스텀 도메인이 정해지면 `.env.example`, Vercel Environment Variables, README의 공개 URL을 같은 값으로 맞춥니다.
+
 ## 무료 대안
 
 Cloudflare Pages는 무료 플랜에서 Git 연동 배포, 월 500 builds, 무료 preview를 제공합니다. 이 프로젝트를 완전 정적 export 구조로 바꿀 때 2차 후보로 검토합니다.
@@ -75,6 +85,8 @@ npm run check:viewport
 - README 상단에 production URL을 추가합니다.
 
 ## 1차 홍보 문구
+
+더 긴 채널별 문구는 [홍보 패키지](promotion-pack.md)에 정리합니다.
 
 ```txt
 반도체를 처음 배우는 사람도 DRAM, HBM, EUV를 실무 관점까지 이해할 수 있도록 오픈소스 문서를 만들고 있습니다.

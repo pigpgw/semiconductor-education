@@ -23,6 +23,8 @@
 - production URL 기준 메타데이터, Open Graph, Twitter metadata를 보강했습니다.
 - `/robots.txt`와 `/sitemap.xml`을 추가해 무료 배포 후 검색/공유 기본 요건을 맞췄습니다.
 - `docs/launch-checklist.md`를 추가해 Vercel Hobby 무료 배포, GitHub About, v0.1.0 릴리즈, 홍보 문구를 한 번에 확인하게 했습니다.
+- `.env.example`을 추가해 `NEXT_PUBLIC_SITE_URL` 설정값을 배포 전 확인할 수 있게 했습니다.
+- `docs/promotion-pack.md`를 추가해 채널별 홍보 문구, GitHub Release 본문, 런칭 당일 순서를 정리했습니다.
 - `docs/release-notes-v0.1.0.md`를 추가해 첫 공개 범위와 다음 버전 후보를 정리했습니다.
 - README, MVP 정리, 배포 문서, 문서 인덱스를 1차 공개 기준으로 갱신했습니다.
 
@@ -60,12 +62,13 @@
 2. `dev -> main` release PR을 만들고 Vercel production 배포를 연결합니다.
 3. GitHub About과 README 상단에 실제 production URL을 반영합니다.
 4. `v0.1.0` GitHub Release를 생성합니다.
-5. NAND/SSD 첫 글을 추가합니다.
-6. 패키징과 chiplet 글을 추가합니다.
-7. 수율, metrology, inspection 글을 추가합니다.
-8. `/sources`에 Big 10 학습 순서 필터나 추천 순서를 추가합니다.
-9. NVIDIA, AMD, Qualcomm, Broadcom 같은 fabless/AI 시스템 출처를 별도 보조 카테고리로 분리할지 결정합니다.
-10. 기초/중급/고급 모드 데이터를 MDX frontmatter나 별도 content 파일로 분리할지 결정합니다.
+5. `docs/promotion-pack.md`의 짧은 홍보문을 production URL과 함께 게시합니다.
+6. NAND/SSD 첫 글을 추가합니다.
+7. 패키징과 chiplet 글을 추가합니다.
+8. 수율, metrology, inspection 글을 추가합니다.
+9. `/sources`에 Big 10 학습 순서 필터나 추천 순서를 추가합니다.
+10. NVIDIA, AMD, Qualcomm, Broadcom 같은 fabless/AI 시스템 출처를 별도 보조 카테고리로 분리할지 결정합니다.
+11. 기초/중급/고급 모드 데이터를 MDX frontmatter나 별도 content 파일로 분리할지 결정합니다.
 
 ### 검증 결과
 

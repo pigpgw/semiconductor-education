@@ -126,6 +126,12 @@ npm install
 npm run dev
 ```
 
+환경값 예시는 [.env.example](.env.example)에 있습니다.
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://semiconductor-education.vercel.app
+```
+
 검증:
 
 ```bash
@@ -160,6 +166,7 @@ npm run promote:industry-draft -- --id=sk-hynix-ieee-hbm-award --format=ts
 - Site URL env: `NEXT_PUBLIC_SITE_URL`
 - 예상 기본 URL: `https://semiconductor-education.vercel.app`
 - 공개 체크리스트: [docs/launch-checklist.md](docs/launch-checklist.md)
+- 홍보 패키지: [docs/promotion-pack.md](docs/promotion-pack.md)
 - 릴리즈 노트: [docs/release-notes-v0.1.0.md](docs/release-notes-v0.1.0.md)
 
 실제 production URL이 확정되면 README 상단과 GitHub About의 Website에 반영합니다.

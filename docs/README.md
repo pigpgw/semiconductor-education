@@ -22,9 +22,11 @@
    - 현재 코드, 문서, 설정의 총점검 결과와 삭제/유지 판단을 정리합니다.
 9. [1차 공개 체크리스트](launch-checklist.md)
    - 무료 배포, GitHub 정리, v0.1.0 릴리즈, 홍보 문구를 확인합니다.
-10. [작업 로그](work-log.md)
+10. [홍보 패키지](promotion-pack.md)
+   - GitHub Release, LinkedIn, 블로그, 커리어리, 디스콰이엇에 쓸 공개 문구를 정리합니다.
+11. [작업 로그](work-log.md)
    - 최신 작업, 현재 부족한 점, 다음 개발 후보를 이어서 볼 수 있게 기록합니다.
-11. [기여 가이드](../CONTRIBUTING.md)
+12. [기여 가이드](../CONTRIBUTING.md)
    - 설명 개선, 출처 보강, 글 추가, 검증 흐름을 확인합니다.
 
 ## 기획 문서
@@ -56,6 +58,7 @@
 | [Git workflow](git-workflow.md) | `main`, `dev`, 작업 브랜치, 커밋 규칙 |
 | [Deployment](deployment.md) | 배포 파이프라인과 환경 변수 정책 |
 | [1차 공개 체크리스트](launch-checklist.md) | 무료 배포, GitHub About, 릴리즈, 홍보 문구 |
+| [홍보 패키지](promotion-pack.md) | 공개 후 채널별 홍보 문구와 런칭 당일 순서 |
 | [v0.1.0 릴리즈 노트](release-notes-v0.1.0.md) | 첫 공개 버전의 포함 범위와 다음 버전 후보 |
 | [기여 가이드](../CONTRIBUTING.md) | 기여 단위, 출처 기준, 작업 흐름, 검증 명령 |
 | [1차 최종 점검](phase-one-final-audit.md) | 총점검 결과, 삭제/유지 판단, 다음 작업 |
