@@ -16,6 +16,8 @@ import {
   officialSources,
   rssSourceCount,
   sourceCompanyTypes,
+  sourceKindLabels,
+  sourceLevelLabels,
   sourceTopics,
   type SourceCompanyType
 } from "@/lib/sources";
@@ -192,6 +194,12 @@ export default async function SourcesPage({ searchParams }: SourcesPageProps) {
                     {crawlPolicyLabels[source.crawlPolicy]}
                   </span>
                   <span className="rounded-full border border-line bg-bg3 px-3 py-1 text-xs font-bold text-muted">
+                    {sourceKindLabels[source.sourceKind]}
+                  </span>
+                  <span className="rounded-full border border-saffron/25 bg-saffron/10 px-3 py-1 text-xs font-black text-saffron">
+                    {sourceLevelLabels[source.recommendedLevel]}
+                  </span>
+                  <span className="rounded-full border border-line bg-bg3 px-3 py-1 text-xs font-bold text-muted">
                     {source.language.toUpperCase()}
                   </span>
                 </div>
@@ -210,6 +218,33 @@ export default async function SourcesPage({ searchParams }: SourcesPageProps) {
                   <p className="mt-2 text-sm leading-7 text-muted">
                     {source.readFor}
                   </p>
+                </div>
+                <div className="mt-4 grid gap-3 border-t border-line pt-4 sm:grid-cols-2">
+                  <div>
+                    <h3 className="text-sm font-black">근거 유형</h3>
+                    <p className="mt-2 text-sm leading-7 text-muted">
+                      {source.evidenceType}
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black">확인 주기</h3>
+                    <p className="mt-2 text-sm leading-7 text-muted">
+                      {source.refreshCadence}
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4 border-t border-line pt-4">
+                  <h3 className="text-sm font-black">학습에 쓰는 방식</h3>
+                  <ul className="mt-3 grid gap-2">
+                    {source.useCases.map((useCase) => (
+                      <li
+                        key={useCase}
+                        className="rounded-md border border-line bg-bg3 px-3 py-2 text-xs font-bold leading-5 text-muted"
+                      >
+                        {useCase}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {source.topics.map((topic) => (

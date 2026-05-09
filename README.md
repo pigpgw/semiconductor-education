@@ -7,12 +7,12 @@
 - 기능이 많은 교육 플랫폼보다 글이 중심인 오픈소스 문서로 운영
 - 초보자도 이해할 수 있는 반도체 기초 설명
 - 삼성전자와 SK하이닉스가 공개한 공식 기술 자료를 바탕으로 한 메모리 중심 학습 콘텐츠
-- DRAM, HBM, EUV처럼 채용과 산업 맥락에서 중요한 키워드를 구조적으로 설명
+- DRAM, NAND/SSD, HBM, EUV처럼 채용과 산업 맥락에서 중요한 키워드를 구조적으로 설명
 - 프론트엔드 포트폴리오로도 보일 수 있는 읽기 좋은 문서 UX
 
 ## MVP 범위
 
-첫 공개 버전은 전체 커리큘럼 로드맵과 핵심 글 3편으로 구성합니다.
+첫 공개 버전은 전체 커리큘럼 로드맵과 핵심 글 5편으로 구성합니다.
 
 - `/`: 프로젝트 소개와 핵심 학습 진입점
 - `/level`: 자가 진단과 3단계 난이도 안내
@@ -39,9 +39,11 @@
 오픈소스 문서 운영 방향은 [docs/open-source-document-strategy.md](docs/open-source-document-strategy.md)에 정리했습니다.
 상세 기획은 [docs/product-planning.md](docs/product-planning.md), 1차 MVP 최종 설계 기준은 [docs/final-design.md](docs/final-design.md), 현재 MVP 정리는 [docs/mvp-summary.md](docs/mvp-summary.md), 다음 보완 기획은 [docs/planning-improvements.md](docs/planning-improvements.md)에 정리했습니다.
 
-첫 글 3편:
+첫 글 5편:
 
 - DRAM은 왜 빠른 작업 메모리인가
+- DDR, LPDDR, GDDR, HBM은 어떻게 다른가
+- NAND와 SSD는 왜 오래 저장하는 메모리인가
 - HBM은 왜 AI 시대의 핵심 메모리인가
 - EUV는 왜 DRAM 미세화에 중요한가
 
@@ -80,12 +82,13 @@
 
 ## 현재 MVP 상태
 
-- 핵심 글 3편: DRAM, HBM, EUV
+- 핵심 글 5편: DRAM, DRAM 제품군 비교, NAND/SSD, HBM, EUV
 - 핵심 글 3편 1차 리라이트: 스펙 읽기, trade-off, 실무 판단 기준 보강
-- 용어 사전 30개
-- 복습 질문 20개와 실무 시나리오 3개
+- NAND/SSD 첫 글: 비휘발성, 3D NAND, TLC/QLC, SSD 컨트롤러, 오류 정정, 내구성 보강
+- 용어 사전 34개
+- 복습 질문 24개와 실무 시나리오 3개
 - 학습 체크리스트 7개
-- 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, 산업 업데이트/해설 노트 8개
+- 공식 출처 16개, RSS/API 후보 6개, source별 feed 필터 6개, 자료 유형/추천 난이도/확인 주기, 검토 대기 후보 4개, 산업 업데이트/해설 노트 8개
 - 로그인 없는 로컬 학습 노트
 - 다크 문서형 반응형 UI
 

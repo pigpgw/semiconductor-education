@@ -6,6 +6,7 @@ const sourceText = readFileSync(sourceFile, "utf8");
 
 const requestTimeoutMs = 20000;
 const allowedStatusBySourceId = new Map([
+  ["jedec-standards", 403],
   ["tsmc-technology", 403],
   ["tsmc-press-center", 403]
 ]);
@@ -37,9 +38,14 @@ function extractOfficialSources(text) {
     ([, block]) => ({
       id: getField(block, "id"),
       name: getField(block, "name"),
+      sourceKind: getField(block, "sourceKind"),
+      recommendedLevel: getField(block, "recommendedLevel"),
       url: getField(block, "url"),
       feedUrl: getField(block, "feedUrl"),
       crawlPolicy: getField(block, "crawlPolicy"),
+      refreshCadence: getField(block, "refreshCadence"),
+      evidenceType: getField(block, "evidenceType"),
+      useCases: getArrayField(block, "useCases"),
       feedIncludeKeywords: getArrayField(block, "feedIncludeKeywords"),
       feedExcludeKeywords: getArrayField(block, "feedExcludeKeywords")
     })
@@ -76,7 +82,16 @@ function validateSourceShape(sources) {
   }
 
   const missingFields = sources.filter(
-    (source) => !source.id || !source.name || !source.url || !source.crawlPolicy
+    (source) =>
+      !source.id ||
+      !source.name ||
+      !source.sourceKind ||
+      !source.recommendedLevel ||
+      !source.url ||
+      !source.crawlPolicy ||
+      !source.refreshCadence ||
+      !source.evidenceType ||
+      source.useCases.length === 0
   );
 
   const duplicateIds = findDuplicates(sources.map((source) => source.id));

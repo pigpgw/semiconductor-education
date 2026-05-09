@@ -170,6 +170,252 @@ function MiniHbmVisual() {
   );
 }
 
+function MiniNandVisual() {
+  return (
+    <div className="grid h-full content-center gap-3" aria-label="3D NAND stack mini visual">
+      <div className="mx-auto grid w-28 gap-1">
+        {Array.from({ length: 7 }).map((_, index) => (
+          <div
+            key={index}
+            className={`h-3 border border-line ${
+              index % 2 === 0 ? "bg-teal/15" : "bg-blue/10"
+            }`}
+          />
+        ))}
+      </div>
+      <div className="mx-auto grid w-44 grid-cols-8 gap-1">
+        {Array.from({ length: 24 }).map((_, index) => (
+          <span
+            key={index}
+            className={`h-4 border border-line ${
+              index % 5 === 0 ? "bg-saffron/20" : "bg-paper"
+            }`}
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-[1fr_48px] items-center gap-3">
+        <SignalLine className="bg-saffron/70" />
+        <div className="grid h-10 place-items-center border border-teal/40 bg-teal/10 text-[10px] font-black text-teal">
+          SSD
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NandStorageVisual({ mode }: { mode: VisualMode }) {
+  if (mode === "mini") {
+    return <MiniNandVisual />;
+  }
+
+  return (
+    <div className="grid gap-4" aria-label="NAND stack, SSD controller, endurance trade-off visual">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_230px]">
+        <div className="grid gap-4 border border-line bg-bg0 p-4">
+          <div className="grid gap-4 md:grid-cols-[150px_1fr] md:items-center">
+            <div className="grid gap-1">
+              {Array.from({ length: 12 }).map((_, index) => (
+                <div
+                  key={index}
+                  className={`h-4 border border-line ${
+                    index % 3 === 0 ? "bg-teal/15" : "bg-paper"
+                  }`}
+                >
+                  {index === 1 ? (
+                    <span className="ml-2 text-[10px] font-black text-teal">
+                      3D NAND layers
+                    </span>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+            <div className="grid gap-3">
+              <div className="grid grid-cols-8 gap-1">
+                {Array.from({ length: 48 }).map((_, index) => (
+                  <span
+                    key={index}
+                    className={`h-5 border border-line ${
+                      index % 7 === 0 ? "bg-saffron/25" : "bg-bg3"
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="grid gap-2 sm:grid-cols-[1fr_150px] sm:items-center">
+                <SignalLine className="bg-saffron/70" />
+                <div className="border border-blue/40 bg-blue/10 p-3 text-center text-xs font-black text-blue">
+                  SSD controller
+                </div>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-3">
+                <VisualLabel>ECC</VisualLabel>
+                <VisualLabel>Wear leveling</VisualLabel>
+                <VisualLabel>NVMe/SATA</VisualLabel>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="grid gap-3">
+          <TradeoffCard
+            label="Capacity"
+            gain="층 수와 셀당 비트 수를 늘려 저장 밀도를 키웁니다."
+            cost="공정 균일도와 셀 상태 구분이 더 어려워집니다."
+          />
+          <TradeoffCard
+            label="Controller"
+            gain="NAND를 실제 SSD 제품처럼 안정적으로 관리합니다."
+            cost="오류 정정, 주소 매핑, 캐싱 정책이 성능과 수명을 좌우합니다."
+          />
+          <TradeoffCard
+            label="Endurance"
+            gain="많은 데이터를 저렴하게 오래 보관할 수 있습니다."
+            cost="쓰기 수명과 workload 조건을 함께 확인해야 합니다."
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MiniDramFamilyVisual() {
+  return (
+    <div className="grid h-full content-center gap-3" aria-label="DRAM family comparison mini visual">
+      <div className="grid grid-cols-4 gap-2">
+        {["DDR", "LP", "GD", "HBM"].map((label, index) => (
+          <div
+            key={label}
+            className={`grid h-14 place-items-center border text-[10px] font-black ${
+              index === 3
+                ? "border-teal/40 bg-teal/15 text-teal"
+                : index === 1
+                  ? "border-saffron/40 bg-saffron/15 text-saffron"
+                  : "border-line bg-paper text-muted"
+            }`}
+          >
+            {label}
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-[48px_1fr_48px] items-center gap-2">
+        <div className="grid h-10 place-items-center border border-line bg-bg3 text-[10px] font-black text-muted">
+          CPU
+        </div>
+        <SignalLine />
+        <div className="grid h-10 place-items-center border border-blue/40 bg-blue/10 text-[10px] font-black text-blue">
+          GPU
+        </div>
+      </div>
+      <div className="grid grid-cols-8 gap-1">
+        {Array.from({ length: 24 }).map((_, index) => (
+          <span
+            key={index}
+            className={`h-3 border border-line ${
+              index % 4 === 0 ? "bg-teal/20" : "bg-bg3"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DramFamilyVisual({ mode }: { mode: VisualMode }) {
+  if (mode === "mini") {
+    return <MiniDramFamilyVisual />;
+  }
+
+  return (
+    <div className="grid gap-4" aria-label="DDR, LPDDR, GDDR, HBM system placement visual">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_230px]">
+        <div className="grid gap-4 border border-line bg-bg0 p-4">
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="border border-line bg-paper p-3">
+              <p className="text-xs font-black text-teal">CPU system memory</p>
+              <div className="mt-3 grid grid-cols-[64px_1fr] items-center gap-3">
+                <div className="grid h-14 place-items-center border border-blue/40 bg-blue/10 text-xs font-black text-blue">
+                  CPU
+                </div>
+                <div className="grid gap-2">
+                  <SignalLine />
+                  <div className="grid grid-cols-3 gap-2">
+                    {["UDIMM", "SODIMM", "RDIMM"].map((label) => (
+                      <div key={label} className="border border-line bg-bg3 p-2 text-center text-[10px] font-black text-muted">
+                        {label}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="border border-saffron/35 bg-saffron/10 p-3">
+              <p className="text-xs font-black text-saffron">Low-power platform</p>
+              <div className="mt-3 grid grid-cols-[74px_1fr] items-center gap-3">
+                <div className="grid h-16 place-items-center border border-line bg-bg3 text-xs font-black text-muted">
+                  SoC
+                </div>
+                <div className="grid gap-2">
+                  {["LPDDR", "thin package", "power modes"].map((label) => (
+                    <div key={label} className="rounded-md border border-saffron/25 bg-paper px-2 py-1 text-[11px] font-bold text-muted">
+                      {label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="border border-line bg-paper p-3">
+              <p className="text-xs font-black text-blue">Graphics board</p>
+              <div className="mt-3 grid grid-cols-[74px_1fr] items-center gap-3">
+                <div className="grid h-16 place-items-center border border-blue/40 bg-blue/10 text-xs font-black text-blue">
+                  GPU
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {Array.from({ length: 6 }).map((_, index) => (
+                    <div key={index} className="h-7 border border-line bg-bg3" />
+                  ))}
+                </div>
+              </div>
+              <p className="mt-2 text-[11px] font-bold text-muted">GDDR around GPU</p>
+            </div>
+            <div className="border border-teal/35 bg-teal/10 p-3">
+              <p className="text-xs font-black text-teal">AI package</p>
+              <div className="mt-3 grid grid-cols-[84px_1fr] items-center gap-3">
+                <div className="grid h-16 place-items-center border border-blue/40 bg-blue/10 text-xs font-black text-blue">
+                  Accelerator
+                </div>
+                <div className="grid gap-1">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <div key={index} className="h-4 border border-teal/30 bg-paper" />
+                  ))}
+                  <div className="h-1 bg-teal" />
+                </div>
+              </div>
+              <p className="mt-2 text-[11px] font-bold text-muted">
+                HBM stack + TSV + interposer
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="grid gap-3">
+          <TradeoffCard
+            label="DDR"
+            gain="범용 시스템 메모리와 서버 확장성에 강합니다."
+            cost="최고 대역폭보다 호환성, 용량, 안정성이 중요합니다."
+          />
+          <TradeoffCard
+            label="LPDDR / GDDR"
+            gain="저전력 또는 GPU 주변 대역폭에 맞춰 최적화됩니다."
+            cost="패키지 위치와 전력/열 조건이 제품 선택을 제한합니다."
+          />
+          <TradeoffCard
+            label="HBM"
+            gain="AI/HPC의 데이터 이동 병목을 크게 줄일 수 있습니다."
+            cost="TSV, 적층, interposer, 수율과 고객 검증 부담이 큽니다."
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function HbmStackVisual({ mode }: { mode: VisualMode }) {
   if (mode === "mini") {
     return <MiniHbmVisual />;
@@ -341,6 +587,20 @@ function EuvBeamVisual({ mode }: { mode: VisualMode }) {
 }
 
 function getVisualConfig(slug: string | undefined, mode: VisualMode): VisualConfig {
+  if (slug === "dram-family-comparison") {
+    return {
+      title: "DRAM 제품군은 같은 셀에서 출발하지만 시스템 위치와 병목이 다릅니다.",
+      caption:
+        "CPU 주메모리, 모바일 SoC, GPU 보드, AI 패키지 안에서 메모리가 어디에 붙는지 비교하면 DDR, LPDDR, GDDR, HBM의 차이가 보입니다.",
+      highlights: [
+        { label: "구조", text: "DDR module / LPDDR package / GDDR board / HBM stack" },
+        { label: "병목", text: "전력, 대역폭, 폼팩터, 패키징" },
+        { label: "실무 판단", text: "시스템 위치와 고객 검증" }
+      ],
+      visual: <DramFamilyVisual mode={mode} />
+    };
+  }
+
   if (slug === "hbm-ai-memory") {
     return {
       title: "HBM은 적층, TSV, 패키징을 한 번에 봐야 AI 병목을 설명할 수 있습니다.",
@@ -366,6 +626,20 @@ function getVisualConfig(slug: string | undefined, mode: VisualMode): VisualConf
         { label: "실무 판단", text: "수율과 장비 처리량" }
       ],
       visual: <EuvBeamVisual mode={mode} />
+    };
+  }
+
+  if (slug === "nand-ssd-storage") {
+    return {
+      title: "NAND는 셀 적층, SSD 컨트롤러, 오류 정정을 함께 봐야 저장장치가 됩니다.",
+      caption:
+        "전원이 꺼져도 남는 메모리라는 큰 장점 뒤에 3D 적층, 셀당 비트 수, 내구성, 컨트롤러 관리가 함께 따라옵니다.",
+      highlights: [
+        { label: "구조", text: "3D NAND layers + cell array" },
+        { label: "병목", text: "오류 정정, 내구성, 주소 관리" },
+        { label: "실무 판단", text: "용량, 전력, 수율, workload" }
+      ],
+      visual: <NandStorageVisual mode={mode} />
     };
   }
 

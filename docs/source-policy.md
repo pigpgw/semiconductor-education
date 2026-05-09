@@ -10,6 +10,18 @@
 4. 표준 문서, 논문, 학술 자료
 5. 기타 해설 자료
 
+## 자료 정보 레벨
+
+`/sources`의 모든 공식 출처는 단순 링크가 아니라 학습용 메타데이터를 함께 갖습니다.
+
+| 항목 | 의미 |
+| --- | --- |
+| 자료 유형 | 뉴스룸, 기술 블로그, 기술 페이지, 제품 페이지, 표준 문서, 산업 데이터, 연구 자료실 중 어디에 가까운지 표시 |
+| 추천 난이도 | 기초부터 읽을 수 있는지, 중급 이후가 좋은지, 실무/심화 학습자에게 맞는지 표시 |
+| 근거 유형 | 제품 발표, 표준 규격, 장비 해설, 산업 수치처럼 어떤 종류의 주장에 쓰는 자료인지 표시 |
+| 확인 주기 | RSS/API, 월 1회, 분기 1회처럼 최신성 확인 방식을 표시 |
+| 학습 활용 방식 | 교재 본문, 용어 사전, 산업 업데이트, 포트폴리오 설명 중 어디에 쓰는지 표시 |
+
 ## 작성 규칙
 
 - 핵심 주장은 공식 출처를 연결합니다.
@@ -35,4 +47,9 @@
 - 삼성반도체 DRAM: https://semiconductor.samsung.com/kr/dram/
 - 삼성반도체 HBM: https://semiconductor.samsung.com/kr/dram/hbm/
 - 삼성반도체 EUV: https://semiconductor.samsung.com/kr/technologies/euv/
+- 삼성반도체 3D V-NAND Dictionary: https://semiconductor.samsung.com/support/tools-resources/dictionary/semiconductor-glossary-3d-v-nand-flash-memory/
 - SK하이닉스 뉴스룸: https://news.skhynix.co.kr/
+- KIOXIA BiCS FLASH: https://americas.kioxia.com/en-us/business/memory/bics.html
+- JEDEC Standards: https://www.jedec.org/
+- NVM Express Specifications: https://nvmexpress.org/specifications/
+- SIA Semiconductor Industry Fact Sheet: https://www.semiconductors.org/resources/semiconductor-industry-fact-sheet/

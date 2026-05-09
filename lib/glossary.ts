@@ -252,6 +252,50 @@ export const glossary: GlossaryTerm[] = [
     related: ["NAND", "SSD", "식각"]
   },
   {
+    term: "QLC",
+    english: "Quad-Level Cell",
+    category: "메모리",
+    level: "중급",
+    simple:
+      "NAND 셀 하나에 4비트를 저장하는 방식입니다. 같은 셀 수로 더 큰 용량을 만들 수 있습니다.",
+    fieldUse:
+      "용량과 원가 측면에서 유리하지만 셀 상태를 더 촘촘히 구분해야 하므로 오류 정정, 캐싱, 내구성 관리가 중요해집니다.",
+    related: ["NAND", "SSD", "오류 정정"]
+  },
+  {
+    term: "SSD 컨트롤러",
+    english: "SSD Controller",
+    category: "메모리",
+    level: "중급",
+    simple:
+      "SSD 안에서 NAND를 읽고 쓰고 관리하는 작은 두뇌입니다.",
+    fieldUse:
+      "주소 매핑, 오류 정정, wear leveling, garbage collection을 조율해 SSD 성능과 수명, 전력 특성을 좌우합니다.",
+    related: ["SSD", "NAND", "오류 정정"]
+  },
+  {
+    term: "오류 정정",
+    english: "Error Correction Code",
+    category: "시스템",
+    level: "중급",
+    simple:
+      "저장하거나 읽는 과정에서 생긴 데이터 오류를 찾아 고치는 기술입니다.",
+    fieldUse:
+      "NAND 셀 밀도가 높아질수록 오류 가능성이 커지므로 SSD 컨트롤러의 ECC 능력은 성능, 수명, 신뢰성의 핵심입니다.",
+    related: ["NAND", "SSD 컨트롤러", "QLC"]
+  },
+  {
+    term: "내구성",
+    english: "Endurance",
+    category: "메모리",
+    level: "심화",
+    simple:
+      "NAND나 SSD가 데이터를 반복해서 쓰고 지워도 안정적으로 버틸 수 있는 정도입니다.",
+    fieldUse:
+      "셀당 비트 수, 쓰기 패턴, wear leveling, 오류 정정, over-provisioning이 SSD 내구성과 고객 workload 적합성을 결정합니다.",
+    related: ["NAND", "SSD", "오류 정정"]
+  },
+  {
     term: "CXL",
     english: "Compute Express Link",
     category: "시스템",

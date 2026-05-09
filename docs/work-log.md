@@ -6,10 +6,125 @@
 
 - 브랜치 흐름: `feature/*`, `fix/*`, `refactor/*`, `docs/*`, `style/*`, `chore/*`, `test/*` -> `dev` -> `main`
 - 핵심 화면: `/`, `/level`, `/roadmap`, `/learn`, `/learn/[slug]`, `/glossary`, `/sources`, `/industry`, `/industry/[slug]`, `/practice`, `/study`
-- 핵심 콘텐츠: DRAM, HBM, EUV 글 3편
-- 콘텐츠 데이터: 용어 30개, 복습 질문 20개, 공식 출처 12개, RSS/API 후보 6개, source별 feed 필터 6개, 검토 대기 후보 4개, promotion 품질 메타데이터 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
+- 핵심 콘텐츠: DRAM, DRAM 제품군 비교, NAND/SSD, HBM, EUV 글 5편
+- 콘텐츠 데이터: 용어 34개, 복습 질문 24개, 공식 출처 16개, RSS/API 후보 6개, source별 feed 필터 6개, 출처별 자료 유형/추천 난이도/확인 주기, 검토 대기 후보 4개, promotion 품질 메타데이터 4개, industry 초안 승격 스크립트 1개, 산업 업데이트 8개
 - 로그인 정책: 로그인 없음, `/study`만 브라우저 `localStorage` 사용
 - 검증 기준: `npm run validate`, `npm run check:links`, `npm run check:viewport`
+
+## 2026-05-09: 학습 흐름 UI/UX 보완
+
+### 작업 브랜치
+
+- `feature/nand-ssd-foundation`
+
+### 작업한 것
+
+- `/learn` 상단에 추천 읽기 순서를 추가해 글 목록을 보기 전에 전체 학습 흐름을 먼저 파악할 수 있게 했습니다.
+- 글 카드에 예상 읽기 시간과 핵심 용어를 노출해 사용자가 자기 수준과 소요 시간을 빠르게 판단할 수 있게 했습니다.
+- `/learn/[slug]` 글 상세에 현재 글 순서, 모바일 목차, 이전/다음 글 이동을 추가했습니다.
+- 데스크톱 사이드바에 학습 순서와 예상 읽기 시간을 고정 정보로 보여 주도록 정리했습니다.
+
+### 부족한 점
+
+- 목차의 현재 읽는 위치 active 상태는 아직 없습니다.
+- `/learn` 검색 UX는 아직 난이도/주제 필터 중심이며 자유 검색 입력은 없습니다.
+- 시각 자료 확대 인터랙션은 일부 도식 중심이며 전체 도식 확대 모달은 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 글 상세 목차 active 상태와 본문 진행률을 추가합니다.
+2. `/learn`에 제목/설명/용어 기반 검색 입력을 추가합니다.
+3. 주요 반도체 도식에 확대 보기와 단계별 설명 토글을 추가합니다.
+
+### 검증 결과
+
+- `git diff --check`: 통과
+- `npm run validate`: 통과
+- `npm run check:links`: 통과, 공식 출처 16개와 산업 업데이트 8개 확인
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 16개 경로와 360/390/768/1280px 확인
+
+## 2026-05-09: DRAM 제품군 비교 교재 보강
+
+### 작업 브랜치
+
+- `feature/nand-ssd-foundation`
+
+### 작업한 것
+
+- `content/lessons/dram-family-comparison.mdx`를 추가했습니다.
+- DDR, LPDDR, GDDR, HBM을 같은 DRAM 계열로 묶되 용도, 전력, 대역폭, 폼팩터, 패키징, 고객 검증 기준으로 비교했습니다.
+- Samsung DDR, LPDDR5X, GDDR7, HBM과 JEDEC 공식 자료를 출처로 연결했습니다.
+- 글 상세 시각 자료에 DRAM 제품군 비교 전용 도식을 추가했습니다.
+- 복습 질문을 24개로 늘리고 기존 DDR/LPDDR/GDDR/HBM 질문을 새 글로 연결했습니다.
+- 로드맵과 MVP 문서에서 핵심 글 수와 다음 작업 후보를 갱신했습니다.
+
+### 부족한 점
+
+- 패키징/TSV/MR-MUF 심화 글은 아직 없습니다.
+- 수율, metrology, inspection 전용 글은 아직 없습니다.
+- 직무별 읽기 경로는 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 패키징, TSV, MR-MUF 글을 추가합니다.
+2. 8대 공정 입문 글을 추가합니다.
+3. 수율과 품질 글을 추가합니다.
+4. 직무별 읽기 경로를 추가합니다.
+
+## 2026-05-09: 공식 자료 정보 보강
+
+### 작업 브랜치
+
+- `feature/nand-ssd-foundation`
+
+### 작업한 것
+
+- `/sources` 공식 출처 데이터를 12개에서 16개로 확장했습니다.
+- KIOXIA BiCS FLASH, JEDEC Standards, NVM Express Specifications, SIA Semiconductor Industry Fact Sheet를 추가했습니다.
+- 모든 공식 출처에 자료 유형, 추천 난이도, 근거 유형, 확인 주기, 학습 활용 방식을 추가했습니다.
+- `/sources` 카드에서 해당 메타데이터를 확인할 수 있게 UI를 보강했습니다.
+- `check:sources`가 새 메타데이터 누락을 검증하게 했습니다.
+- 출처 정책, 뉴스 소스 전략, 공식 출처 추가 템플릿, MVP 상태 문서를 갱신했습니다.
+
+### 부족한 점
+
+- 새로 추가한 KIOXIA/JEDEC/NVM Express/SIA 출처를 `/industry` 해설 노트로 승격하지는 않았습니다.
+- SIA 산업 데이터를 README와 프로젝트 소개의 시장 필요성 근거로 더 얇게 연결하는 작업이 남아 있습니다.
+
+### 다음 작업 후보
+
+1. KIOXIA/JEDEC/NVM Express/SIA 출처를 `/industry` 해설 노트 후보로 승격합니다.
+2. SIA 산업 데이터를 README와 프로젝트 소개의 시장 필요성 근거로 더 얇게 연결합니다.
+3. source별 확인 주기를 실제 운영 후 보정합니다.
+
+## 2026-05-09: NAND/SSD 교재 확장
+
+### 작업 브랜치
+
+- `feature/nand-ssd-foundation`
+
+### 작업한 것
+
+- `content/lessons/nand-ssd-storage.mdx`를 추가했습니다.
+- NAND를 DRAM과 대비되는 비휘발성 저장 메모리로 설명하고, SSD를 NAND+컨트롤러+펌웨어+오류 정정이 결합된 저장 시스템으로 정리했습니다.
+- 3D NAND, V-NAND, 4D NAND, TLC/QLC, 내구성, SSD 컨트롤러, 오류 정정 trade-off를 공식 자료 기반으로 보강했습니다.
+- 글 상세 시각 자료에 NAND/SSD 전용 3D 적층과 컨트롤러 구조 도식을 추가했습니다.
+- 용어 사전에 QLC, SSD 컨트롤러, 오류 정정, 내구성을 추가했습니다.
+- 복습 질문을 23개로 늘리고 NAND/SSD 글 연결을 추가했습니다.
+- 로드맵의 DRAM/NAND 단계에 TLC/QLC, 오류 정정, SSD 컨트롤러를 보강했습니다.
+
+### 부족한 점
+
+- NAND/SSD 전용 산업 업데이트 상세 노트는 아직 없습니다.
+- 패키징/TSV/MR-MUF 심화 글은 아직 없습니다.
+- 수율, metrology, inspection 전용 글은 아직 없습니다.
+
+### 다음 작업 후보
+
+1. 패키징, TSV, MR-MUF 글을 추가합니다.
+2. NAND/SSD 관련 산업 업데이트 후보를 `/industry`에 승격합니다.
+3. 수율, metrology, inspection 글을 추가합니다.
+4. 학습 노트 내보내기를 추가합니다.
 
 ## 2026-05-07: 승격 초안 품질 보정
 
@@ -52,7 +167,7 @@
 - `npm run check:links`: 통과, 공식 출처 12개와 공식 feed 6개, 산업 업데이트 8개 확인
 - `npm run collect:feeds -- --limit=2`: 통과, source별 필터 적용 후 공식 feed 6개에서 `review-needed` 후보 9개 출력
 - `npm audit --audit-level=moderate`: 통과, 취약점 0건
-- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 14개 경로와 360/390/768/1280px 확인
+- `BASE_URL=http://127.0.0.1:3001 npm run check:viewport`: 통과, 15개 경로와 360/390/768/1280px 확인
 
 ## 2026-05-07: industry 초안 승격 스크립트
 

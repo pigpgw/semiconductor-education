@@ -1,0 +1,221 @@
+---
+title: "NAND와 SSD는 왜 오래 저장하는 메모리인가"
+description: "NAND Flash가 전원이 꺼져도 데이터를 보관하는 이유, 3D NAND 적층, SSD 컨트롤러, 오류 정정, 내구성 trade-off를 기초부터 정리합니다."
+level: "기초"
+category: "메모리"
+tags:
+  - "NAND"
+  - "SSD"
+  - "3D NAND"
+  - "Storage"
+publishedAt: "2026-05-09"
+updatedAt: "2026-05-09"
+learningGoals:
+  - "NAND가 DRAM과 달리 비휘발성 저장 메모리라는 점을 설명할 수 있다"
+  - "SSD가 NAND 칩만이 아니라 컨트롤러, 펌웨어, 오류 정정이 결합된 저장장치라는 점을 이해한다"
+  - "3D NAND, TLC, QLC, 내구성, 수율을 저장장치 trade-off로 연결할 수 있다"
+prerequisites:
+  - "0과 1의 기본 개념"
+  - "DRAM과 저장장치의 큰 역할 차이"
+  - "트랜지스터가 전하 흐름을 제어한다는 기초"
+quickSummary:
+  conclusion: "NAND는 전원이 꺼져도 데이터를 남겨 두는 저장 메모리이고, SSD는 그 NAND를 실제 저장장치로 쓰게 만드는 시스템입니다."
+  analogy: "DRAM이 책상이라면 NAND는 책장입니다. SSD는 책장을 정리하고, 잘못 꽂힌 책을 찾아 고치고, 자주 보는 책을 더 빨리 꺼내 주는 사서까지 포함한 저장 시스템입니다."
+  estimatedReadTime: "기초 7분 · 중급 11분 · 실무 관점 15분"
+  keyTerms:
+    - "NAND"
+    - "SSD"
+    - "3D NAND"
+  fieldKeywords:
+    - "비휘발성"
+    - "TLC/QLC"
+    - "오류 정정"
+    - "내구성"
+    - "컨트롤러"
+  outcome: "NAND와 SSD를 저장 용량 하나로만 보지 않고, 적층 구조, 셀당 비트 수, 오류 정정, 수명, 컨트롤러 trade-off까지 설명할 수 있습니다."
+readingGuide:
+  basic: "DRAM과 NAND를 책상과 책장으로 구분하고, 왜 NAND가 전원 없이 데이터를 보관하는지 큰 그림을 잡습니다."
+  applied: "3D NAND, TLC/QLC, SSD 컨트롤러 표를 중심으로 읽고 용량·속도·수명 trade-off를 비교합니다."
+  field: "현업 관점과 스펙 읽기 섹션에서 적층 수, 오류 정정, 수율, 고객 workload, 전력 효율을 함께 봅니다."
+sourceInterpretation:
+  officialClaim: "삼성반도체 자료는 NAND Flash와 3D V-NAND를 비휘발성 저장과 수직 적층 관점으로 설명하고, SK하이닉스와 KIOXIA 자료는 3D/4D NAND 적층과 SSD 제품화를 함께 강조합니다. NVM Express 자료는 SSD가 host와 통신하는 표준 인터페이스 관점을 제공합니다."
+  engineeringMeaning: "이 주장은 NAND를 단순 저장 칩이 아니라 셀 구조, 적층 공정, 셀당 비트 수, 컨트롤러, 오류 정정, 인터페이스, 고객 workload가 함께 맞아야 하는 저장 시스템으로 읽어야 한다는 뜻입니다."
+  readerQuestion: "NAND 또는 SSD 발표를 볼 때 용량이 얼마나 큰지만 보지 말고, 어떤 적층 구조인지, TLC/QLC인지, 전력과 성능은 어떤 workload를 기준으로 하는지, NVMe 같은 host 연결은 어떤 병목을 줄이는지, 내구성과 오류 정정 부담은 어떻게 관리하는지 질문합니다."
+  freshnessNote: "층 수, 제품 세대, 고객 공급 상태는 바뀔 수 있으므로 2026-05-09 확인 링크를 기준으로 구조와 trade-off 중심으로 사용했습니다."
+sources:
+  - title: "NAND Flash Memory | Samsung Semiconductor Dictionary"
+    url: "https://semiconductor.samsung.com/us/support/tools-resources/dictionary/semiconductor-glossary-nand-flash-memory/"
+    checkedAt: "2026-05-09"
+    usedFor: "NAND Flash가 대용량 저장에 적합한 비휘발성 메모리라는 기본 설명의 공식 근거로 사용했습니다."
+  - title: "Samsung Starts Mass Producing 32-Layer 3D V-NAND Flash Memory"
+    url: "https://semiconductor.samsung.com/news-events/news/samsung-starts-mass-producing-industrys-first-32-layer-3d-v-nand-flash-memory-its-2nd-generation/"
+    checkedAt: "2026-05-09"
+    usedFor: "평면 축소만이 아니라 수직 적층으로 저장 밀도를 높이는 V-NAND 흐름을 설명하는 근거로 사용했습니다."
+  - title: "3D V-NAND Flash Memory | Samsung Semiconductor Dictionary"
+    url: "https://semiconductor.samsung.com/support/tools-resources/dictionary/semiconductor-glossary-3d-v-nand-flash-memory/"
+    checkedAt: "2026-05-09"
+    usedFor: "2D NAND scaling 한계와 셀 간 간섭을 줄이기 위해 수직 적층 구조가 등장했다는 개념 근거로 사용했습니다."
+  - title: "SK hynix Develops World’s Highest 238-Layer 4D NAND Flash"
+    url: "https://news.skhynix.com/sk-hynix-develops-worlds-highest-238-layer-4d-nand-flash/"
+    checkedAt: "2026-05-09"
+    usedFor: "NAND 적층 수, TLC, 생산성, 데이터 전송 속도, 전력 효율이 함께 언급되는 이유를 설명하는 근거로 사용했습니다."
+  - title: "SK hynix Begins Supply of 321-layer QLC NAND cSSD"
+    url: "https://news.skhynix.com/begin-supply-321-layer-qlc-nand-cssd/"
+    checkedAt: "2026-05-09"
+    usedFor: "QLC NAND와 client SSD가 용량, 성능, 전력 효율, 고객 공급 맥락으로 읽혀야 한다는 근거로 사용했습니다."
+  - title: "KIOXIA BiCS FLASH 3D Flash Memory"
+    url: "https://americas.kioxia.com/en-us/business/memory/bics.html"
+    checkedAt: "2026-05-09"
+    usedFor: "3D flash를 층 수 경쟁만이 아니라 수직/수평 scaling, 성능, 전력, 용도별 제품 선택으로 읽어야 한다는 보조 근거로 사용했습니다."
+  - title: "NVM Express Specifications"
+    url: "https://nvmexpress.org/specifications/"
+    checkedAt: "2026-05-09"
+    usedFor: "SSD가 NAND 칩만이 아니라 host software, controller, command set, transport 규격까지 포함하는 저장 시스템이라는 설명의 근거로 사용했습니다."
+---
+
+<OneLine>
+NAND는 데이터를 오래 보관하는 메모리이고, SSD는 NAND를 실제 컴퓨터가 믿고 쓰게 만드는 저장 시스템입니다.
+</OneLine>
+
+## 쉬운 비유
+
+DRAM을 책상이라고 했다면 NAND는 책장입니다.
+
+책상 위 자료는 바로 손이 닿지만, 공부가 끝나면 치웁니다. 책장은 꺼내는 데 시간이 더 걸리지만 많은 책을 오래 보관합니다. 컴퓨터도 비슷합니다. 실행 중인 데이터는 DRAM에 올리고, 사진, 영상, 프로그램, 운영체제 파일은 SSD에 보관합니다.
+
+여기서 SSD는 단순한 책장이 아닙니다. 책을 어느 칸에 넣을지 정하고, 낡은 책을 교체하고, 잘못 꽂힌 책을 찾아 고치는 사서 역할까지 포함합니다. 이 사서에 해당하는 것이 SSD 컨트롤러와 펌웨어입니다.
+
+처음에는 이렇게 구분하면 됩니다.
+
+| 구분 | 역할 | 전원이 꺼지면 |
+| --- | --- | --- |
+| DRAM | 지금 처리할 데이터의 작업 공간 | 사라짐 |
+| NAND | 파일과 데이터를 오래 보관하는 저장 메모리 | 남아 있음 |
+| SSD | NAND를 묶어 실제 저장장치로 동작하게 하는 시스템 | 남아 있음 |
+
+## 실제 구조
+
+NAND Flash는 전하 상태를 이용해 데이터를 저장합니다. DRAM도 전하를 쓰지만, DRAM의 커패시터 전하는 시간이 지나면 쉽게 새어 나가므로 refresh가 필요합니다. NAND는 전하를 더 오래 붙잡아 두는 구조를 사용해 전원이 꺼져도 데이터를 유지합니다.
+
+NAND 셀은 여러 개가 줄지어 연결됩니다. 그래서 아주 빠른 임의 접근보다는 많은 데이터를 큰 단위로 저장하고 읽는 데 적합합니다. 이 성격 때문에 NAND는 작업 메모리보다 저장장치에 더 잘 맞습니다.
+
+<Term title="비휘발성 메모리">
+전원이 꺼져도 저장된 데이터가 남는 메모리입니다. NAND Flash가 대표적인 예입니다.
+</Term>
+
+NAND는 보통 페이지(page) 단위로 읽고 쓰며, 블록(block) 단위로 지웁니다. 이 차이가 중요합니다. 사용자는 파일 하나를 저장한다고 생각하지만, 실제 SSD 내부에서는 여러 NAND 블록을 지우고 다시 쓰는 관리 작업이 계속 일어납니다.
+
+## 왜 전원이 꺼져도 남는가
+
+NAND는 셀 안에 전하가 남아 있는지에 따라 데이터를 구분합니다. 이 전하가 오래 유지되기 때문에 전원이 꺼져도 데이터가 사라지지 않습니다.
+
+하지만 “오래 남는다”가 “영원히 완벽하다”는 뜻은 아닙니다. 셀은 많이 쓰고 지울수록 상태가 조금씩 나빠질 수 있습니다. 온도, 사용 횟수, 셀당 저장하는 비트 수에 따라 오류 가능성도 달라집니다.
+
+그래서 NAND 기반 저장장치는 항상 오류 정정과 수명 관리를 함께 봐야 합니다.
+
+| 항목 | 좋은 점 | 부담 |
+| --- | --- | --- |
+| 전원 없이 저장 | 파일을 오래 보관할 수 있음 | 셀 상태를 안정적으로 구분해야 함 |
+| 큰 저장 밀도 | 같은 면적에 많은 데이터를 저장 | 셀 간 간섭과 오류 가능성 증가 |
+| 반복 쓰기 | 데이터를 계속 갱신할 수 있음 | 지우기/쓰기 수명 관리 필요 |
+
+## SSD는 NAND만으로 끝나지 않는다
+
+SSD를 이해할 때 가장 흔한 오해는 “NAND가 좋으면 SSD도 무조건 좋다”입니다.
+
+NAND는 저장하는 셀입니다. SSD는 그 셀을 실제 제품으로 쓰기 위해 컨트롤러, 펌웨어, 캐시, 인터페이스, 전력 관리, 오류 정정이 결합된 장치입니다.
+
+| 구성 | 역할 |
+| --- | --- |
+| NAND Flash | 데이터를 실제로 저장 |
+| SSD 컨트롤러 | 읽기, 쓰기, 지우기, 주소 관리, 오류 정정을 조율 |
+| 펌웨어 | wear leveling, garbage collection 같은 내부 정책 실행 |
+| DRAM cache 또는 buffer | 주소 매핑과 임시 데이터 처리 보조 |
+| 인터페이스 | SATA, PCIe/NVMe처럼 시스템과 SSD를 연결 |
+
+사용자가 파일을 저장하면 SSD는 단순히 한 셀에 바로 쓰지 않습니다. 어느 블록을 쓸지 고르고, 낡은 블록을 피하고, 오류가 생기면 고치고, 성능이 급격히 떨어지지 않도록 내부 데이터를 정리합니다.
+
+그래서 SSD 성능은 순차 읽기 속도 하나로 끝나지 않습니다. 작은 파일을 많이 다루는지, 큰 파일을 길게 읽는지, 오래 쓰는 서버인지, 노트북처럼 전력 제한이 큰 제품인지에 따라 중요한 지표가 달라집니다.
+
+## 3D NAND와 적층
+
+처음 NAND는 평면에 셀을 더 촘촘히 넣는 방향으로 발전했습니다. 하지만 평면에서 계속 줄이면 셀 간 간섭과 신뢰성 문제가 커집니다.
+
+그래서 NAND는 셀을 위로 쌓는 방향으로 발전했습니다. 이를 3D NAND 또는 V-NAND라고 부릅니다. 땅이 부족하면 건물을 높게 짓는 것과 비슷합니다.
+
+3D NAND의 핵심은 단순히 층 수를 많이 쌓는 것이 아닙니다.
+
+- 층이 많아질수록 같은 면적에 더 많은 데이터를 넣을 수 있습니다.
+- 깊은 채널 홀을 균일하게 만들고 식각해야 합니다.
+- 층마다 전기적 특성이 안정적으로 맞아야 합니다.
+- 결함이 늘어나면 수율과 원가가 나빠질 수 있습니다.
+
+SK하이닉스의 238단 4D NAND 발표나 321단 QLC NAND cSSD 발표를 읽을 때도 숫자만 보면 안 됩니다. KIOXIA의 BiCS FLASH 자료도 3D flash를 용도별 요구 조건, 수직/수평 scaling, 성능, 전력 효율의 균형으로 설명합니다. 층 수는 저장 밀도와 연결되지만, 동시에 생산성, 전력 효율, 데이터 전송, 고객 공급 가능성을 함께 묻는 신호입니다.
+
+## DRAM과 NAND 비교
+
+DRAM과 NAND는 둘 다 메모리지만 해결하는 문제가 다릅니다.
+
+| 항목 | DRAM | NAND |
+| --- | --- | --- |
+| 주 역할 | 실행 중인 데이터 작업 공간 | 파일과 데이터를 오래 저장 |
+| 전원 차단 후 데이터 | 사라짐 | 남음 |
+| 주요 관심사 | 대역폭, 지연 시간, refresh, 전력 | 용량, 비용, 내구성, 오류 정정 |
+| 제품 예 | DDR, LPDDR, GDDR, HBM | SSD, UFS, eMMC, 메모리 카드 |
+| 실무 질문 | CPU/GPU에 데이터를 빨리 공급하는가 | 오래, 많이, 안정적으로 저장하는가 |
+
+면접에서 “NAND는 DRAM보다 느립니다”로만 답하면 부족합니다. 더 좋은 답은 “NAND는 속도보다 비휘발성과 저장 밀도에 최적화되어 SSD 같은 저장장치에 쓰이고, 실제 제품에서는 컨트롤러와 오류 정정이 성능과 수명을 좌우합니다”입니다.
+
+<IndustryKeywords items="NAND|SSD|3D NAND|V-NAND|4D NAND|TLC|QLC|Controller|ECC|Endurance|Wear leveling" />
+
+## SSD 스펙을 읽는 순서
+
+SSD 제품이나 NAND 발표를 볼 때는 숫자가 많습니다. 이때는 아래 순서로 읽으면 덜 흔들립니다.
+
+| 읽을 항목 | 먼저 묻는 질문 | 실무 의미 |
+| --- | --- | --- |
+| 용도 | client, mobile, enterprise 중 어디에 쓰는가 | 성능, 전력, 내구성 기준이 달라짐 |
+| NAND 세대 | 몇 단 적층이고 어떤 셀 구조인가 | 저장 밀도, 원가, 수율, 전력 효율과 연결 |
+| 셀당 비트 수 | TLC인가 QLC인가 | 용량은 늘지만 셀 상태 구분과 오류 정정 부담이 커질 수 있음 |
+| 인터페이스 | SATA인가 PCIe/NVMe인가 | 시스템과 SSD 사이 병목을 결정 |
+| 성능 지표 | 순차 읽기/쓰기와 랜덤 I/O가 어떻게 다른가 | workload에 따라 체감 성능이 달라짐 |
+| 내구성 | 얼마나 많이 쓰고 지워도 되는가 | 서버, AI PC, 소비자 제품의 요구가 다름 |
+
+TLC는 한 셀에 3비트를 저장하고, QLC는 한 셀에 4비트를 저장합니다. QLC는 용량과 비용 측면에서 유리할 수 있지만, 셀 상태를 더 촘촘히 구분해야 하므로 컨트롤러와 오류 정정, 캐싱 정책이 더 중요해집니다.
+
+NVMe를 볼 때는 “SSD가 빠르다”가 아니라 “host와 SSD가 어떤 규칙으로 명령을 주고받는가”를 봐야 합니다. NVM Express 공식 규격은 base specification, command set, transport, management interface처럼 SSD를 시스템과 연결하는 여러 층을 분리합니다. 그래서 실제 SSD 성능은 NAND 셀, 컨트롤러, 펌웨어, 인터페이스가 함께 맞아야 합니다.
+
+## 현업 관점에서 보는 핵심
+
+현업에서 NAND와 SSD를 볼 때는 “용량이 크다” 하나로 끝나지 않습니다.
+
+보통 다음 질문으로 봅니다.
+
+- 같은 웨이퍼 면적에서 얼마나 많은 비트를 만들 수 있는가
+- 층 수를 늘려도 수율과 생산성이 따라오는가
+- TLC/QLC로 용량을 늘릴 때 오류 정정과 내구성 부담은 감당 가능한가
+- SSD 컨트롤러와 펌웨어가 실제 workload에서 성능을 안정적으로 유지하는가
+- 전력과 발열이 노트북, AI PC, 데이터센터 조건에 맞는가
+
+NAND 사업의 경쟁력은 셀만 잘 만드는 것이 아닙니다. 식각, 증착, 계측, 수율, 컨트롤러, 펌웨어, 고객 검증이 이어져야 SSD 제품 경쟁력이 됩니다.
+
+조금 더 실무적으로 보면 네 가지 균형이 중요합니다.
+
+| 균형 | 한쪽만 밀면 생기는 문제 |
+| --- | --- |
+| 용량과 신뢰성 | 셀당 비트 수를 늘리면 상태 구분과 오류 정정 부담이 커짐 |
+| 층 수와 수율 | 더 많이 쌓으면 저장 밀도는 늘지만 공정 난이도와 결함 관리가 어려워짐 |
+| 성능과 전력 | 빠른 인터페이스와 컨트롤러는 전력과 발열 부담을 키울 수 있음 |
+| 원가와 내구성 | 비용을 낮추는 선택이 쓰기 수명과 고객 workload에 맞는지 확인해야 함 |
+
+그래서 NAND/SSD 발표를 읽을 때는 “몇 단인가?”에서 멈추지 말고 “그 층 수가 어떤 고객 제품에서 안정적으로 공급되는가?”까지 봐야 합니다.
+
+## 공식 자료 기반 근거
+
+삼성반도체의 NAND Flash 설명은 NAND가 대용량 저장에 적합한 비휘발성 메모리라는 큰 틀을 잡는 데 사용했습니다. Samsung V-NAND 자료는 저장 밀도를 높이는 방향이 평면 축소에서 수직 적층으로 이동했다는 근거로 사용했습니다.
+
+SK하이닉스의 238단 4D NAND와 321단 QLC NAND cSSD 자료는 NAND 발표를 읽을 때 층 수, 셀당 비트 수, 성능, 전력 효율, 고객 공급 맥락을 함께 봐야 한다는 근거로 사용했습니다. KIOXIA BiCS FLASH 자료는 3D flash를 특정 회사의 제품명 하나가 아니라 수직 적층과 용도별 제품 설계라는 산업 흐름으로 이해하는 데 사용했습니다. NVM Express 자료는 SSD 설명을 NAND 칩에서 멈추지 않고 host와 장치가 통신하는 인터페이스 구조까지 확장하는 근거로 사용했습니다.
+
+이 글은 공식 자료의 제품 홍보 문장을 그대로 옮기지 않습니다. 학습자가 읽어야 할 구조와 질문으로 재구성합니다. 핵심은 NAND가 “전원이 꺼져도 남는 메모리”이고, SSD는 “그 NAND를 실제 저장장치로 믿고 쓰게 만드는 시스템”이라는 점입니다.
+
+<CheckQuestions questions="NAND가 DRAM과 달리 전원이 꺼져도 데이터를 보관할 수 있는 이유는 무엇인가요?|SSD가 NAND 칩만으로 설명되지 않는 이유는 무엇인가요?|3D NAND가 셀을 위로 쌓는 방식으로 발전한 이유는 무엇인가요?|TLC와 QLC를 비교할 때 용량 외에 어떤 trade-off를 봐야 하나요?" />
