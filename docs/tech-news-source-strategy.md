@@ -8,7 +8,7 @@ Semiconductor Education은 반도체 기술 뉴스를 “긁어 모아 보여주
 
 ## 왜 필요한가
 
-반도체 산업 자료는 여러 회사 사이트에 흩어져 있습니다. 학습자는 Samsung, SK hynix, TSMC, Intel, ASML, Lam Research, Applied Materials 같은 회사의 기술 글을 읽어야 하지만, 처음에는 어떤 글이 중요한지 판단하기 어렵습니다.
+반도체 산업 자료는 여러 회사 사이트에 흩어져 있습니다. 학습자는 Samsung, SK hynix, Micron, TSMC, Intel, ASML, Lam Research, Applied Materials, KLA, imec 같은 회사와 연구기관의 기술 글을 읽어야 하지만, 처음에는 어떤 글이 중요한지 판단하기 어렵습니다.
 
 따라서 이 프로젝트는 다음 역할을 합니다.
 
@@ -35,6 +35,25 @@ Semiconductor Education은 반도체 기술 뉴스를 “긁어 모아 보여주
 | 장비 | Applied Materials Newsroom | https://www.appliedmaterials.com/us/en/newsroom.html | materials engineering, wiring, DRAM scaling, advanced patterning |
 | 계측/수율 | KLA Newsroom | https://www.kla.com/newsroom | inspection, metrology, yield management |
 | 연구 | imec Reading Room | https://www.imec-int.com/en/reading-room | sub-2nm, EUV, silicon photonics, advanced research |
+
+## 학습 기준 Big 10
+
+이 프로젝트의 Big 10은 순위표가 아니라 학습 범위입니다. 메모리 기업만 보면 DRAM/HBM은 이해할 수 있지만 공정, 장비, 수율, 패키징까지 이어지지 않습니다. 반대로 장비 기업만 보면 제품과 시스템 병목을 놓칩니다. 따라서 다음 10개 축을 함께 봅니다.
+
+| 축 | 출처 | 담당하는 질문 |
+| --- | --- | --- |
+| 메모리 제품 | Samsung Semiconductor | DRAM, HBM, EUV, SSD를 어떤 제품군과 고객 요구로 설명하는가 |
+| AI 메모리 | SK hynix Newsroom | HBM, NAND, CXL/PIM이 AI 시스템 병목과 어떻게 연결되는가 |
+| 메모리 비교축 | Micron Technology | HBM, data center SSD, DRAM/NAND 스펙을 다른 메모리 기업과 어떻게 비교할 것인가 |
+| 파운드리/패키징 | TSMC Technology | 공정 노드와 3DFabric이 시스템 성능으로 어떻게 이어지는가 |
+| 로직/패키징 | Intel Foundry | RibbonFET, PowerVia, EMIB/Foveros가 어떤 병목을 줄이는가 |
+| 노광 | ASML Technology | EUV와 High-NA를 파장, 광학, throughput, defect 관점으로 어떻게 읽는가 |
+| 식각/증착 | Lam Research | 노광 뒤 실제 구조를 만들 때 etch/deposition 난이도가 왜 커지는가 |
+| 재료/배선 | Applied Materials | scaling이 왜 재료, 배선, hard mask, PPACt 문제로 확장되는가 |
+| 계측/수율 | KLA | defect, metrology, inspection이 양산 수율과 어떻게 연결되는가 |
+| 연구 로드맵 | imec | 상용 발표와 연구 단계 기술을 어떻게 구분해 읽는가 |
+
+세부 커리큘럼은 [Big 10 공식 자료 기반 반도체 펀더멘탈 설계](big10-source-curriculum.md)에 둡니다.
 
 ## 사이트 기능 설계
 

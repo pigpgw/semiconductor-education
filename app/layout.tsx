@@ -1,16 +1,45 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Semiconductor Education",
-    template: "%s | Semiconductor Education"
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`
   },
-  description:
-    "기초부터 실무 관점까지 읽는 반도체 오픈소스 문서 MVP입니다.",
-  metadataBase: new URL("https://github.com/pigpgw/semiconductor-education")
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: "Semiconductor Education contributors" }],
+  creator: "Semiconductor Education contributors",
+  alternates: {
+    canonical: "/"
+  },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  }
 };
 
 export default function RootLayout({

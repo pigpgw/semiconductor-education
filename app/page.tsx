@@ -281,7 +281,7 @@ field: 병목 + 수율 + 패키징 + 고객 검증`}</code>
         <SectionHeader
           tag="Roadmap"
           title="처음부터 실무 관점까지"
-          description="현재 MVP의 6단계 로드맵을 타임라인 형태로 보여줍니다."
+          description="현재 MVP의 10단계 로드맵을 타임라인 형태로 보여줍니다."
         />
         <div className="mt-9 grid gap-0">
           {roadmap.map((item, index) => (

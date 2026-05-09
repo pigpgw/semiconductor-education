@@ -8,7 +8,7 @@ tags:
   - "Memory"
   - "Refresh"
 publishedAt: "2026-05-07"
-updatedAt: "2026-05-07"
+updatedAt: "2026-05-09"
 learningGoals:
   - "DRAM이 데이터를 전하로 저장한다는 사실을 설명할 수 있다"
   - "휘발성과 refresh가 왜 필요한지 말할 수 있다"
@@ -34,19 +34,27 @@ readingGuide:
   applied: "refresh와 용도별 DRAM 표를 중심으로 읽고, 속도·전력·용도의 차이를 비교합니다."
   field: "현업 관점과 스펙 읽기 섹션에서 면적, 대역폭, 전력, 제품 최적화 기준을 함께 봅니다."
 sourceInterpretation:
-  officialClaim: "삼성반도체 자료는 DRAM을 PC, 서버, 모바일, 그래픽, HBM 등 다양한 시스템에 쓰이는 메모리 제품군으로 설명합니다."
-  engineeringMeaning: "이 주장은 DRAM을 단일 부품이 아니라 용도별 속도, 전력, 대역폭, 패키지, 신뢰성 조건을 맞춰 최적화하는 제품군으로 읽어야 한다는 뜻입니다."
-  readerQuestion: "DRAM 제품 이름을 볼 때 이 메모리가 어떤 시스템 병목을 줄이려는지, 저장장치가 아니라 작업 메모리로 어떤 역할을 하는지, 그 대신 어떤 전력과 패키지 비용을 감수하는지 질문합니다."
-  freshnessNote: "제품 세대와 라인업은 바뀔 수 있으므로 2026-05-07 확인 링크를 기준으로 구조와 역할 중심으로만 사용했습니다."
+  officialClaim: "Samsung Semiconductor와 SK hynix 자료는 DRAM을 시스템이 즉시 사용할 데이터를 담는 작업 메모리이자 DDR, LPDDR, GDDR, HBM으로 갈라지는 제품군으로 설명합니다."
+  engineeringMeaning: "이 주장은 DRAM을 단일 부품이 아니라 용도별 속도, 전력, 대역폭, 패키지, 신뢰성 조건을 맞춰 최적화하는 메모리 계층으로 읽어야 한다는 뜻입니다."
+  readerQuestion: "DRAM 제품 이름을 볼 때 이 메모리가 어떤 시스템 병목을 줄이려는지, SRAM/NAND와 비교해 어떤 역할을 맡는지, 그 대신 어떤 전력과 패키지 비용을 감수하는지 질문합니다."
+  freshnessNote: "제품 세대와 라인업은 바뀔 수 있으므로 2026-05-09 확인 링크를 기준으로 구조와 역할 중심으로만 사용했습니다."
 sources:
   - title: "DRAM | 메모리 | 삼성반도체"
     url: "https://semiconductor.samsung.com/kr/dram/"
-    checkedAt: "2026-05-07"
+    checkedAt: "2026-05-09"
     usedFor: "DRAM 제품군과 용도, 휘발성 작업 메모리라는 기본 설명의 공식 근거로 사용했습니다."
   - title: "DRAM | Memory | Samsung Semiconductor Global"
     url: "https://semiconductor.samsung.com/dram/"
-    checkedAt: "2026-05-07"
+    checkedAt: "2026-05-09"
     usedFor: "DRAM 셀 구조와 제품군 설명을 한국어 자료와 교차 확인하는 근거로 사용했습니다."
+  - title: "Semiconductor 101: SK hynix Explains What’s What in the Semiconductor World"
+    url: "https://news.skhynix.com/semiconductor-101-sk-hynix-explains-whats-what-in-the-semiconductor-world/"
+    checkedAt: "2026-05-09"
+    usedFor: "휘발성 메모리와 비휘발성 메모리를 구분하고 DRAM/NAND의 역할 차이를 설명하는 보조 공식 근거로 사용했습니다."
+  - title: "What Are Semiconductors? | Semiconductor Industry Association"
+    url: "https://www.semiconductors.org/semiconductors-101/what-are-semiconductors/"
+    checkedAt: "2026-05-09"
+    usedFor: "반도체가 전자기기와 정보 처리의 기반이라는 기초 설명을 보강하는 산업 공식 자료로 사용했습니다."
 ---
 
 <OneLine>
@@ -184,6 +192,6 @@ DRAM을 이해할 때는 “빠르다” 하나로 끝내면 부족합니다.
 
 삼성반도체는 DRAM을 하나의 트랜지스터와 하나의 커패시터로 구성된 셀들의 집합으로 설명합니다. 또한 DRAM은 CPU와 GPU가 필요한 데이터를 빠르게 가져올 수 있도록 일시적으로 보관하는 휘발성 메모리라고 설명합니다.
 
-이 글에서는 그 설명을 초보자 관점으로 다시 풀었습니다. 핵심은 DRAM이 “영구 저장”이 아니라 “작업 중 빠른 접근”에 최적화된 메모리라는 점입니다. 공식 자료의 제품군 설명은 DDR, LPDDR, GDDR, HBM이 같은 DRAM 원리에서 출발하지만 용도별 요구 조건에 맞게 갈라진다는 근거로 사용했습니다.
+SK하이닉스의 반도체 101 자료는 메모리를 휘발성 메모리와 비휘발성 메모리로 나누어 설명합니다. 이 글에서는 그 구분을 DRAM과 NAND의 역할 차이로 연결했습니다. 핵심은 DRAM이 “영구 저장”이 아니라 “작업 중 빠른 접근”에 최적화된 메모리라는 점입니다. 공식 자료의 제품군 설명은 DDR, LPDDR, GDDR, HBM이 같은 DRAM 원리에서 출발하지만 용도별 요구 조건에 맞게 갈라진다는 근거로 사용했습니다.
 
 <CheckQuestions questions="DRAM이 전원이 꺼지면 데이터를 잃는 이유는 무엇인가요?|refresh는 DRAM의 어떤 물리적 한계를 보완하나요?|DRAM과 SRAM, NAND는 각각 어떤 문제를 풀기 위해 쓰이나요?|HBM이 DRAM 계열인데도 AI에서 특별히 중요한 이유는 무엇일까요?" />
